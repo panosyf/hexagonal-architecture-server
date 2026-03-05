@@ -1,5 +1,6 @@
 package com.hexagonal.server.infra.rest.controllers.transaction;
 
+import com.hexagonal.server.account.application.api.TransactionApi;
 import com.hexagonal.server.account.application.usecase.transaction.TransactionUsecase;
 import com.hexagonal.server.account.application.model.response.transaction.TransactionResponse;
 import com.hexagonal.server.account.application.model.request.transaction.TransactionCreateRequest;
@@ -11,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-public class TransactionController {
+public class TransactionController implements TransactionApi {
 
     private final TransactionUsecase transactionUsecase;
 
@@ -19,16 +20,19 @@ public class TransactionController {
         this.transactionUsecase = transactionUsecase;
     }
 
+    @Override
     @GetMapping(path = "/api/v1/transactions/{id}")
     public ResponseEntity<TransactionResponse> getTransaction(@PathVariable(name = "id") String id) {
         return new ResponseEntity<>(transactionUsecase.getTransaction(id), HttpStatus.OK);
     }
 
+    @Override
     @PostMapping(path = "/api/v1/transactions")
     public ResponseEntity<TransactionCreationResponse> createTransaction(@RequestBody TransactionCreateRequest transactionCreateRequest) {
         return new ResponseEntity<>(transactionUsecase.createTransaction(transactionCreateRequest), HttpStatus.CREATED);
     }
 
+    @Override
     @PutMapping(path = "/api/v1/transactions/{id}")
     public ResponseEntity<TransactionUpdateResponse> updateTransaction(
             @PathVariable(value = "id") String id,

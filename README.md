@@ -94,7 +94,6 @@ hexagonal-server/
 ├── dependency-bom
 ├── shared-kernel/
 │ ├── common
-│ ├── common-contract
 │ ├── common-infra
 │ ├── common-migration
 │ ├── common-test
