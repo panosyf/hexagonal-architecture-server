@@ -1,16 +1,16 @@
-package com.hexagonal.server.account.infra.integration.test.flow.account;
+package com.hexagonal.server.identity.infra.integration.test.flow;
 
-import com.hexagonal.server.account.infra.integration.test.common.constant.account.Endpoint;
-import com.hexagonal.server.account.core.model.enums.account.AccountCreationStatusEnum;
-import com.hexagonal.server.account.application.model.request.account.AccountCreateRequest;
-import com.hexagonal.server.account.application.model.response.account.AccountCreationResponse;
-import com.hexagonal.server.account.infra.integration.test.config.BaseAccountIntegrationTest;
+import com.hexagonal.server.identity.infra.integration.test.common.constant.Endpoint;
+import com.hexagonal.server.identity.core.account.model.enums.AccountCreationStatusEnum;
+import com.hexagonal.server.identity.application.account.model.request.AccountCreateRequest;
+import com.hexagonal.server.identity.application.account.model.response.AccountCreationResponse;
+import com.hexagonal.server.identity.infra.integration.test.config.BaseIdentityIntegrationTest;
 import org.junit.jupiter.api.Test;
 
-import static com.hexagonal.server.account.infra.integration.test.common.mock.account.AccountCreateRequestMock.generateAccountCreateRequest;
+import static com.hexagonal.server.identity.infra.integration.test.common.mock.AccountCreateRequestMock.generateAccountCreateRequest;
 import static org.assertj.core.api.Assertions.assertThat;
 
-class AccountIntegrationTest extends BaseAccountIntegrationTest {
+class AccountIntegrationTest extends BaseIdentityIntegrationTest {
 
     @Test
     void userCreatesAccount() {

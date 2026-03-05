@@ -9,7 +9,7 @@ import com.hexagonal.server.account.core.model.enums.transaction.TransactionStat
 import com.hexagonal.server.account.infra.integration.test.common.constant.transaction.Endpoint;
 import com.hexagonal.server.account.infra.integration.test.common.mock.account.AccountMock;
 import com.hexagonal.server.account.infra.integration.test.common.mock.transaction.TransactionCreateRequestMock;
-import com.hexagonal.server.account.infra.integration.test.config.AppIntegrationTest;
+import com.hexagonal.server.account.infra.integration.test.config.BaseAccountIntegrationTest;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Money;
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +19,7 @@ import static com.hexagonal.server.account.core.model.enums.transaction.Transact
 import static com.hexagonal.server.account.infra.integration.test.common.mock.transaction.TransactionUpdateRequestMock.generateTransactionUpdateRequest;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class TransactionIntegrationTest extends AppIntegrationTest {
+public class TransactionIntegrationTest extends BaseAccountIntegrationTest {
 
     private static final Money BALANCE_5 = Money.of(BigDecimal.valueOf(5));
     private static final Money BALANCE_10 = Money.of(BigDecimal.TEN);
