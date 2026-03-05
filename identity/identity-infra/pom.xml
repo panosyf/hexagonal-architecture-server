@@ -19,7 +19,7 @@
     <modules>
         <module>identity-persistence</module>
         <module>identity-rest</module>
-        <module>identity-integration-test-suite</module>
+        <module>identity-integration-test</module>
     </modules>
 
 </project>
