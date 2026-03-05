@@ -99,12 +99,12 @@ public class Account extends DomainEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Account account = (Account) o;
-        return Objects.equals(id, account.id) && Objects.equals(email, account.email) && Objects.equals(username, account.username) && Objects.equals(password, account.password) && Objects.equals(name, account.name) && Objects.equals(balance, account.balance) && Objects.equals(createdAt, account.createdAt) && Objects.equals(updatedAt, account.updatedAt);
+        return Objects.equals(id, account.id) && Objects.equals(email, account.email) && Objects.equals(username, account.username) && Objects.equals(password, account.password) && Objects.equals(name, account.name) && Objects.equals(createdAt, account.createdAt) && Objects.equals(updatedAt, account.updatedAt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, email, username, password, name, balance, createdAt, updatedAt);
+        return Objects.hash(id, email, username, password, name, createdAt, updatedAt);
     }
 
     @Override

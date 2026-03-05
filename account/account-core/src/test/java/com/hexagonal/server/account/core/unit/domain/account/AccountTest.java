@@ -14,6 +14,7 @@ import java.math.BigDecimal;
 import java.util.stream.Stream;
 
 import static com.hexagonal.server.account.core.common.mock.account.AccountMock.generateAccount;
+import static com.hexagonal.server.account.core.exception.utils.message.transaction.ErrorMessageConstant.INSUFFICIENT_BALANCE_EXCEPTION;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -70,7 +71,7 @@ class AccountTest {
         Account account = generateAccount();
         assertThatThrownBy(() -> account.validateBalanceEligibleForTransaction(BALANCE_10))
                 .isInstanceOf(InsufficientBalanceException.class)
-                .hasMessage(ErrorUtils.generateErrorMessage(ErrorMessageConstants.INSUFFICIENT_BALANCE_EXCEPTION, account.getId().getValue()));
+                .hasMessage(ErrorUtils.generateErrorMessage(INSUFFICIENT_BALANCE_EXCEPTION, account.getId().getValue()));
     }
 
     @Test

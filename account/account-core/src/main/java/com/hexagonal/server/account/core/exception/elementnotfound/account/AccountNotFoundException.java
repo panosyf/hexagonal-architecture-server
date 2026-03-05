@@ -3,7 +3,7 @@ package com.hexagonal.server.account.core.exception.elementnotfound.account;
 import com.hexagonal.server.shared.kernel.common.exception.types.ElementNotFoundException;
 import com.hexagonal.server.shared.kernel.common.exception.utils.ErrorUtils;
 
-import static com.hexagonal.server.shared.kernel.common.exception.constants.ErrorMessageConstants.ACCOUNT_NOT_FOUND_EXCEPTION;
+import static com.hexagonal.server.account.core.exception.utils.message.account.ErrorMessageConstant.ACCOUNT_NOT_FOUND_EXCEPTION;
 
 public class AccountNotFoundException extends ElementNotFoundException {
 

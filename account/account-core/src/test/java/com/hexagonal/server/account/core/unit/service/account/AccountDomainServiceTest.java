@@ -25,6 +25,7 @@ import static com.hexagonal.server.account.core.common.mock.account.CreateAccoun
 import static com.hexagonal.server.account.core.common.mock.account.DecreaseBalanceOperationMock.generateDecreaseBalanceOperation;
 import static com.hexagonal.server.account.core.common.mock.account.GetAccountOperationMock.generateGetAccountOperation;
 import static com.hexagonal.server.account.core.common.mock.account.IncreaseBalanceOperationMock.generateIncreaseBalanceOperation;
+import static com.hexagonal.server.account.core.exception.utils.message.account.ErrorMessageConstant.ACCOUNT_NOT_FOUND_EXCEPTION;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -78,7 +79,7 @@ class AccountDomainServiceTest {
         // then
         assertThatThrownBy(() -> accountDomainService.getAccount(getAccountOperation))
                 .isInstanceOf(AccountNotFoundException.class)
-                .hasMessage(ErrorUtils.generateErrorMessage(ErrorMessageConstants.ACCOUNT_NOT_FOUND_EXCEPTION, AccountId.ACCOUNT_ID_1.getValue()));
+                .hasMessage(ErrorUtils.generateErrorMessage(ACCOUNT_NOT_FOUND_EXCEPTION, AccountId.ACCOUNT_ID_1.getValue()));
     }
 
     @Test
@@ -130,7 +131,7 @@ class AccountDomainServiceTest {
         // then
         assertThatThrownBy(() -> accountDomainService.increaseBalance(increaseBalanceOperation))
                 .isInstanceOf(AccountNotFoundException.class)
-                .hasMessage(ErrorUtils.generateErrorMessage(ErrorMessageConstants.ACCOUNT_NOT_FOUND_EXCEPTION, AccountId.ACCOUNT_ID_1.getValue()));
+                .hasMessage(ErrorUtils.generateErrorMessage(ACCOUNT_NOT_FOUND_EXCEPTION, AccountId.ACCOUNT_ID_1.getValue()));
     }
 
     @Test
@@ -157,7 +158,7 @@ class AccountDomainServiceTest {
         // then
         assertThatThrownBy(() -> accountDomainService.decreaseBalance(decreaseBalanceOperation))
                 .isInstanceOf(AccountNotFoundException.class)
-                .hasMessage(ErrorUtils.generateErrorMessage(ErrorMessageConstants.ACCOUNT_NOT_FOUND_EXCEPTION, AccountId.ACCOUNT_ID_1.getValue()));
+                .hasMessage(ErrorUtils.generateErrorMessage(ACCOUNT_NOT_FOUND_EXCEPTION, AccountId.ACCOUNT_ID_1.getValue()));
     }
 
 }

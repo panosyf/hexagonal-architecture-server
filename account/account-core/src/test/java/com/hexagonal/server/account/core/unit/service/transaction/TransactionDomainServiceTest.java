@@ -28,6 +28,7 @@ import static com.hexagonal.server.account.core.common.mock.transaction.GetTrans
 import static com.hexagonal.server.account.core.common.mock.transaction.TransactionMock.generatePendingTransaction;
 import static com.hexagonal.server.account.core.common.mock.transaction.TransactionMock.generateTransaction;
 import static com.hexagonal.server.account.core.common.mock.transaction.UpdateTransactionOperationMock.generateUpdateTransactionOperation;
+import static com.hexagonal.server.account.core.exception.utils.message.transaction.ErrorMessageConstant.TRANSACTION_NOT_FOUND_EXCEPTION;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -82,7 +83,7 @@ class TransactionDomainServiceTest {
         // then
         assertThatThrownBy(() -> transactionDomainService.getTransaction(getTransactionOperation))
                 .isInstanceOf(TransactionNotFoundException.class)
-                .hasMessage(ErrorUtils.generateErrorMessage(ErrorMessageConstants.TRANSACTION_NOT_FOUND_EXCEPTION, TransactionId.TRANSACTION_ID_1.getValue()));
+                .hasMessage(ErrorUtils.generateErrorMessage(TRANSACTION_NOT_FOUND_EXCEPTION, TransactionId.TRANSACTION_ID_1.getValue()));
     }
 
     @Test
@@ -129,7 +130,7 @@ class TransactionDomainServiceTest {
         // then
         assertThatThrownBy(() -> transactionDomainService.updateTransaction(updateTransactionOperation))
                 .isInstanceOf(TransactionNotFoundException.class)
-                .hasMessage(ErrorUtils.generateErrorMessage(ErrorMessageConstants.TRANSACTION_NOT_FOUND_EXCEPTION, TransactionId.TRANSACTION_ID_1.getValue()));
+                .hasMessage(ErrorUtils.generateErrorMessage(TRANSACTION_NOT_FOUND_EXCEPTION, TransactionId.TRANSACTION_ID_1.getValue()));
     }
 
 }

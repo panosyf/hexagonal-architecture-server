@@ -18,6 +18,7 @@ import org.mockito.ArgumentCaptor;
 import static com.hexagonal.server.identity.core.account.common.mock.AccountMock.generateAccount;
 import static com.hexagonal.server.identity.core.account.common.mock.CreateAccountOperationMock.generateCreateAccountOperation;
 import static com.hexagonal.server.identity.core.account.common.mock.GetAccountOperationMock.generateGetAccountOperation;
+import static com.hexagonal.server.identity.core.account.exception.utils.message.ErrorMessageConstant.ACCOUNT_NOT_FOUND_EXCEPTION;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -66,7 +67,7 @@ class AccountDomainServiceTest {
         // then
         assertThatThrownBy(() -> accountDomainService.getAccount(getAccountOperation))
                 .isInstanceOf(AccountNotFoundException.class)
-                .hasMessage(ErrorUtils.generateErrorMessage(ErrorMessageConstants.ACCOUNT_NOT_FOUND_EXCEPTION, AccountId.ACCOUNT_ID_1.getValue()));
+                .hasMessage(ErrorUtils.generateErrorMessage(ACCOUNT_NOT_FOUND_EXCEPTION, AccountId.ACCOUNT_ID_1.getValue()));
     }
 
     @Test
