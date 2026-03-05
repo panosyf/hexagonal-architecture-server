@@ -62,6 +62,15 @@
             </properties>
         </profile>
         <profile>
+            <id>local-postgres</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <spring.profiles.active>local-postgres</spring.profiles.active>
+            </properties>
+        </profile>
+        <profile>
             <id>dev</id>
             <properties>
                 <spring.profiles.active>dev</spring.profiles.active>

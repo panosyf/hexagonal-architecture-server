@@ -191,6 +191,8 @@ chmod +x monolith-run.sh
 
 # Run the application
 ./monolith-run.sh
+# or for using docker container docker container
+./monolith-run.sh local-postgres
 ```
 
 The script will:
