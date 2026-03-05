@@ -1,6 +1,6 @@
 package com.hexagonal.server.infra.persistence.converter.account;
 
-import com.hexagonal.server.account.core.domain.account.Account;
+import com.hexagonal.server.identity.core.core.domain.account.Account;
 import com.hexagonal.server.infra.persistence.entity.account.AccountPersistenceEntity;
 import org.springframework.core.convert.converter.Converter;
 

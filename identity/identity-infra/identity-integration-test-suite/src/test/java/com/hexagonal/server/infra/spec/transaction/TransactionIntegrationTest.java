@@ -1,11 +1,11 @@
 package com.hexagonal.server.infra.spec.transaction;
 
-import com.hexagonal.server.account.application.model.request.transaction.TransactionCreateRequest;
-import com.hexagonal.server.account.application.model.request.transaction.TransactionUpdateRequest;
-import com.hexagonal.server.account.application.model.response.transaction.TransactionCreationResponse;
-import com.hexagonal.server.account.application.model.response.transaction.TransactionUpdateResponse;
-import com.hexagonal.server.account.core.domain.account.Account;
-import com.hexagonal.server.account.core.model.enums.transaction.TransactionStatusEnum;
+import com.hexagonal.server.identity.application.application.model.request.transaction.TransactionCreateRequest;
+import com.hexagonal.server.identity.application.application.model.request.transaction.TransactionUpdateRequest;
+import com.hexagonal.server.identity.application.application.model.response.transaction.TransactionCreationResponse;
+import com.hexagonal.server.identity.application.application.model.response.transaction.TransactionUpdateResponse;
+import com.hexagonal.server.identity.core.core.domain.account.Account;
+import com.hexagonal.server.identity.core.core.model.enums.transaction.TransactionStatusEnum;
 import com.hexagonal.server.infra.common.constant.transaction.Endpoint;
 import com.hexagonal.server.infra.common.mock.account.AccountMock;
 import com.hexagonal.server.infra.common.mock.transaction.TransactionCreateRequestMock;
@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 
-import static com.hexagonal.server.account.core.model.enums.transaction.TransactionStatusEnum.COMPLETED;
+import static com.hexagonal.server.identity.core.core.model.enums.transaction.TransactionStatusEnum.COMPLETED;
 import static com.hexagonal.server.infra.common.mock.transaction.TransactionUpdateRequestMock.generateTransactionUpdateRequest;
 import static org.assertj.core.api.Assertions.assertThat;
 

@@ -1,6 +1,6 @@
 package com.hexagonal.server.infra.persistence.adapter.out.transaction.config;
 
-import com.hexagonal.server.account.core.port.out.transaction.TransactionRepositoryPort;
+import com.hexagonal.server.identity.core.core.port.out.transaction.TransactionRepositoryPort;
 import com.hexagonal.server.infra.persistence.adapter.out.transaction.TransactionJpaRepository;
 import com.hexagonal.server.infra.persistence.adapter.out.transaction.TransactionRepositoryAdapter;
 import org.springframework.context.annotation.Bean;

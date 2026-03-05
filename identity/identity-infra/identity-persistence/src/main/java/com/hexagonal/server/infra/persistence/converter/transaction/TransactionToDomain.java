@@ -1,6 +1,6 @@
 package com.hexagonal.server.infra.persistence.converter.transaction;
 
-import com.hexagonal.server.account.core.domain.transaction.Transaction;
+import com.hexagonal.server.identity.core.core.domain.transaction.Transaction;
 import com.hexagonal.server.infra.persistence.entity.transaction.TransactionPersistenceEntity;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Id;
 import org.springframework.core.convert.converter.Converter;

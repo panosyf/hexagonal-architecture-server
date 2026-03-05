@@ -1,7 +1,7 @@
 package com.hexagonal.server.infra.persistence.entity.transaction;
 
-import com.hexagonal.server.account.core.model.enums.transaction.TransactionStatusEnum;
-import com.hexagonal.server.account.core.model.enums.transaction.TransactionType;
+import com.hexagonal.server.identity.core.core.model.enums.transaction.TransactionStatusEnum;
+import com.hexagonal.server.identity.core.core.model.enums.transaction.TransactionType;
 import com.hexagonal.server.shared.kernel.common.entity.PersistenceEntity;
 import com.hexagonal.server.shared.kernel.common.infra.valueobjects.converters.DescriptionAttributeConverter;
 import com.hexagonal.server.shared.kernel.common.infra.valueobjects.converters.MoneyAttributeConverter;
