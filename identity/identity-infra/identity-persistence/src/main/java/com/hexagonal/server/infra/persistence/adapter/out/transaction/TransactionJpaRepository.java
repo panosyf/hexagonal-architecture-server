@@ -1,6 +1,6 @@
 package com.hexagonal.server.infra.persistence.adapter.out.transaction;
 
-import com.hexagonal.server.identity.core.core.model.enums.transaction.TransactionStatusEnum;
+import com.hexagonal.server.identity.core.model.enums.transaction.TransactionStatusEnum;
 import com.hexagonal.server.infra.persistence.entity.transaction.TransactionPersistenceEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;

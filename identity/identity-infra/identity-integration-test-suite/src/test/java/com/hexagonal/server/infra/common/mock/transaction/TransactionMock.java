@@ -1,8 +1,8 @@
 package com.hexagonal.server.infra.common.mock.transaction;
 
-import com.hexagonal.server.identity.core.core.domain.transaction.Transaction;
-import com.hexagonal.server.identity.core.core.model.enums.transaction.TransactionStatusEnum;
-import com.hexagonal.server.identity.core.core.model.enums.transaction.TransactionType;
+import com.hexagonal.server.identity.core.domain.transaction.Transaction;
+import com.hexagonal.server.identity.core.model.enums.transaction.TransactionStatusEnum;
+import com.hexagonal.server.identity.core.model.enums.transaction.TransactionType;
 import com.hexagonal.server.infra.common.constant.transaction.TransactionId;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Description;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Money;

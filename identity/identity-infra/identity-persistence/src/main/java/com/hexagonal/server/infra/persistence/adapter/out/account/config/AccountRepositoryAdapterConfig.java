@@ -1,6 +1,6 @@
 package com.hexagonal.server.infra.persistence.adapter.out.account.config;
 
-import com.hexagonal.server.identity.core.core.port.out.account.AccountRepositoryPort;
+import com.hexagonal.server.identity.core.port.out.account.AccountRepositoryPort;
 import com.hexagonal.server.infra.persistence.adapter.out.account.AccountJpaRepository;
 import com.hexagonal.server.infra.persistence.adapter.out.account.AccountRepositoryAdapter;
 import org.springframework.context.annotation.Bean;

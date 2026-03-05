@@ -1,9 +1,9 @@
 package com.hexagonal.server.infra.persistence.adapter.out.transaction;
 
-import com.hexagonal.server.identity.core.core.domain.transaction.Transaction;
-import com.hexagonal.server.identity.core.core.exception.elementnotfound.transaction.TransactionNotFoundException;
-import com.hexagonal.server.identity.core.core.model.enums.transaction.TransactionStatusEnum;
-import com.hexagonal.server.identity.core.core.port.out.transaction.TransactionRepositoryPort;
+import com.hexagonal.server.identity.core.domain.transaction.Transaction;
+import com.hexagonal.server.identity.core.exception.elementnotfound.transaction.TransactionNotFoundException;
+import com.hexagonal.server.identity.core.model.enums.transaction.TransactionStatusEnum;
+import com.hexagonal.server.identity.core.port.out.transaction.TransactionRepositoryPort;
 import com.hexagonal.server.infra.persistence.entity.transaction.TransactionPersistenceEntity;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Id;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Timestamp;

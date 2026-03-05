@@ -1,6 +1,6 @@
 package com.hexagonal.server.infra.common.mock.account;
 
-import com.hexagonal.server.identity.application.application.model.request.account.AccountCreateRequest;
+import com.hexagonal.server.identity.application.model.request.account.AccountCreateRequest;
 import com.hexagonal.server.infra.common.constant.account.Email;
 import com.hexagonal.server.infra.common.constant.account.Name;
 import com.hexagonal.server.infra.common.constant.account.Password;
