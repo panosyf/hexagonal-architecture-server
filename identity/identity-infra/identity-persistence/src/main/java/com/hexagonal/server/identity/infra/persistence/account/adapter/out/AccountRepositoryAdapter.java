@@ -5,8 +5,6 @@ import com.hexagonal.server.identity.core.account.exception.elementnotfound.Acco
 import com.hexagonal.server.identity.core.account.port.out.AccountRepositoryPort;
 import com.hexagonal.server.identity.infra.persistence.account.entity.AccountPersistenceEntity;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Id;
-import com.hexagonal.server.shared.kernel.common.valueobjects.Money;
-import jakarta.transaction.Transactional;
 import org.springframework.core.convert.ConversionService;
 
 public class AccountRepositoryAdapter implements AccountRepositoryPort {
@@ -31,18 +29,6 @@ public class AccountRepositoryAdapter implements AccountRepositoryPort {
         AccountPersistenceEntity accountPersistenceEntity = accountJpaRepository.findById(id.getValue())
                 .orElseThrow(() -> new AccountNotFoundException(id.getValue()));
         return accountToDomain(accountPersistenceEntity);
-    }
-
-    @Override
-    public Money findBalance(Id id) {
-        return Money.of(accountJpaRepository.findBalance(id.getValue()));
-    }
-
-    @Override
-    @Transactional
-    public Account updateBalance(Account account) {
-        accountJpaRepository.updateBalance(account.getId().getValue(), account.getBalance().getValue());
-        return findById(account.getId());
     }
 
     @Override

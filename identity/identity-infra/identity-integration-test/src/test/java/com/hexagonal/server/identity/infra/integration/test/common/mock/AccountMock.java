@@ -20,13 +20,4 @@ public class AccountMock {
                 Name.ACCOUNT_NAME_1);
     }
 
-    public static Account generateAccount(Money balance) {
-        return new Account(
-                Email.EMAIL_1,
-                Username.USERNAME_1,
-                Password.PASSWORD_1,
-                Name.ACCOUNT_NAME_1,
-                balance);
-    }
-
 }

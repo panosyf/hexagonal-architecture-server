@@ -6,16 +6,11 @@ import com.hexagonal.server.identity.application.account.model.response.AccountC
 import com.hexagonal.server.identity.application.account.model.response.AccountResponse;
 import com.hexagonal.server.identity.core.account.domain.Account;
 import com.hexagonal.server.identity.core.account.model.enums.AccountCreationStatusEnum;
-import com.hexagonal.server.identity.core.account.service.AccountDomainService;
 import com.hexagonal.server.identity.core.account.model.operation.CreateAccountOperation;
-import com.hexagonal.server.identity.core.account.model.operation.DecreaseBalanceOperation;
 import com.hexagonal.server.identity.core.account.model.operation.GetAccountOperation;
-import com.hexagonal.server.identity.core.account.model.operation.IncreaseBalanceOperation;
+import com.hexagonal.server.identity.core.account.service.AccountDomainService;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Id;
-import com.hexagonal.server.shared.kernel.common.valueobjects.Money;
 import org.springframework.core.convert.ConversionService;
-
-import java.math.BigDecimal;
 
 public class AccountUsecaseImpl implements AccountUsecase {
 
@@ -40,18 +35,6 @@ public class AccountUsecaseImpl implements AccountUsecase {
         Account account = accountDomainService.getAccount(getAccountOperation);
         AccountDto accountDto = conversionService.convert(account, AccountDto.class);
         return new AccountResponse(accountDto);
-    }
-
-    @Override
-    public void increaseBalance(String id, BigDecimal amount) {
-        IncreaseBalanceOperation increaseBalanceOperation = new IncreaseBalanceOperation(Id.valueOf(id), Money.of(amount));
-        accountDomainService.increaseBalance(increaseBalanceOperation);
-    }
-
-    @Override
-    public void decreaseBalance(String id, BigDecimal amount) {
-        DecreaseBalanceOperation decreaseBalanceOperation = new DecreaseBalanceOperation(Id.valueOf(id), Money.of(amount));
-        accountDomainService.decreaseBalance(decreaseBalanceOperation);
     }
 
 }

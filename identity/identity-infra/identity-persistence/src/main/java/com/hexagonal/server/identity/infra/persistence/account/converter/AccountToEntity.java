@@ -14,7 +14,6 @@ public class AccountToEntity implements Converter<Account, AccountPersistenceEnt
                 account.getUsername(),
                 account.getPassword(),
                 account.getName(),
-                account.getBalance(),
                 account.getCreatedAt(),
                 account.getUpdatedAt()
         );

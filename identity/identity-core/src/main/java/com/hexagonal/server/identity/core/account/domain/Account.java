@@ -12,7 +12,6 @@ public class Account extends DomainEntity {
     private Username username;
     private Password password;
     private Name name;
-    private Money balance;
     private Timestamp createdAt;
     private Timestamp updatedAt;
 
@@ -29,24 +28,6 @@ public class Account extends DomainEntity {
         this.username = username;
         this.password = password;
         this.name = name;
-        this.balance = Money.zero();
-        Timestamp now = Timestamp.now();
-        this.createdAt = now;
-        this.updatedAt = now;
-    }
-
-    public Account(
-            final Email email,
-            final Username username,
-            final Password password,
-            final Name name,
-            final Money balance) {
-        this.id = Id.generate();
-        this.email = email;
-        this.username = username;
-        this.password = password;
-        this.name = name;
-        this.balance = balance;
         Timestamp now = Timestamp.now();
         this.createdAt = now;
         this.updatedAt = now;
@@ -57,14 +38,12 @@ public class Account extends DomainEntity {
             final Email email,
             final Username username,
             final Password password,
-            final Name name,
-            final Money balance) {
+            final Name name) {
         this.id = id;
         this.email = email;
         this.username = username;
         this.password = password;
         this.name = name;
-        this.balance = balance;
         Timestamp now = Timestamp.now();
         this.createdAt = now;
         this.updatedAt = now;
@@ -76,7 +55,6 @@ public class Account extends DomainEntity {
             final Username username,
             final Password password,
             final Name name,
-            final Money balance,
             final Timestamp createdAt,
             final Timestamp updatedAt) {
         this.id = id;
@@ -84,7 +62,6 @@ public class Account extends DomainEntity {
         this.username = username;
         this.password = password;
         this.name = name;
-        this.balance = balance;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -109,43 +86,12 @@ public class Account extends DomainEntity {
         return name;
     }
 
-    public Money getBalance() {
-        return balance;
-    }
-
     public Timestamp getCreatedAt() {
         return createdAt;
     }
 
     public Timestamp getUpdatedAt() {
         return updatedAt;
-    }
-
-    public boolean hasBalance() {
-        return this.balance.isGreaterThanZero();
-    }
-
-    public boolean isBalanceEligibleForTransaction(final Money transactionAmount) {
-        return hasBalance() && balance.isGreaterThanOrEqual(transactionAmount);
-    }
-
-    public boolean notEligibleBalanceForTransaction(final Money transactionAmount) {
-        return !isBalanceEligibleForTransaction(transactionAmount);
-    }
-
-    public void validateBalanceEligibleForTransaction(final Money amount) {
-        if (notEligibleBalanceForTransaction(amount)) {
-            throw new InsufficientBalanceException(id.getValue());
-        }
-    }
-
-    public void increaseBalance(final Money amount) {
-        this.balance = this.balance.add(amount);
-    }
-
-    public void decreaseBalance(final Money amount) {
-        validateBalanceEligibleForTransaction(amount);
-        this.balance = this.balance.subtract(amount);
     }
 
     @Override
@@ -169,7 +115,6 @@ public class Account extends DomainEntity {
                 ", username=" + username +
                 ", password=" + "[REDACTED]" +
                 ", name=" + name +
-                ", balance=" + balance +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 '}';

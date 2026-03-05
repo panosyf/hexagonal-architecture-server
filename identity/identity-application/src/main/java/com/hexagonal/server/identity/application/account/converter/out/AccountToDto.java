@@ -12,7 +12,6 @@ public class AccountToDto implements Converter<Account, AccountDto> {
                 account.getId().getValue(),
                 account.getName().getFirstName(),
                 account.getName().getLastName(),
-                account.getBalance().getValue(),
                 account.getCreatedAt().getTime(),
                 account.getUpdatedAt().getTime()
         );

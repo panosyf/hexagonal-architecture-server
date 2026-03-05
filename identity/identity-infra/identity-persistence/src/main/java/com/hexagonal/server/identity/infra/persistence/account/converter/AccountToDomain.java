@@ -15,7 +15,6 @@ public class AccountToDomain implements Converter<AccountPersistenceEntity, Acco
                 accountPersistenceEntity.getUsername(),
                 accountPersistenceEntity.getPassword(),
                 accountPersistenceEntity.getName(),
-                accountPersistenceEntity.getBalance(),
                 accountPersistenceEntity.getCreatedAt(),
                 accountPersistenceEntity.getUpdatedAt()
         );
