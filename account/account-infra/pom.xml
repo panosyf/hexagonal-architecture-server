@@ -19,7 +19,7 @@
     <modules>
         <module>account-persistence</module>
         <module>account-rest</module>
-        <module>account-integration-test-suite</module>
+        <module>account-integration-test</module>
     </modules>
 
 </project>
