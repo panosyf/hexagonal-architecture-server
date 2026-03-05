@@ -4,7 +4,7 @@ import com.hexagonal.server.account.core.domain.transaction.Transaction;
 import com.hexagonal.server.account.core.exception.elementnotfound.transaction.TransactionNotFoundException;
 import com.hexagonal.server.account.core.model.enums.transaction.TransactionStatusEnum;
 import com.hexagonal.server.account.core.port.out.transaction.TransactionRepositoryPort;
-import com.hexagonal.server.infra.persistence.entity.transaction.TransactionEntity;
+import com.hexagonal.server.infra.persistence.entity.transaction.TransactionPersistenceEntity;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Id;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Timestamp;
 import jakarta.transaction.Transactional;
@@ -24,16 +24,16 @@ public class TransactionRepositoryAdapter implements TransactionRepositoryPort {
 
     @Override
     public Transaction save(Transaction transaction) {
-        TransactionEntity transactionEntity = conversionService.convert(transaction, TransactionEntity.class);
-        TransactionEntity persistedTransactionEntity = transactionJpaRepository.save(transactionEntity);
-        return transactionToDomain(persistedTransactionEntity);
+        TransactionPersistenceEntity transactionPersistenceEntity = conversionService.convert(transaction, TransactionPersistenceEntity.class);
+        TransactionPersistenceEntity persistedTransactionPersistenceEntity = transactionJpaRepository.save(transactionPersistenceEntity);
+        return transactionToDomain(persistedTransactionPersistenceEntity);
     }
 
     @Override
     public Transaction findById(Id id) {
-        TransactionEntity transactionEntity = transactionJpaRepository.findById(id.getValue())
+        TransactionPersistenceEntity transactionPersistenceEntity = transactionJpaRepository.findById(id.getValue())
                 .orElseThrow(() -> new TransactionNotFoundException(id.getValue()));
-        return transactionToDomain(transactionEntity);
+        return transactionToDomain(transactionPersistenceEntity);
     }
 
     @Override
@@ -51,8 +51,8 @@ public class TransactionRepositoryAdapter implements TransactionRepositoryPort {
         transactionJpaRepository.deleteAll();
     }
 
-    private Transaction transactionToDomain(TransactionEntity transactionEntity) {
-        return conversionService.convert(transactionEntity, Transaction.class);
+    private Transaction transactionToDomain(TransactionPersistenceEntity transactionPersistenceEntity) {
+        return conversionService.convert(transactionPersistenceEntity, Transaction.class);
     }
 
 }

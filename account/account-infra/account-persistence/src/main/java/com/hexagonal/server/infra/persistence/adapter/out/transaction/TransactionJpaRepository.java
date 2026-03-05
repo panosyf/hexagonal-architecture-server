@@ -1,7 +1,7 @@
 package com.hexagonal.server.infra.persistence.adapter.out.transaction;
 
 import com.hexagonal.server.account.core.model.enums.transaction.TransactionStatusEnum;
-import com.hexagonal.server.infra.persistence.entity.transaction.TransactionEntity;
+import com.hexagonal.server.infra.persistence.entity.transaction.TransactionPersistenceEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.time.Instant;
 
-public interface TransactionJpaRepository extends JpaRepository<TransactionEntity, String> {
+public interface TransactionJpaRepository extends JpaRepository<TransactionPersistenceEntity, String> {
 
     @Modifying
     @Query(

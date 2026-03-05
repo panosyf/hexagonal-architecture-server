@@ -10,7 +10,7 @@ import java.util.Objects;
 
 @Entity(name = "account")
 @Table(name = "account")
-public class AccountEntity extends PersistenceEntity {
+public class AccountPersistenceEntity extends PersistenceEntity {
 
     @Id
     @Column(name = "id")
@@ -44,10 +44,10 @@ public class AccountEntity extends PersistenceEntity {
     @Convert(converter = TimestampAttributeConverter.class)
     private Timestamp updatedAt;
 
-    protected AccountEntity() {
+    protected AccountPersistenceEntity() {
     }
 
-    public AccountEntity(
+    public AccountPersistenceEntity(
             final String id,
             final Email email,
             final Username username,
@@ -134,7 +134,7 @@ public class AccountEntity extends PersistenceEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        AccountEntity that = (AccountEntity) o;
+        AccountPersistenceEntity that = (AccountPersistenceEntity) o;
         return Objects.equals(id, that.id) && Objects.equals(email, that.email) && Objects.equals(username, that.username) && Objects.equals(password, that.password) && Objects.equals(name, that.name) && Objects.equals(balance, that.balance) && Objects.equals(createdAt, that.createdAt) && Objects.equals(updatedAt, that.updatedAt);
     }
 
@@ -145,7 +145,7 @@ public class AccountEntity extends PersistenceEntity {
 
     @Override
     public String toString() {
-        return "AccountEntity{" +
+        return "AccountPersistenceEntity{" +
                 "id=" + id +
                 ", email=" + email +
                 ", username=" + username +

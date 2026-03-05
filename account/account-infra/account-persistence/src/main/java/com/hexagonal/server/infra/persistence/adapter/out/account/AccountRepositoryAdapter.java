@@ -3,7 +3,7 @@ package com.hexagonal.server.infra.persistence.adapter.out.account;
 import com.hexagonal.server.account.core.domain.account.Account;
 import com.hexagonal.server.account.core.exception.elementnotfound.account.AccountNotFoundException;
 import com.hexagonal.server.account.core.port.out.account.AccountRepositoryPort;
-import com.hexagonal.server.infra.persistence.entity.account.AccountEntity;
+import com.hexagonal.server.infra.persistence.entity.account.AccountPersistenceEntity;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Id;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Money;
 import jakarta.transaction.Transactional;
@@ -21,16 +21,16 @@ public class AccountRepositoryAdapter implements AccountRepositoryPort {
 
     @Override
     public Account save(Account account) {
-        AccountEntity accountEntity = conversionService.convert(account, AccountEntity.class);
-        AccountEntity persistedAccountEntity = accountJpaRepository.save(accountEntity);
-        return accountToDomain(persistedAccountEntity);
+        AccountPersistenceEntity accountPersistenceEntity = conversionService.convert(account, AccountPersistenceEntity.class);
+        AccountPersistenceEntity persistedAccountPersistenceEntity = accountJpaRepository.save(accountPersistenceEntity);
+        return accountToDomain(persistedAccountPersistenceEntity);
     }
 
     @Override
     public Account findById(Id id) {
-        AccountEntity accountEntity = accountJpaRepository.findById(id.getValue())
+        AccountPersistenceEntity accountPersistenceEntity = accountJpaRepository.findById(id.getValue())
                 .orElseThrow(() -> new AccountNotFoundException(id.getValue()));
-        return accountToDomain(accountEntity);
+        return accountToDomain(accountPersistenceEntity);
     }
 
     @Override
@@ -55,8 +55,8 @@ public class AccountRepositoryAdapter implements AccountRepositoryPort {
         accountJpaRepository.deleteAll();
     }
 
-    private Account accountToDomain(AccountEntity accountEntity) {
-        return conversionService.convert(accountEntity, Account.class);
+    private Account accountToDomain(AccountPersistenceEntity accountPersistenceEntity) {
+        return conversionService.convert(accountPersistenceEntity, Account.class);
     }
 
 }

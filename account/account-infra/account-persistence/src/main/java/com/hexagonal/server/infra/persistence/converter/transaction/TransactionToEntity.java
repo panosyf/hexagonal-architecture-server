@@ -1,14 +1,14 @@
 package com.hexagonal.server.infra.persistence.converter.transaction;
 
 import com.hexagonal.server.account.core.domain.transaction.Transaction;
-import com.hexagonal.server.infra.persistence.entity.transaction.TransactionEntity;
+import com.hexagonal.server.infra.persistence.entity.transaction.TransactionPersistenceEntity;
 import org.springframework.core.convert.converter.Converter;
 
-public class TransactionToEntity implements Converter<Transaction, TransactionEntity> {
+public class TransactionToEntity implements Converter<Transaction, TransactionPersistenceEntity> {
 
     @Override
-    public TransactionEntity convert(Transaction transaction) {
-        return new TransactionEntity(
+    public TransactionPersistenceEntity convert(Transaction transaction) {
+        return new TransactionPersistenceEntity(
                 transaction.getId().getValue(),
                 transaction.getType(),
                 transaction.getAmount(),

@@ -15,7 +15,7 @@ import java.util.Objects;
 
 @Entity(name = "transaction")
 @Table(name = "transaction")
-public class TransactionEntity extends PersistenceEntity {
+public class TransactionPersistenceEntity extends PersistenceEntity {
 
     @Column(name = "id")
     @Id
@@ -51,10 +51,10 @@ public class TransactionEntity extends PersistenceEntity {
     @Convert(converter = TimestampAttributeConverter.class)
     private Timestamp updatedAt;
 
-    protected TransactionEntity() {
+    protected TransactionPersistenceEntity() {
     }
 
-    public TransactionEntity(
+    public TransactionPersistenceEntity(
             String id,
             TransactionType type,
             Money amount,
@@ -151,7 +151,7 @@ public class TransactionEntity extends PersistenceEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        TransactionEntity that = (TransactionEntity) o;
+        TransactionPersistenceEntity that = (TransactionPersistenceEntity) o;
         return Objects.equals(id, that.id) && type == that.type && Objects.equals(amount, that.amount) && Objects.equals(description, that.description) && Objects.equals(debtorAccountId, that.debtorAccountId) && Objects.equals(beneficiaryAccountId, that.beneficiaryAccountId) && status == that.status && Objects.equals(createdAt, that.createdAt) && Objects.equals(updatedAt, that.updatedAt);
     }
 
@@ -162,7 +162,7 @@ public class TransactionEntity extends PersistenceEntity {
 
     @Override
     public String toString() {
-        return "TransactionEntity{" +
+        return "TransactionPersistenceEntity{" +
                 "id='" + id + '\'' +
                 ", type=" + type +
                 ", amount=" + amount +
