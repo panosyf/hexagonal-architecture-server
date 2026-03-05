@@ -1,4 +1,4 @@
-package com.hexagonal.server.infra.rest.controllers.account;
+package com.hexagonal.server.infra.rest.controller.account;
 
 import com.hexagonal.server.account.application.api.AccountApi;
 import com.hexagonal.server.account.application.usecase.account.AccountUsecase;

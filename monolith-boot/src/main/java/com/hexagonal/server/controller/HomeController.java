@@ -1,4 +1,4 @@
-package com.hexagonal.server.infra.rest.controllers.home;
+package com.hexagonal.server.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

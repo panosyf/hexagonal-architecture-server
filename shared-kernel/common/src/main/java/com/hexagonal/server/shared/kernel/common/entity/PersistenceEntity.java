@@ -1,4 +1,4 @@
 package com.hexagonal.server.shared.kernel.common.entity;
 
-public abstract class PersistentEntity {
+public abstract class PersistenceEntity {
 }

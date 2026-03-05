@@ -2,7 +2,7 @@ package com.hexagonal.server.infra.persistence.entity.transaction;
 
 import com.hexagonal.server.account.core.model.enums.transaction.TransactionStatusEnum;
 import com.hexagonal.server.account.core.model.enums.transaction.TransactionType;
-import com.hexagonal.server.shared.kernel.common.entity.PersistentEntity;
+import com.hexagonal.server.shared.kernel.common.entity.PersistenceEntity;
 import com.hexagonal.server.shared.kernel.common.infra.valueobjects.converters.DescriptionAttributeConverter;
 import com.hexagonal.server.shared.kernel.common.infra.valueobjects.converters.MoneyAttributeConverter;
 import com.hexagonal.server.shared.kernel.common.infra.valueobjects.converters.TimestampAttributeConverter;
@@ -15,7 +15,7 @@ import java.util.Objects;
 
 @Entity(name = "transaction")
 @Table(name = "transaction")
-public class TransactionEntity extends PersistentEntity {
+public class TransactionEntity extends PersistenceEntity {
 
     @Column(name = "id")
     @Id

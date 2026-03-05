@@ -1,6 +1,6 @@
 package com.hexagonal.server.infra.persistence.entity.account;
 
-import com.hexagonal.server.shared.kernel.common.entity.PersistentEntity;
+import com.hexagonal.server.shared.kernel.common.entity.PersistenceEntity;
 import com.hexagonal.server.shared.kernel.common.infra.valueobjects.converters.*;
 import com.hexagonal.server.shared.kernel.common.valueobjects.*;
 import jakarta.persistence.Id;
@@ -10,7 +10,7 @@ import java.util.Objects;
 
 @Entity(name = "account")
 @Table(name = "account")
-public class AccountEntity extends PersistentEntity {
+public class AccountEntity extends PersistenceEntity {
 
     @Id
     @Column(name = "id")

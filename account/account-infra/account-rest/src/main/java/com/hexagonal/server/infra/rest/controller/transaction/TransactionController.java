@@ -1,4 +1,4 @@
-package com.hexagonal.server.infra.rest.controllers.transaction;
+package com.hexagonal.server.infra.rest.controller.transaction;
 
 import com.hexagonal.server.account.application.api.TransactionApi;
 import com.hexagonal.server.account.application.usecase.transaction.TransactionUsecase;

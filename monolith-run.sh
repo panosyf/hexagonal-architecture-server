@@ -8,6 +8,6 @@ echo "Building all modules..."
 ./mvnw clean install
 echo ""
 echo "Starting application..."
-cd app
+cd monolith-boot
 #mvn spring-boot:run -Dspring-boot.run.profiles=local
 .././mvnw spring-boot:run -Dspring-boot.run.profiles=local
