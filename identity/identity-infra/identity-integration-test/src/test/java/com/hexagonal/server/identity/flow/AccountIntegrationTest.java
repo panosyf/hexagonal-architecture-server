@@ -1,7 +1,7 @@
 package com.hexagonal.server.identity.flow;
 
 import com.hexagonal.server.identity.common.constant.Endpoint;
-import com.hexagonal.server.identity.core.account.model.enums.AccountCreationStatusEnum;
+import com.hexagonal.server.identity.application.account.model.enums.AccountCreationStatusEnum;
 import com.hexagonal.server.identity.application.account.model.request.AccountCreateRequest;
 import com.hexagonal.server.identity.application.account.model.response.AccountCreationResponse;
 import com.hexagonal.server.identity.config.BaseIdentityIntegrationTest;

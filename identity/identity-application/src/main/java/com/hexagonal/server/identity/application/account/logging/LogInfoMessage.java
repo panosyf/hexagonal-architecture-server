@@ -1,4 +1,4 @@
-package com.hexagonal.server.identity.core.account.logging;
+package com.hexagonal.server.identity.application.account.logging;
 
 public class LogInfoMessage {
 

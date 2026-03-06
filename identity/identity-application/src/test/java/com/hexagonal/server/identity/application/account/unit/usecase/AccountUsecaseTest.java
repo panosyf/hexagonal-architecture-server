@@ -11,7 +11,7 @@ import com.hexagonal.server.identity.application.account.port.out.repository.Acc
 import com.hexagonal.server.identity.application.account.usecase.AccountUsecase;
 import com.hexagonal.server.identity.application.account.usecase.AccountUsecaseImpl;
 import com.hexagonal.server.identity.core.account.domain.Account;
-import com.hexagonal.server.identity.core.account.model.enums.AccountCreationStatusEnum;
+import com.hexagonal.server.identity.application.account.model.enums.AccountCreationStatusEnum;
 import com.hexagonal.server.identity.core.account.model.operation.CreateAccountOperation;
 import com.hexagonal.server.identity.core.account.service.AccountDomainService;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Id;
