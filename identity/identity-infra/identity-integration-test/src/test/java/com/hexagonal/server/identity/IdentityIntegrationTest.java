@@ -1,10 +1,10 @@
-package com.hexagonal.server.identity.infra.integration.test;
+package com.hexagonal.server.identity;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication(
-        scanBasePackages = "com.hexagonal.server"
+        scanBasePackages = "com.hexagonal.server.identity"
 )
 public class IdentityIntegrationTest {
 

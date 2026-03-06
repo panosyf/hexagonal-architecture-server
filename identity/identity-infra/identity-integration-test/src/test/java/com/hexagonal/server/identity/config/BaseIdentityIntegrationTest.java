@@ -1,4 +1,4 @@
-package com.hexagonal.server.identity.infra.integration.test.config;
+package com.hexagonal.server.identity.config;
 
 import com.hexagonal.server.identity.core.account.port.out.AccountRepositoryPort;
 import com.hexagonal.server.shared.kernel.testing.config.AbstractIntegrationTest;

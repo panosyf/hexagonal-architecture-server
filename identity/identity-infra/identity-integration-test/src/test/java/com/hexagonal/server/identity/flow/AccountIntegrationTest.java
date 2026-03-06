@@ -1,13 +1,13 @@
-package com.hexagonal.server.identity.infra.integration.test.flow;
+package com.hexagonal.server.identity.flow;
 
-import com.hexagonal.server.identity.infra.integration.test.common.constant.Endpoint;
+import com.hexagonal.server.identity.common.constant.Endpoint;
 import com.hexagonal.server.identity.core.account.model.enums.AccountCreationStatusEnum;
 import com.hexagonal.server.identity.application.account.model.request.AccountCreateRequest;
 import com.hexagonal.server.identity.application.account.model.response.AccountCreationResponse;
-import com.hexagonal.server.identity.infra.integration.test.config.BaseIdentityIntegrationTest;
+import com.hexagonal.server.identity.config.BaseIdentityIntegrationTest;
 import org.junit.jupiter.api.Test;
 
-import static com.hexagonal.server.identity.infra.integration.test.common.mock.AccountCreateRequestMock.generateAccountCreateRequest;
+import static com.hexagonal.server.identity.common.mock.AccountCreateRequestMock.generateAccountCreateRequest;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class AccountIntegrationTest extends BaseIdentityIntegrationTest {

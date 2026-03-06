@@ -24,10 +24,10 @@
     </properties>
 
     <dependencies>
-        <!-- account-app module-->
+        <!-- identity-boot module-->
         <dependency>
-            <groupId>com.hexagonal.server.account</groupId>
-            <artifactId>account-boot</artifactId>
+            <groupId>com.hexagonal.server.identity</groupId>
+            <artifactId>identity-boot</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>

@@ -1,4 +1,4 @@
-package com.hexagonal.server.identity.infra.integration.test.common.constant;
+package com.hexagonal.server.identity.common.constant;
 
 public class Username {
 

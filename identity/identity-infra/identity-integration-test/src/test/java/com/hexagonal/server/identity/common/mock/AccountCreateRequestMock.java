@@ -1,10 +1,10 @@
-package com.hexagonal.server.identity.infra.integration.test.common.mock;
+package com.hexagonal.server.identity.common.mock;
 
 import com.hexagonal.server.identity.application.account.model.request.AccountCreateRequest;
-import com.hexagonal.server.identity.infra.integration.test.common.constant.Email;
-import com.hexagonal.server.identity.infra.integration.test.common.constant.Name;
-import com.hexagonal.server.identity.infra.integration.test.common.constant.Password;
-import com.hexagonal.server.identity.infra.integration.test.common.constant.Username;
+import com.hexagonal.server.identity.common.constant.Email;
+import com.hexagonal.server.identity.common.constant.Name;
+import com.hexagonal.server.identity.common.constant.Password;
+import com.hexagonal.server.identity.common.constant.Username;
 
 public class AccountCreateRequestMock {
 
