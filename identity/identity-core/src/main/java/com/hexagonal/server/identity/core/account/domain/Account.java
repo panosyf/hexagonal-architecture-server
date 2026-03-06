@@ -1,11 +1,11 @@
 package com.hexagonal.server.identity.core.account.domain;
 
-import com.hexagonal.server.shared.kernel.common.entity.DomainEntity;
+import com.hexagonal.server.shared.kernel.common.entity.AggregateRoot;
 import com.hexagonal.server.shared.kernel.common.valueobjects.*;
 
 import java.util.Objects;
 
-public class Account extends DomainEntity {
+public class Account extends AggregateRoot {
 
     private Id id;
     private Email email;

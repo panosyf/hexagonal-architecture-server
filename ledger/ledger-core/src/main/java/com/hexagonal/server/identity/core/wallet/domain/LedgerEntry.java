@@ -1,12 +1,13 @@
 package com.hexagonal.server.identity.core.wallet.domain;
 
+import com.hexagonal.server.shared.kernel.common.entity.DomainEntity;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Id;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Money;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Timestamp;
 
 import java.util.Objects;
 
-public class LedgerEntry {
+public class LedgerEntry extends DomainEntity {
 
     private Id id;
     private Id walletId;
