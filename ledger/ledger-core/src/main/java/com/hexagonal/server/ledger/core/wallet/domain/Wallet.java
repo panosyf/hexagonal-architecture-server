@@ -4,7 +4,6 @@ import com.hexagonal.server.shared.kernel.common.entity.AggregateRoot;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Id;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Money;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -15,20 +14,23 @@ import static com.hexagonal.server.ledger.core.wallet.exception.WalletErrorMessa
 public class Wallet extends AggregateRoot {
 
     private Id id;
-    private List<LedgerEntry> ledgerEntryList;
+    private Id accountId;
+    private List<LedgerEntry> ledgerEntryList = new ArrayList<>();
 
     private Wallet() {
     }
 
-    public Wallet(final Id id, final List<LedgerEntry> ledgerEntryList) {
+    private Wallet(final Id id, final Id accountId, final List<LedgerEntry> ledgerEntryList) {
         this.id = id;
+        this.accountId = accountId;
         this.ledgerEntryList = new ArrayList<>(ledgerEntryList);
     }
 
+    public static Wallet create(final Id accountId) {
+        return new Wallet(Id.generate(), accountId, List.of());
+    }
+
     public Money balance() {
-        if (ledgerEntryList.isEmpty()) {
-            return Money.of(BigDecimal.ZERO);
-        }
         return ledgerEntryList.stream()
                 .map(LedgerEntry::getAmount)
                 .reduce(Money.zero(), Money::add);
@@ -58,13 +60,12 @@ public class Wallet extends AggregateRoot {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Wallet wallet = (Wallet) o;
-        return Objects.equals(id, wallet.id) && Objects.equals(ledgerEntryList, wallet.ledgerEntryList);
+        return Objects.equals(id, wallet.id) && Objects.equals(accountId, wallet.accountId) && Objects.equals(ledgerEntryList, wallet.ledgerEntryList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, ledgerEntryList);
+        return Objects.hash(id, accountId, ledgerEntryList);
     }
-
 }
 
