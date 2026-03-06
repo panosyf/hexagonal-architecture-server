@@ -1,9 +1,8 @@
 package com.hexagonal.server.identity.flow;
 
-import com.hexagonal.server.identity.common.constant.Endpoint;
-import com.hexagonal.server.identity.application.account.model.enums.AccountCreationStatusEnum;
 import com.hexagonal.server.identity.application.account.model.request.AccountCreateRequest;
 import com.hexagonal.server.identity.application.account.model.response.AccountCreationResponse;
+import com.hexagonal.server.identity.common.constant.Endpoint;
 import com.hexagonal.server.identity.config.BaseIdentityIntegrationTest;
 import org.junit.jupiter.api.Test;
 
@@ -25,7 +24,7 @@ class AccountIntegrationTest extends BaseIdentityIntegrationTest {
         //then
         assertThat(accountRepositoryPort.findTotalEntries()).isEqualTo(1);
         assertThat(accountCreationResponse).isNotNull();
-        assertThat(accountCreationResponse.status()).isEqualTo(AccountCreationStatusEnum.SUCCESSFUL);
+        assertThat(accountCreationResponse.id()).isNotNull();
     }
 
 }

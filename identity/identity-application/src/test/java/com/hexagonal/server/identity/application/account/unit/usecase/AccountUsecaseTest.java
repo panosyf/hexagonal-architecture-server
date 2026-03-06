@@ -6,12 +6,10 @@ import com.hexagonal.server.identity.application.account.converter.out.AccountTo
 import com.hexagonal.server.identity.application.account.model.dto.AccountDto;
 import com.hexagonal.server.identity.application.account.model.request.AccountCreateRequest;
 import com.hexagonal.server.identity.application.account.model.response.AccountCreationResponse;
-import com.hexagonal.server.identity.application.account.model.response.AccountResponse;
 import com.hexagonal.server.identity.application.account.port.out.repository.AccountRepositoryPort;
 import com.hexagonal.server.identity.application.account.usecase.AccountUsecase;
 import com.hexagonal.server.identity.application.account.usecase.AccountUsecaseImpl;
 import com.hexagonal.server.identity.core.account.domain.Account;
-import com.hexagonal.server.identity.application.account.model.enums.AccountCreationStatusEnum;
 import com.hexagonal.server.identity.core.account.model.operation.CreateAccountOperation;
 import com.hexagonal.server.identity.core.account.service.AccountDomainService;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Id;
@@ -61,7 +59,6 @@ public class AccountUsecaseTest {
                 () -> assertEquals(Username.USERNAME_1, createAccountOperation.username()),
                 () -> assertEquals(Password.PASSWORD_1, createAccountOperation.password()),
                 () -> assertEquals(Name.ACCOUNT_NAME_1, createAccountOperation.name()),
-                () -> assertEquals(AccountCreationStatusEnum.SUCCESSFUL, accountCreationResponse.status()),
                 () -> assertEquals(account.getId().getValue(), accountCreationResponse.id())
         );
     }
@@ -74,12 +71,11 @@ public class AccountUsecaseTest {
         given(accountRepositoryPort.findById(any(Id.class)))
                 .willReturn(account);
         // when
-        AccountResponse accountResponse = accountUsecase.getAccount(accountId1.getValue());
+        AccountDto accountDto = accountUsecase.getAccount(accountId1.getValue());
         // then
         verify(accountRepositoryPort, times(1))
                 .findById(idCaptor.capture());
         Id idCaptorValue = idCaptor.getValue();
-        AccountDto accountDto = accountResponse.accountDto();
         assertAll(
                 () -> assertEquals(accountId1, idCaptorValue),
                 () -> assertEquals(Name.ACCOUNT_NAME_1.getFirstName(), accountDto.firstname()),

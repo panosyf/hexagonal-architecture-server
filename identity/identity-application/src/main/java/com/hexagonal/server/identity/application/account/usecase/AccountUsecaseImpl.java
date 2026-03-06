@@ -4,10 +4,8 @@ import com.hexagonal.server.identity.application.account.logging.LogInfoMessage;
 import com.hexagonal.server.identity.application.account.model.dto.AccountDto;
 import com.hexagonal.server.identity.application.account.model.request.AccountCreateRequest;
 import com.hexagonal.server.identity.application.account.model.response.AccountCreationResponse;
-import com.hexagonal.server.identity.application.account.model.response.AccountResponse;
 import com.hexagonal.server.identity.application.account.port.out.repository.AccountRepositoryPort;
 import com.hexagonal.server.identity.core.account.domain.Account;
-import com.hexagonal.server.identity.application.account.model.enums.AccountCreationStatusEnum;
 import com.hexagonal.server.identity.core.account.model.operation.CreateAccountOperation;
 import com.hexagonal.server.identity.core.account.service.AccountDomainService;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Id;
@@ -38,14 +36,13 @@ public class AccountUsecaseImpl implements AccountUsecase {
         Account account = accountDomainService.createAccount(createAccountOperation);
         accountRepositoryPort.save(account);
         log.info(LogInfoMessage.LOG_ACCOUNT_CREATED_INFO, account.getEmail(), account.getUsername());
-        return new AccountCreationResponse(account.getId().getValue(), AccountCreationStatusEnum.SUCCESSFUL);
+        return new AccountCreationResponse(account.getId().getValue());
     }
 
     @Override
-    public AccountResponse getAccount(String id) {
+    public AccountDto getAccount(String id) {
         Account account = accountRepositoryPort.findById(Id.valueOf(id));
-        AccountDto accountDto = conversionService.convert(account, AccountDto.class);
-        return new AccountResponse(accountDto);
+        return conversionService.convert(account, AccountDto.class);
     }
 
 }
