@@ -1,6 +1,6 @@
 package com.hexagonal.server.identity.infra.rest.account.controller;
 
-import com.hexagonal.server.identity.application.account.api.AccountApi;
+import com.hexagonal.server.identity.application.account.port.in.api.AccountApi;
 import com.hexagonal.server.identity.application.account.usecase.AccountUsecase;
 import com.hexagonal.server.identity.application.account.model.response.AccountCreationResponse;
 import com.hexagonal.server.identity.application.account.model.response.AccountResponse;

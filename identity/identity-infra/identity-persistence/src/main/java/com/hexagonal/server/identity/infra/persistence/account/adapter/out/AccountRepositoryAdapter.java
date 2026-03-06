@@ -2,7 +2,7 @@ package com.hexagonal.server.identity.infra.persistence.account.adapter.out;
 
 import com.hexagonal.server.identity.core.account.domain.Account;
 import com.hexagonal.server.identity.core.account.exception.elementnotfound.AccountNotFoundException;
-import com.hexagonal.server.identity.core.account.port.out.AccountRepositoryPort;
+import com.hexagonal.server.identity.application.account.port.out.repository.AccountRepositoryPort;
 import com.hexagonal.server.identity.infra.persistence.account.entity.AccountPersistenceEntity;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Id;
 import org.springframework.core.convert.ConversionService;
