@@ -9,6 +9,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Currency;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -22,6 +23,8 @@ public class MoneyTest {
     private final Money MONEY_8 = Money.of(BIG_DECIMAL_8);
     private final Money MONEY_10 = Money.of(BigDecimal.TEN);
     private final Money MONEY_12 = Money.of(BIG_DECIMAL_12);
+    private final Money MONEY_MINUS_2 = Money.of(BigDecimal.TWO.negate());
+    private final Money MONEY_USD_10 = Money.of(BigDecimal.TEN, Currency.getInstance("USD"));
 
     @ParameterizedTest
     @MethodSource("moneyOfTestArguments")
@@ -36,6 +39,16 @@ public class MoneyTest {
                 Arguments.of(BigDecimal.TEN, Money.of(BigDecimal.TEN)),
                 Arguments.of(BigDecimal.ZERO, Money.of(BigDecimal.ZERO))
         );
+    }
+
+    @Test
+    void moneyOfCurrencyTest() {
+        BigDecimal value = BigDecimal.TEN;
+        Currency usdCurrency = Currency.getInstance("USD");
+        Money money = Money.of(value, usdCurrency);
+        assertThat(money.equals(MONEY_USD_10)).isTrue();
+        assertThat(money.getCurrency().equals(usdCurrency)).isTrue();
+        assertThat(money.getValue()).isEqualTo(value.setScale(2, RoundingMode.HALF_EVEN));
     }
 
     @Test
@@ -153,6 +166,12 @@ public class MoneyTest {
     void isGreaterThanZeroTest() {
         assertThat(MONEY_2.isGreaterThanZero()).isTrue();
         assertThat(Money.zero().isGreaterThan(Money.zero())).isFalse();
+    }
+
+    @Test
+    void isNegativeTest() {
+        assertThat(MONEY_MINUS_2.isNegative()).isTrue();
+        assertThat(MONEY_2.isNegative()).isFalse();
     }
 
     @Test

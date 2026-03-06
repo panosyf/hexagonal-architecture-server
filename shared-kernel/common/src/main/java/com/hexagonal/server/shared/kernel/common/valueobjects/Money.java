@@ -18,11 +18,19 @@ public class Money extends ValueObject {
         this.currency = Currency.getInstance("EUR");
     }
 
+    private Money(final BigDecimal value, final Currency currency) {
+        this.value = Money.setScale(value);
+        this.currency = currency;
+    }
+
     public static Money of(final BigDecimal amount) {
         BigDecimal finalAmount = amount == null ? BigDecimal.ZERO : amount;
-        if (finalAmount.compareTo(BigDecimal.ZERO) < 0)
-            throw new IllegalArgumentException(ErrorMessageConstants.MONEY_CANNOT_HAVE_NEGATIVE_VALUE);
         return new Money(finalAmount);
+    }
+
+    public static Money of(final BigDecimal amount, final Currency currency) {
+        BigDecimal finalAmount = amount == null ? BigDecimal.ZERO : amount;
+        return new Money(finalAmount, currency);
     }
 
     public static Money zero() {
@@ -35,6 +43,10 @@ public class Money extends ValueObject {
 
     public BigDecimal getValue() {
         return this.value;
+    }
+
+    public Currency getCurrency() {
+        return this.currency;
     }
 
     public Money add(final Money money) {
@@ -75,6 +87,10 @@ public class Money extends ValueObject {
 
     public boolean isGreaterThanZero() {
         return this.value.compareTo(BigDecimal.ZERO) > 0;
+    }
+
+    public boolean isNegative() {
+        return this.value.compareTo(BigDecimal.ZERO) < 0;
     }
 
     public boolean isGreaterThan(final Money money) {
