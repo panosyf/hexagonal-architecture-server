@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.hexagonal.server.ledger</groupId>
+        <artifactId>ledger</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <artifactId>ledger-boot</artifactId>
+    <packaging>jar</packaging>
+    <version>0.0.1-SNAPSHOT</version>
+
+    <dependencies>
+        <!-- persistence module-->
+        <dependency>
+            <groupId>com.hexagonal.server.ledger.infra</groupId>
+            <artifactId>ledger-persistence</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <!-- rest module-->
+        <dependency>
+            <groupId>com.hexagonal.server.ledger.infra</groupId>
+            <artifactId>ledger-rest</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <!-- integration-test module-->
+        <dependency>
+            <groupId>com.hexagonal.server.ledger.infra</groupId>
+            <artifactId>ledger-integration-test</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>

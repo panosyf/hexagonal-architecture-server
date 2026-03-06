@@ -20,6 +20,7 @@
         <module>dependency-bom</module>
         <module>shared-kernel</module>
         <module>identity</module>
+        <module>ledger</module>
         <module>account</module>
         <module>monolith-boot</module>
     </modules>
