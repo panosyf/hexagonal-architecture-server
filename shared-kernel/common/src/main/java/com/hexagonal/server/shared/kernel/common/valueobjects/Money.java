@@ -54,8 +54,6 @@ public class Money extends ValueObject {
     }
 
     public Money subtract(final Money money) {
-        if (this.value.compareTo(money.value) < 0)
-            throw new IllegalArgumentException(ErrorMessageConstants.SUBTRACTION_OPERATION_BETWEEN_GIVEN_VALUES_RETURNS_NEGATIVE_RESULTS);
         return new Money(this.value.subtract(money.value));
     }
 

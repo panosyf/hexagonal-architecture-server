@@ -76,6 +76,9 @@ public class LedgerEntry extends DomainEntity {
     }
 
     public static LedgerEntry debit(Id walletId, Money amount, String reference) {
+        if (amount.isNegative()) {
+            throw new IllegalArgumentException("Debit amount cannot be negative");
+        }
         return new LedgerEntry(
                 Id.generate(),
                 walletId,

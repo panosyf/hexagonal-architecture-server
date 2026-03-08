@@ -1,0 +1,79 @@
+package com.hexagonal.server.ledger.core.wallet.unit.domain;
+
+import com.hexagonal.server.ledger.core.wallet.domain.Wallet;
+import com.hexagonal.server.shared.kernel.common.valueobjects.Id;
+import com.hexagonal.server.shared.kernel.common.valueobjects.Money;
+import org.junit.jupiter.api.Test;
+
+import java.math.BigDecimal;
+
+import static com.hexagonal.server.ledger.core.wallet.exception.WalletErrorMessageConstants.INSUFFICIENT_FUNDS;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
+class WalletTest {
+
+    @Test
+    void should_create_wallet() {
+        // given
+        Id accountId = Id.generate();
+        // when
+        Wallet wallet = Wallet.create(accountId);
+        // then
+        assertThat(wallet).isNotNull();
+        assertThat(wallet.getLedgerEntryList()).isEmpty();
+        assertThat(wallet.balance()).isEqualTo(Money.zero());
+    }
+
+    @Test
+    void credit_should_add_ledger_entry() {
+        // given
+        Wallet wallet = Wallet.create(Id.generate());
+        // when
+        wallet.credit(Money.of(BigDecimal.valueOf(100)), "deposit");
+        // then
+        assertThat(wallet.getLedgerEntryList()).hasSize(1);
+        assertThat(wallet.balance()).isEqualTo(Money.of(BigDecimal.valueOf(100)));
+    }
+
+    @Test
+    void debit_should_reduce_balance() {
+        // given
+        Wallet wallet = Wallet.create(Id.generate());
+        // when
+        wallet.credit(Money.of(BigDecimal.valueOf(100)), "deposit");
+        wallet.debit(Money.of(BigDecimal.valueOf(40)), "payment");
+        // then
+        assertThat(wallet.balance())
+                .isEqualTo(Money.of(BigDecimal.valueOf(60)));
+        assertThat(wallet.getLedgerEntryList()).hasSize(2);
+    }
+
+    @Test
+    void debit_should_fail_if_insufficient_funds() {
+        // given
+        Wallet wallet = Wallet.create(Id.generate());
+        // when
+        wallet.credit(Money.of(BigDecimal.valueOf(50)), "deposit");
+        // then
+        assertThatThrownBy(() ->
+                wallet.debit(Money.of(BigDecimal.valueOf(100)), "payment")
+        )
+                .isInstanceOf(IllegalStateException.class)
+                .hasMessage(INSUFFICIENT_FUNDS);
+    }
+
+    @Test
+    void balance_should_be_sum_of_entries() {
+        // given
+        Wallet wallet = Wallet.create(Id.generate());
+        // when
+        wallet.credit(Money.of(BigDecimal.valueOf(100)), "deposit");
+        wallet.debit(Money.of(BigDecimal.valueOf(30)), "payment");
+        // then
+        assertThat(wallet.balance())
+                .isEqualTo(Money.of(BigDecimal.valueOf(70)));
+    }
+
+
+}

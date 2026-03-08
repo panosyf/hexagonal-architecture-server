@@ -17,7 +17,6 @@ public class ErrorMessageConstants {
     public static final String DIVISOR_CANNOT_BE_NULL = "Divisor cannot be zero";
     public static final String DIVISOR_CANNOT_BE_ZERO = "Divisor cannot be zero";
     public static final String DIVISOR_CANNOT_BE_NEGATIVE = "Divisor cannot be negative";
-    public static final String SUBTRACTION_OPERATION_BETWEEN_GIVEN_VALUES_RETURNS_NEGATIVE_RESULTS = "Subtraction operation between given values returns negative result";
     public static final String FIRST_NAME_CANNOT_BE_NULL_OR_BLANK = "First name cannot be null or blank";
     public static final String LAST_NAME_ID_CANNOT_BE_NULL_OR_BLANK = "Last name cannot be null";
     public static final String FULL_NAME_CANNOT_BE_NULL_OR_BLANK = "Full name cannot be null or blank";

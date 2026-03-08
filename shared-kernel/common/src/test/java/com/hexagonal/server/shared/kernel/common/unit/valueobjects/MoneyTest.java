@@ -76,13 +76,6 @@ public class MoneyTest {
     }
 
     @Test
-    void restrictSubtractIfResultsToNegativeTest() {
-        assertThatThrownBy(() -> MONEY_2.subtract(MONEY_10))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessageConstants.SUBTRACTION_OPERATION_BETWEEN_GIVEN_VALUES_RETURNS_NEGATIVE_RESULTS);
-    }
-
-    @Test
     void isSubtractedResultNegative() {
         assertThat(MONEY_10.isSubtractedResultNegative(MONEY_2)).isFalse();
         assertThat(MONEY_2.isSubtractedResultNegative(MONEY_10)).isTrue();
