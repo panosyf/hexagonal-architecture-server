@@ -1,4 +1,4 @@
-package com.hexagonal.server.identity.application.account.converter.out;
+package com.hexagonal.server.identity.application.account.converter.response;
 
 import com.hexagonal.server.identity.application.account.model.dto.AccountDto;
 import com.hexagonal.server.identity.core.account.domain.Account;

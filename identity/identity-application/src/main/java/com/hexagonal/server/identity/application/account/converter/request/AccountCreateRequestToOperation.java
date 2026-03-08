@@ -1,4 +1,4 @@
-package com.hexagonal.server.identity.application.account.converter.in;
+package com.hexagonal.server.identity.application.account.converter.request;
 
 import com.hexagonal.server.identity.application.account.model.request.AccountCreateRequest;
 import com.hexagonal.server.identity.core.account.model.operation.CreateAccountOperation;
