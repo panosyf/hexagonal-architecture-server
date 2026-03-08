@@ -99,12 +99,19 @@ hexagonal-server/
 │ ├── common-test
 │ └── shared-kernel-bom
 ├── account/
-  ├── account-core
-  ├── account-application
-  └── account-infra/
-    ├── account-persistence
-    ├── account-rest
-    └── account-boot
+│ ├── account-core
+│ ├── account-application
+│ └── account-infra/
+│   ├── account-persistence
+│   ├── account-rest
+│   └── account-boot
+└── ledger/
+  ├── ledger-core
+  ├── ledger-application
+  └── ledger-infra/
+    ├── ledger-persistence
+    ├── ledger-rest
+    └── ledger-boot
 ```
 
 Each bounded context is:
