@@ -2,11 +2,9 @@ package com.hexagonal.server.ledger.core.wallet.service;
 
 import com.hexagonal.server.ledger.core.wallet.domain.LedgerEntry;
 import com.hexagonal.server.ledger.core.wallet.domain.Wallet;
-import com.hexagonal.server.ledger.core.wallet.model.operation.CreateWalletOperation;
-import com.hexagonal.server.ledger.core.wallet.model.operation.CreditOperation;
-import com.hexagonal.server.ledger.core.wallet.model.operation.DebitOperation;
-import com.hexagonal.server.ledger.core.wallet.service.WalletDomainService;
-import com.hexagonal.server.ledger.core.wallet.service.WalletDomainServiceImpl;
+import com.hexagonal.server.ledger.core.wallet.model.CreateWalletOperation;
+import com.hexagonal.server.ledger.core.wallet.model.CreditOperation;
+import com.hexagonal.server.ledger.core.wallet.model.DebitOperation;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Id;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Money;
 import org.junit.jupiter.api.BeforeEach;

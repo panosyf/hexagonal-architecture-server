@@ -4,7 +4,7 @@ import com.hexagonal.server.identity.application.account.common.constant.Email;
 import com.hexagonal.server.identity.application.account.common.constant.Name;
 import com.hexagonal.server.identity.application.account.common.constant.Password;
 import com.hexagonal.server.identity.application.account.common.constant.Username;
-import com.hexagonal.server.identity.core.account.model.operation.CreateAccountOperation;
+import com.hexagonal.server.identity.core.account.model.CreateAccountOperation;
 
 public class CreateAccountOperationMock {
 

@@ -1,7 +1,7 @@
 package com.hexagonal.server.identity.application.account.usecase.createaccount.mapper;
 
 import com.hexagonal.server.identity.application.account.usecase.createaccount.model.request.AccountCreateRequest;
-import com.hexagonal.server.identity.core.account.model.operation.CreateAccountOperation;
+import com.hexagonal.server.identity.core.account.model.CreateAccountOperation;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Email;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Name;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Password;

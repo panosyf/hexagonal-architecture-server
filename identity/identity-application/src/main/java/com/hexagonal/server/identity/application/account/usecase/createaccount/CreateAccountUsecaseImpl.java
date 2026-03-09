@@ -6,7 +6,7 @@ import com.hexagonal.server.identity.application.account.port.out.repository.Acc
 import com.hexagonal.server.identity.application.account.usecase.createaccount.model.request.AccountCreateRequest;
 import com.hexagonal.server.identity.application.account.usecase.createaccount.model.response.AccountCreationResponse;
 import com.hexagonal.server.identity.core.account.domain.Account;
-import com.hexagonal.server.identity.core.account.model.operation.CreateAccountOperation;
+import com.hexagonal.server.identity.core.account.model.CreateAccountOperation;
 import com.hexagonal.server.identity.core.account.service.AccountDomainService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,4 +1,4 @@
-package com.hexagonal.server.identity.core.account.model.operation;
+package com.hexagonal.server.identity.core.account.model;
 
 import com.hexagonal.server.shared.kernel.common.valueobjects.Email;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Name;
