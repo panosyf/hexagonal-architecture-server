@@ -1,6 +1,6 @@
 package com.hexagonal.server.identity.application.account.mapper;
 
-import com.hexagonal.server.identity.application.account.shared.dto.AccountDto;
+import com.hexagonal.server.identity.application.account.common.dto.AccountDto;
 import com.hexagonal.server.identity.core.account.domain.Account;
 import org.springframework.core.convert.converter.Converter;
 

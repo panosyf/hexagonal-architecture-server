@@ -4,7 +4,7 @@ import com.hexagonal.server.identity.application.account.common.constant.Account
 import com.hexagonal.server.identity.application.account.common.constant.Name;
 import com.hexagonal.server.identity.application.account.mapper.AccountCreateRequestToOperation;
 import com.hexagonal.server.identity.application.account.mapper.AccountToDto;
-import com.hexagonal.server.identity.application.account.shared.dto.AccountDto;
+import com.hexagonal.server.identity.application.account.common.dto.AccountDto;
 import com.hexagonal.server.identity.application.account.port.out.repository.AccountRepositoryPort;
 import com.hexagonal.server.identity.core.account.domain.Account;
 import com.hexagonal.server.identity.core.account.service.AccountDomainService;

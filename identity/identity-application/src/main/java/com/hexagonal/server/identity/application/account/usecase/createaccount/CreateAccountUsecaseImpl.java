@@ -1,6 +1,6 @@
 package com.hexagonal.server.identity.application.account.usecase.createaccount;
 
-import com.hexagonal.server.identity.application.account.shared.logging.LogInfoMessage;
+import com.hexagonal.server.identity.application.account.common.logging.AccountLogInfoMessage;
 import com.hexagonal.server.identity.application.account.usecase.createaccount.model.request.AccountCreateRequest;
 import com.hexagonal.server.identity.application.account.usecase.createaccount.model.response.AccountCreationResponse;
 import com.hexagonal.server.identity.application.account.port.out.repository.AccountRepositoryPort;
@@ -33,7 +33,7 @@ public class CreateAccountUsecaseImpl implements CreateAccountUsecase {
         CreateAccountOperation createAccountOperation = conversionService.convert(accountCreateRequest, CreateAccountOperation.class);
         Account account = accountDomainService.createAccount(createAccountOperation);
         accountRepositoryPort.save(account);
-        log.info(LogInfoMessage.LOG_ACCOUNT_CREATED_INFO, account.getEmail(), account.getUsername());
+        log.info(AccountLogInfoMessage.LOG_ACCOUNT_CREATED_INFO, account.getEmail(), account.getUsername());
         return new AccountCreationResponse(account.getId().getValue());
     }
 
