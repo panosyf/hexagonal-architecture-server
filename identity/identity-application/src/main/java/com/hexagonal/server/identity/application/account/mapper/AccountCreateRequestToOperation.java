@@ -1,6 +1,6 @@
-package com.hexagonal.server.identity.application.account.converter.request;
+package com.hexagonal.server.identity.application.account.mapper;
 
-import com.hexagonal.server.identity.application.account.model.request.AccountCreateRequest;
+import com.hexagonal.server.identity.application.account.usecase.createaccount.model.request.AccountCreateRequest;
 import com.hexagonal.server.identity.core.account.model.operation.CreateAccountOperation;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Email;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Name;

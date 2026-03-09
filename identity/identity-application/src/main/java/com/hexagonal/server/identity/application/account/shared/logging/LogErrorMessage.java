@@ -1,4 +1,4 @@
-package com.hexagonal.server.identity.application.account.logging;
+package com.hexagonal.server.identity.application.account.shared.logging;
 
 public class LogErrorMessage {
 

@@ -1,4 +1,4 @@
-package com.hexagonal.server.identity.application.account.model.dto;
+package com.hexagonal.server.identity.application.account.shared.dto;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;

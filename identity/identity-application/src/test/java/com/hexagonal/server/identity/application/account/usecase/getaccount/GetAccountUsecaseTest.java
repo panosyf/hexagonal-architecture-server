@@ -2,12 +2,10 @@ package com.hexagonal.server.identity.application.account.usecase.getaccount;
 
 import com.hexagonal.server.identity.application.account.common.constant.AccountId;
 import com.hexagonal.server.identity.application.account.common.constant.Name;
-import com.hexagonal.server.identity.application.account.converter.request.AccountCreateRequestToOperation;
-import com.hexagonal.server.identity.application.account.converter.response.AccountToDto;
-import com.hexagonal.server.identity.application.account.model.dto.AccountDto;
+import com.hexagonal.server.identity.application.account.mapper.AccountCreateRequestToOperation;
+import com.hexagonal.server.identity.application.account.mapper.AccountToDto;
+import com.hexagonal.server.identity.application.account.shared.dto.AccountDto;
 import com.hexagonal.server.identity.application.account.port.out.repository.AccountRepositoryPort;
-import com.hexagonal.server.identity.application.account.usecase.getaccount.GetAccountUsecase;
-import com.hexagonal.server.identity.application.account.usecase.getaccount.GetAccountUsecaseImpl;
 import com.hexagonal.server.identity.core.account.domain.Account;
 import com.hexagonal.server.identity.core.account.service.AccountDomainService;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Id;

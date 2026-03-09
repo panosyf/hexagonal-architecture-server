@@ -1,12 +1,12 @@
-package com.hexagonal.server.identity.application.account.converter.config;
+package com.hexagonal.server.identity.application.account.mapper.config;
 
-import com.hexagonal.server.identity.application.account.converter.request.AccountCreateRequestToOperation;
-import com.hexagonal.server.identity.application.account.converter.response.AccountToDto;
+import com.hexagonal.server.identity.application.account.mapper.AccountCreateRequestToOperation;
+import com.hexagonal.server.identity.application.account.mapper.AccountToDto;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class AccountApiConvertersConfig {
+public class AccountMappersConfig {
 
     @Bean
     public AccountToDto accountToDto() {

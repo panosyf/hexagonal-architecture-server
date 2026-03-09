@@ -1,4 +1,4 @@
-package com.hexagonal.server.identity.application.account.model.request;
+package com.hexagonal.server.identity.application.account.usecase.createaccount.model.request;
 
 public record AccountCreateRequest(
         String email,

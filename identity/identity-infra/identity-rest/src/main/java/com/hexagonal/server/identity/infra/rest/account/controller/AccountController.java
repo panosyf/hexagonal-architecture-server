@@ -1,8 +1,8 @@
 package com.hexagonal.server.identity.infra.rest.account.controller;
 
-import com.hexagonal.server.identity.application.account.model.dto.AccountDto;
-import com.hexagonal.server.identity.application.account.model.request.AccountCreateRequest;
-import com.hexagonal.server.identity.application.account.model.response.AccountCreationResponse;
+import com.hexagonal.server.identity.application.account.shared.dto.AccountDto;
+import com.hexagonal.server.identity.application.account.usecase.createaccount.model.request.AccountCreateRequest;
+import com.hexagonal.server.identity.application.account.usecase.createaccount.model.response.AccountCreationResponse;
 import com.hexagonal.server.identity.application.account.port.in.api.AccountApi;
 import com.hexagonal.server.identity.application.account.usecase.createaccount.CreateAccountUsecase;
 import com.hexagonal.server.identity.application.account.usecase.getaccount.GetAccountUsecase;

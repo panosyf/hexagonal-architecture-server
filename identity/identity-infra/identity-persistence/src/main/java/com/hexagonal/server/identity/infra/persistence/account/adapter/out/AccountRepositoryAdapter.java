@@ -1,7 +1,7 @@
 package com.hexagonal.server.identity.infra.persistence.account.adapter.out;
 
 import com.hexagonal.server.identity.core.account.domain.Account;
-import com.hexagonal.server.identity.application.account.exception.elementnotfound.AccountNotFoundException;
+import com.hexagonal.server.identity.application.account.shared.exception.elementnotfound.AccountNotFoundException;
 import com.hexagonal.server.identity.application.account.port.out.repository.AccountRepositoryPort;
 import com.hexagonal.server.identity.infra.persistence.account.entity.AccountPersistenceEntity;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Id;

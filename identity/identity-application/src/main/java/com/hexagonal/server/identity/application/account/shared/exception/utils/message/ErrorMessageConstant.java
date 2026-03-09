@@ -1,4 +1,4 @@
-package com.hexagonal.server.identity.application.account.exception.utils.message;
+package com.hexagonal.server.identity.application.account.shared.exception.utils.message;
 
 
 public class ErrorMessageConstant {

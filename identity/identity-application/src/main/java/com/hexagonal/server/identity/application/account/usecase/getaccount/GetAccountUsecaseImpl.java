@@ -1,6 +1,6 @@
 package com.hexagonal.server.identity.application.account.usecase.getaccount;
 
-import com.hexagonal.server.identity.application.account.model.dto.AccountDto;
+import com.hexagonal.server.identity.application.account.shared.dto.AccountDto;
 import com.hexagonal.server.identity.application.account.port.out.repository.AccountRepositoryPort;
 import com.hexagonal.server.identity.core.account.domain.Account;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Id;
