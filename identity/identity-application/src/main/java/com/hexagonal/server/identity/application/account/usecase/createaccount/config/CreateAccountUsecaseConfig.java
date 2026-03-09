@@ -1,21 +1,21 @@
-package com.hexagonal.server.identity.application.account.usecase.config;
+package com.hexagonal.server.identity.application.account.usecase.createaccount.config;
 
 import com.hexagonal.server.identity.application.account.port.out.repository.AccountRepositoryPort;
-import com.hexagonal.server.identity.application.account.usecase.AccountUsecase;
-import com.hexagonal.server.identity.application.account.usecase.AccountUsecaseImpl;
+import com.hexagonal.server.identity.application.account.usecase.createaccount.CreateAccountUsecase;
+import com.hexagonal.server.identity.application.account.usecase.createaccount.CreateAccountUsecaseImpl;
 import com.hexagonal.server.identity.core.account.service.AccountDomainService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.ConversionService;
 
 @Configuration
-public class AccountUsecaseConfig {
+public class CreateAccountUsecaseConfig {
 
     private final AccountDomainService accountDomainService;
     private final AccountRepositoryPort accountRepositoryPort;
     private final ConversionService conversionService;
 
-    public AccountUsecaseConfig(
+    public CreateAccountUsecaseConfig(
             AccountDomainService accountDomainService,
             AccountRepositoryPort accountRepositoryPort,
             ConversionService conversionService) {
@@ -25,8 +25,8 @@ public class AccountUsecaseConfig {
     }
 
     @Bean
-    public AccountUsecase accountApi() {
-        return new AccountUsecaseImpl(accountDomainService, accountRepositoryPort, conversionService);
+    public CreateAccountUsecase createAccountUsecase() {
+        return new CreateAccountUsecaseImpl(accountDomainService, accountRepositoryPort, conversionService);
     }
 
 }

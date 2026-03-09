@@ -1,4 +1,4 @@
-package com.hexagonal.server.identity.core.account.unit.domain;
+package com.hexagonal.server.identity.core.account.domain;
 
 class AccountTest {
 

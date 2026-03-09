@@ -1,4 +1,4 @@
-package com.hexagonal.server.identity.core.account.unit.service;
+package com.hexagonal.server.identity.core.account.service;
 
 import com.hexagonal.server.identity.core.account.common.constant.Email;
 import com.hexagonal.server.identity.core.account.common.constant.Name;

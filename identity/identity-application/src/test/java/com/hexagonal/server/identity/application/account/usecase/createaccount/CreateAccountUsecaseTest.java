@@ -1,18 +1,19 @@
-package com.hexagonal.server.identity.application.account.unit.usecase;
+package com.hexagonal.server.identity.application.account.usecase.createaccount;
 
-import com.hexagonal.server.identity.application.account.common.constant.*;
+import com.hexagonal.server.identity.application.account.common.constant.Email;
+import com.hexagonal.server.identity.application.account.common.constant.Name;
+import com.hexagonal.server.identity.application.account.common.constant.Password;
+import com.hexagonal.server.identity.application.account.common.constant.Username;
 import com.hexagonal.server.identity.application.account.converter.request.AccountCreateRequestToOperation;
 import com.hexagonal.server.identity.application.account.converter.response.AccountToDto;
-import com.hexagonal.server.identity.application.account.model.dto.AccountDto;
 import com.hexagonal.server.identity.application.account.model.request.AccountCreateRequest;
 import com.hexagonal.server.identity.application.account.model.response.AccountCreationResponse;
 import com.hexagonal.server.identity.application.account.port.out.repository.AccountRepositoryPort;
-import com.hexagonal.server.identity.application.account.usecase.AccountUsecase;
-import com.hexagonal.server.identity.application.account.usecase.AccountUsecaseImpl;
+import com.hexagonal.server.identity.application.account.usecase.createaccount.CreateAccountUsecase;
+import com.hexagonal.server.identity.application.account.usecase.createaccount.CreateAccountUsecaseImpl;
 import com.hexagonal.server.identity.core.account.domain.Account;
 import com.hexagonal.server.identity.core.account.model.operation.CreateAccountOperation;
 import com.hexagonal.server.identity.core.account.service.AccountDomainService;
-import com.hexagonal.server.shared.kernel.common.valueobjects.Id;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
@@ -25,20 +26,19 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 
-public class AccountUsecaseTest {
+public class CreateAccountUsecaseTest {
 
     private final AccountDomainService accountDomainService = mock(AccountDomainService.class);
     private final AccountRepositoryPort accountRepositoryPort = mock(AccountRepositoryPort.class);
     private final GenericConversionService genericConversionService = new GenericConversionService();
-    private AccountUsecase accountUsecase;
+    private CreateAccountUsecase createAccountUsecase;
     private final ArgumentCaptor<CreateAccountOperation> createAccountOperationCaptor = ArgumentCaptor.forClass(CreateAccountOperation.class);
-    private final ArgumentCaptor<Id> idCaptor = ArgumentCaptor.forClass(Id.class);
 
     @BeforeEach
     void init() {
         genericConversionService.addConverter(new AccountToDto());
         genericConversionService.addConverter(new AccountCreateRequestToOperation());
-        accountUsecase = new AccountUsecaseImpl(accountDomainService, accountRepositoryPort, genericConversionService);
+        createAccountUsecase = new CreateAccountUsecaseImpl(accountDomainService, accountRepositoryPort, genericConversionService);
     }
 
     @Test
@@ -49,7 +49,7 @@ public class AccountUsecaseTest {
         given(accountDomainService.createAccount(any(CreateAccountOperation.class)))
                 .willReturn(account);
         // when
-        AccountCreationResponse accountCreationResponse = accountUsecase.createAccount(accountCreateRequest);
+        AccountCreationResponse accountCreationResponse = createAccountUsecase.createAccount(accountCreateRequest);
         // then
         verify(accountDomainService, times(1))
                 .createAccount(createAccountOperationCaptor.capture());
@@ -60,28 +60,6 @@ public class AccountUsecaseTest {
                 () -> assertEquals(Password.PASSWORD_1, createAccountOperation.password()),
                 () -> assertEquals(Name.ACCOUNT_NAME_1, createAccountOperation.name()),
                 () -> assertEquals(account.getId().getValue(), accountCreationResponse.id())
-        );
-    }
-
-    @Test
-    void getAccountTest() {
-        // given
-        Id accountId1 = AccountId.ACCOUNT_ID_1;
-        Account account = generateAccount();
-        given(accountRepositoryPort.findById(any(Id.class)))
-                .willReturn(account);
-        // when
-        AccountDto accountDto = accountUsecase.getAccount(accountId1.getValue());
-        // then
-        verify(accountRepositoryPort, times(1))
-                .findById(idCaptor.capture());
-        Id idCaptorValue = idCaptor.getValue();
-        assertAll(
-                () -> assertEquals(accountId1, idCaptorValue),
-                () -> assertEquals(Name.ACCOUNT_NAME_1.getFirstName(), accountDto.firstname()),
-                () -> assertEquals(Name.ACCOUNT_NAME_1.getLastName(), accountDto.lastname()),
-                () -> assertEquals(account.getCreatedAt().getTime(), accountDto.createdAt()),
-                () -> assertEquals(account.getUpdatedAt().getTime(), accountDto.updatedAt())
         );
     }
 

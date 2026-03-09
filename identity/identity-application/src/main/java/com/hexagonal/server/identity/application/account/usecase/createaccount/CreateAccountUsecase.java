@@ -1,13 +1,10 @@
-package com.hexagonal.server.identity.application.account.usecase;
+package com.hexagonal.server.identity.application.account.usecase.createaccount;
 
-import com.hexagonal.server.identity.application.account.model.dto.AccountDto;
 import com.hexagonal.server.identity.application.account.model.request.AccountCreateRequest;
 import com.hexagonal.server.identity.application.account.model.response.AccountCreationResponse;
 
-public interface AccountUsecase {
+public interface CreateAccountUsecase {
 
     AccountCreationResponse createAccount(AccountCreateRequest accountCreateRequest);
-
-    AccountDto getAccount(String id);
 
 }

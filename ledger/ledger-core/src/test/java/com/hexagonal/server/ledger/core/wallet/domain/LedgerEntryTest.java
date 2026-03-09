@@ -1,4 +1,4 @@
-package com.hexagonal.server.ledger.core.wallet.unit.domain;
+package com.hexagonal.server.ledger.core.wallet.domain;
 
 import com.hexagonal.server.ledger.core.wallet.domain.LedgerEntry;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Id;
