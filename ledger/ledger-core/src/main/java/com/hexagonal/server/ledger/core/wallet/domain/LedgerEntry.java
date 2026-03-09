@@ -18,7 +18,7 @@ public class LedgerEntry extends DomainEntity {
     private LedgerEntry() {
     }
 
-    public LedgerEntry(
+    private LedgerEntry(
             final Id id,
             final Id walletId,
             final Money amount,
@@ -27,19 +27,6 @@ public class LedgerEntry extends DomainEntity {
         this.walletId = walletId;
         this.amount = amount;
         this.createdAt = Timestamp.now();
-        this.reference = reference;
-    }
-
-    public LedgerEntry(
-            final Id id,
-            final Id walletId,
-            final Money amount,
-            final Timestamp createdAt,
-            final String reference) {
-        this.id = id;
-        this.walletId = walletId;
-        this.amount = amount;
-        this.createdAt = createdAt;
         this.reference = reference;
     }
 

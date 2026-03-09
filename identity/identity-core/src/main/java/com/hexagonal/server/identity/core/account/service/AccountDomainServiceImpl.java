@@ -10,7 +10,7 @@ public class AccountDomainServiceImpl implements AccountDomainService {
 
     @Override
     public Account createAccount(final CreateAccountOperation createAccountOperation) {
-        return new Account(
+        return Account.create(
                 createAccountOperation.email(),
                 createAccountOperation.username(),
                 createAccountOperation.password(),

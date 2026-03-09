@@ -12,7 +12,7 @@ public class AccountMock {
     }
 
     public static Account generateAccount() {
-        return new Account(
+        return Account.create(
                 Email.EMAIL_1,
                 Username.USERNAME_1,
                 Password.PASSWORD_1,

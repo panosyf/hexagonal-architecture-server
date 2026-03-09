@@ -18,7 +18,7 @@ public class Account extends AggregateRoot {
     private Account() {
     }
 
-    public Account(
+    private Account(
             final Email email,
             final Username username,
             final Password password,
@@ -33,23 +33,7 @@ public class Account extends AggregateRoot {
         this.updatedAt = now;
     }
 
-    public Account(
-            final Id id,
-            final Email email,
-            final Username username,
-            final Password password,
-            final Name name) {
-        this.id = id;
-        this.email = email;
-        this.username = username;
-        this.password = password;
-        this.name = name;
-        Timestamp now = Timestamp.now();
-        this.createdAt = now;
-        this.updatedAt = now;
-    }
-
-    public Account(
+    private Account(
             final Id id,
             final Email email,
             final Username username,
@@ -64,6 +48,14 @@ public class Account extends AggregateRoot {
         this.name = name;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+    }
+
+    public static Account create(Email email, Username username, Password password, Name name) {
+        return new Account(email, username, password, name);
+    }
+
+    public static Account create(Id id, Email email, Username username, Password password, Name name, Timestamp createdAt, Timestamp updatedAt) {
+        return new Account(Id.generate(), email, username, password, name, createdAt, updatedAt);
     }
 
     public Id getId() {

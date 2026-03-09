@@ -43,7 +43,7 @@ public class AccountPersistenceEntity extends PersistenceEntity {
     protected AccountPersistenceEntity() {
     }
 
-    public AccountPersistenceEntity(
+    private AccountPersistenceEntity(
             final String id,
             final Email email,
             final Username username,
@@ -58,6 +58,10 @@ public class AccountPersistenceEntity extends PersistenceEntity {
         this.name = name;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+    }
+
+    public static AccountPersistenceEntity create(String id, Email email, Username username, Password password, Name name, Timestamp createdAt, Timestamp updatedAt) {
+        return new AccountPersistenceEntity(id, email, username, password, name, createdAt, updatedAt);
     }
 
     public String getId() {

@@ -10,7 +10,7 @@ public class AccountPersistenceMapper {
     }
 
     public static Account toDomainEntity(AccountPersistenceEntity accountPersistenceEntity) {
-        return new Account(
+        return Account.create(
                 Id.valueOf(accountPersistenceEntity.getId()),
                 accountPersistenceEntity.getEmail(),
                 accountPersistenceEntity.getUsername(),
@@ -22,7 +22,7 @@ public class AccountPersistenceMapper {
     }
 
     public static AccountPersistenceEntity toPersistenceEntity(Account account) {
-        return new AccountPersistenceEntity(
+        return AccountPersistenceEntity.create(
                 account.getId().getValue(),
                 account.getEmail(),
                 account.getUsername(),
