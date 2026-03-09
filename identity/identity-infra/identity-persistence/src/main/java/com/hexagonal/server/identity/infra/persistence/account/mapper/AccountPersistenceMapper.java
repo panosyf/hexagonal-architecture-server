@@ -1,14 +1,15 @@
-package com.hexagonal.server.identity.infra.persistence.account.converter;
+package com.hexagonal.server.identity.infra.persistence.account.mapper;
 
 import com.hexagonal.server.identity.core.account.domain.Account;
 import com.hexagonal.server.identity.infra.persistence.account.entity.AccountPersistenceEntity;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Id;
-import org.springframework.core.convert.converter.Converter;
 
-public class AccountToDomain implements Converter<AccountPersistenceEntity, Account> {
+public class AccountPersistenceMapper {
 
-    @Override
-    public Account convert(AccountPersistenceEntity accountPersistenceEntity) {
+    private AccountPersistenceMapper() {
+    }
+
+    public static Account toDomainEntity(AccountPersistenceEntity accountPersistenceEntity) {
         return new Account(
                 Id.valueOf(accountPersistenceEntity.getId()),
                 accountPersistenceEntity.getEmail(),
@@ -17,6 +18,18 @@ public class AccountToDomain implements Converter<AccountPersistenceEntity, Acco
                 accountPersistenceEntity.getName(),
                 accountPersistenceEntity.getCreatedAt(),
                 accountPersistenceEntity.getUpdatedAt()
+        );
+    }
+
+    public static AccountPersistenceEntity toPersistenceEntity(Account account) {
+        return new AccountPersistenceEntity(
+                account.getId().getValue(),
+                account.getEmail(),
+                account.getUsername(),
+                account.getPassword(),
+                account.getName(),
+                account.getCreatedAt(),
+                account.getUpdatedAt()
         );
     }
 

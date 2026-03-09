@@ -5,24 +5,20 @@ import com.hexagonal.server.identity.infra.persistence.account.adapter.out.Accou
 import com.hexagonal.server.identity.infra.persistence.account.adapter.out.AccountRepositoryAdapter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.convert.ConversionService;
 
 @Configuration
 public class AccountRepositoryAdapterConfig {
 
     private final AccountJpaRepository accountJpaRepository;
-    private final ConversionService conversionService;
 
     public AccountRepositoryAdapterConfig(
-            AccountJpaRepository accountJpaRepository,
-            ConversionService conversionService) {
+            AccountJpaRepository accountJpaRepository) {
         this.accountJpaRepository = accountJpaRepository;
-        this.conversionService = conversionService;
     }
 
     @Bean
     public AccountRepositoryPort accountRepositoryPort() {
-        return new AccountRepositoryAdapter(accountJpaRepository, conversionService);
+        return new AccountRepositoryAdapter(accountJpaRepository);
     }
 
 }
