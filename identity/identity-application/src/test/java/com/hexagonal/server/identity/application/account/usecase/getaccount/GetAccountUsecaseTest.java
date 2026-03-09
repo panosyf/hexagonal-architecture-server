@@ -2,17 +2,13 @@ package com.hexagonal.server.identity.application.account.usecase.getaccount;
 
 import com.hexagonal.server.identity.application.account.common.constant.AccountId;
 import com.hexagonal.server.identity.application.account.common.constant.Name;
-import com.hexagonal.server.identity.application.account.mapper.AccountCreateRequestToOperation;
-import com.hexagonal.server.identity.application.account.mapper.AccountToDto;
 import com.hexagonal.server.identity.application.account.common.dto.AccountDto;
 import com.hexagonal.server.identity.application.account.port.out.repository.AccountRepositoryPort;
 import com.hexagonal.server.identity.core.account.domain.Account;
-import com.hexagonal.server.identity.core.account.service.AccountDomainService;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Id;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
-import org.springframework.core.convert.support.GenericConversionService;
 
 import static com.hexagonal.server.identity.application.account.common.mock.AccountMock.generateAccount;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -22,17 +18,13 @@ import static org.mockito.Mockito.*;
 
 public class GetAccountUsecaseTest {
 
-    private final AccountDomainService accountDomainService = mock(AccountDomainService.class);
     private final AccountRepositoryPort accountRepositoryPort = mock(AccountRepositoryPort.class);
-    private final GenericConversionService genericConversionService = new GenericConversionService();
     private GetAccountUsecase getAccountUsecase;
     private final ArgumentCaptor<Id> idCaptor = ArgumentCaptor.forClass(Id.class);
 
     @BeforeEach
     void init() {
-        genericConversionService.addConverter(new AccountToDto());
-        genericConversionService.addConverter(new AccountCreateRequestToOperation());
-        getAccountUsecase = new GetAccountUsecaseImpl(accountRepositoryPort, genericConversionService);
+        getAccountUsecase = new GetAccountUsecaseImpl(accountRepositoryPort);
     }
 
     @Test

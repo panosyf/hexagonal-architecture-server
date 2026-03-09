@@ -1,4 +1,4 @@
-package com.hexagonal.server.identity.application.account.mapper;
+package com.hexagonal.server.identity.application.account.usecase.createaccount.mapper;
 
 import com.hexagonal.server.identity.application.account.usecase.createaccount.model.request.AccountCreateRequest;
 import com.hexagonal.server.identity.core.account.model.operation.CreateAccountOperation;
@@ -6,12 +6,13 @@ import com.hexagonal.server.shared.kernel.common.valueobjects.Email;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Name;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Password;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Username;
-import org.springframework.core.convert.converter.Converter;
 
-public class AccountCreateRequestToOperation implements Converter<AccountCreateRequest, CreateAccountOperation> {
+public class CreateAccountMapper {
 
-    @Override
-    public CreateAccountOperation convert(AccountCreateRequest accountCreateRequest) {
+    private CreateAccountMapper() {
+    }
+
+    public static CreateAccountOperation toCreateAccountOperation(AccountCreateRequest accountCreateRequest) {
         Email email = Email.valueOf(accountCreateRequest.email());
         Username username = Username.valueOf(accountCreateRequest.username());
         // TODO UTILIZE HASHING AND SALT

@@ -13,20 +13,17 @@ public class CreateAccountUsecaseConfig {
 
     private final AccountDomainService accountDomainService;
     private final AccountRepositoryPort accountRepositoryPort;
-    private final ConversionService conversionService;
 
     public CreateAccountUsecaseConfig(
             AccountDomainService accountDomainService,
-            AccountRepositoryPort accountRepositoryPort,
-            ConversionService conversionService) {
+            AccountRepositoryPort accountRepositoryPort) {
         this.accountDomainService = accountDomainService;
         this.accountRepositoryPort = accountRepositoryPort;
-        this.conversionService = conversionService;
     }
 
     @Bean
     public CreateAccountUsecase createAccountUsecase() {
-        return new CreateAccountUsecaseImpl(accountDomainService, accountRepositoryPort, conversionService);
+        return new CreateAccountUsecaseImpl(accountDomainService, accountRepositoryPort);
     }
 
 }

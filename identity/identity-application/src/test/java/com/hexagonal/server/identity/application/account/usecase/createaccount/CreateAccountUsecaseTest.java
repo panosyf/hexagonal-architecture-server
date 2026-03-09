@@ -4,18 +4,15 @@ import com.hexagonal.server.identity.application.account.common.constant.Email;
 import com.hexagonal.server.identity.application.account.common.constant.Name;
 import com.hexagonal.server.identity.application.account.common.constant.Password;
 import com.hexagonal.server.identity.application.account.common.constant.Username;
-import com.hexagonal.server.identity.application.account.mapper.AccountCreateRequestToOperation;
-import com.hexagonal.server.identity.application.account.mapper.AccountToDto;
+import com.hexagonal.server.identity.application.account.port.out.repository.AccountRepositoryPort;
 import com.hexagonal.server.identity.application.account.usecase.createaccount.model.request.AccountCreateRequest;
 import com.hexagonal.server.identity.application.account.usecase.createaccount.model.response.AccountCreationResponse;
-import com.hexagonal.server.identity.application.account.port.out.repository.AccountRepositoryPort;
 import com.hexagonal.server.identity.core.account.domain.Account;
 import com.hexagonal.server.identity.core.account.model.operation.CreateAccountOperation;
 import com.hexagonal.server.identity.core.account.service.AccountDomainService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
-import org.springframework.core.convert.support.GenericConversionService;
 
 import static com.hexagonal.server.identity.application.account.common.mock.AccountCreateRequestMock.generateAccountCreateRequest;
 import static com.hexagonal.server.identity.application.account.common.mock.AccountMock.generateAccount;
@@ -28,15 +25,12 @@ public class CreateAccountUsecaseTest {
 
     private final AccountDomainService accountDomainService = mock(AccountDomainService.class);
     private final AccountRepositoryPort accountRepositoryPort = mock(AccountRepositoryPort.class);
-    private final GenericConversionService genericConversionService = new GenericConversionService();
     private CreateAccountUsecase createAccountUsecase;
     private final ArgumentCaptor<CreateAccountOperation> createAccountOperationCaptor = ArgumentCaptor.forClass(CreateAccountOperation.class);
 
     @BeforeEach
     void init() {
-        genericConversionService.addConverter(new AccountToDto());
-        genericConversionService.addConverter(new AccountCreateRequestToOperation());
-        createAccountUsecase = new CreateAccountUsecaseImpl(accountDomainService, accountRepositoryPort, genericConversionService);
+        createAccountUsecase = new CreateAccountUsecaseImpl(accountDomainService, accountRepositoryPort);
     }
 
     @Test

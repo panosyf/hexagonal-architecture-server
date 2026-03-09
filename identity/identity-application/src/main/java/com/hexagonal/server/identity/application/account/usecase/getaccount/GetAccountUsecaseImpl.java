@@ -1,27 +1,24 @@
 package com.hexagonal.server.identity.application.account.usecase.getaccount;
 
 import com.hexagonal.server.identity.application.account.common.dto.AccountDto;
+import com.hexagonal.server.identity.application.account.common.mapper.AccountMapper;
 import com.hexagonal.server.identity.application.account.port.out.repository.AccountRepositoryPort;
 import com.hexagonal.server.identity.core.account.domain.Account;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Id;
-import org.springframework.core.convert.ConversionService;
 
 public class GetAccountUsecaseImpl implements GetAccountUsecase {
 
     private final AccountRepositoryPort accountRepositoryPort;
-    private final ConversionService conversionService;
 
     public GetAccountUsecaseImpl(
-            AccountRepositoryPort accountRepositoryPort,
-            ConversionService conversionService) {
+            AccountRepositoryPort accountRepositoryPort) {
         this.accountRepositoryPort = accountRepositoryPort;
-        this.conversionService = conversionService;
     }
 
     @Override
     public AccountDto getAccount(String id) {
         Account account = accountRepositoryPort.findById(Id.valueOf(id));
-        return conversionService.convert(account, AccountDto.class);
+        return AccountMapper.toAccountDto(account);
     }
 
 }
