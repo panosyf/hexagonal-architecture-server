@@ -10,6 +10,7 @@ import com.hexagonal.server.identity.core.account.model.operation.CreateAccountO
 import com.hexagonal.server.identity.core.account.service.AccountDomainService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 public class CreateAccountUsecaseImpl implements CreateAccountUsecase {
 
@@ -19,7 +20,7 @@ public class CreateAccountUsecaseImpl implements CreateAccountUsecase {
     private final AccountRepositoryPort accountRepositoryPort;
 
     public CreateAccountUsecaseImpl(
-            AccountDomainService accountDomainService,
+            @Qualifier("accountDomainService") AccountDomainService accountDomainService,
             AccountRepositoryPort accountRepositoryPort) {
         this.accountDomainService = accountDomainService;
         this.accountRepositoryPort = accountRepositoryPort;

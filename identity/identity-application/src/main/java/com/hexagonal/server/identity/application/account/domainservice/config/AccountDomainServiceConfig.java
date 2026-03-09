@@ -1,4 +1,4 @@
-package com.hexagonal.server.identity.application.account.service.config;
+package com.hexagonal.server.identity.application.account.domainservice.config;
 
 import com.hexagonal.server.identity.core.account.service.AccountDomainService;
 import com.hexagonal.server.identity.core.account.service.AccountDomainServiceImpl;
@@ -11,8 +11,8 @@ public class AccountDomainServiceConfig {
     public AccountDomainServiceConfig() {
     }
 
-    @Bean
-    public AccountDomainService accountService() {
+    @Bean("accountDomainService")
+    public AccountDomainService accountDomainService() {
         return new AccountDomainServiceImpl();
     }
 

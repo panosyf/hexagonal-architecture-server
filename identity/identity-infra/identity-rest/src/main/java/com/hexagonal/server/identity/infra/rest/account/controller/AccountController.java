@@ -6,6 +6,7 @@ import com.hexagonal.server.identity.application.account.usecase.createaccount.m
 import com.hexagonal.server.identity.application.account.port.in.api.AccountApi;
 import com.hexagonal.server.identity.application.account.usecase.createaccount.CreateAccountUsecase;
 import com.hexagonal.server.identity.application.account.usecase.getaccount.GetAccountUsecase;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +17,9 @@ public class AccountController implements AccountApi {
     private final CreateAccountUsecase createAccountUsecase;
     private final GetAccountUsecase getAccountUsecase;
 
-    public AccountController(CreateAccountUsecase createAccountUsecase, GetAccountUsecase getAccountUsecase) {
+    public AccountController(
+            @Qualifier("createAccountUsecase") CreateAccountUsecase createAccountUsecase,
+            @Qualifier("getAccountUsecase") GetAccountUsecase getAccountUsecase) {
         this.createAccountUsecase = createAccountUsecase;
         this.getAccountUsecase = getAccountUsecase;
     }

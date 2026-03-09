@@ -16,7 +16,7 @@ public class GetAccountUsecaseConfig {
         this.accountRepositoryPort = accountRepositoryPort;
     }
 
-    @Bean
+    @Bean("getAccountUsecase")
     public GetAccountUsecase getAccountUsecase() {
         return new GetAccountUsecaseImpl(accountRepositoryPort);
     }
