@@ -5,7 +5,6 @@ import com.hexagonal.server.ledger.core.wallet.domain.Wallet;
 import com.hexagonal.server.ledger.core.wallet.model.operation.CreateWalletOperation;
 import com.hexagonal.server.ledger.core.wallet.model.operation.CreditOperation;
 import com.hexagonal.server.ledger.core.wallet.model.operation.DebitOperation;
-import com.hexagonal.server.shared.kernel.common.valueobjects.Money;
 
 public interface WalletDomainService {
 
