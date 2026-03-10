@@ -1,16 +1,19 @@
 package com.hexagonal.server.ledger.application.wallet.port.in.api;
 
 
-import com.hexagonal.server.ledger.core.wallet.domain.LedgerEntry;
-import com.hexagonal.server.shared.kernel.common.valueobjects.Id;
-import com.hexagonal.server.shared.kernel.common.valueobjects.Money;
+import com.hexagonal.server.ledger.application.wallet.usecase.createwallet.model.request.CreateWalletRequest;
+import com.hexagonal.server.ledger.application.wallet.usecase.createwallet.model.response.CreateWalletResponse;
+import com.hexagonal.server.ledger.application.wallet.usecase.creditwallet.model.request.CreditWalletRequest;
+import com.hexagonal.server.ledger.application.wallet.usecase.creditwallet.model.response.CreditWalletResponse;
+import com.hexagonal.server.ledger.application.wallet.usecase.debitwallet.model.request.DebitWalletRequest;
+import com.hexagonal.server.ledger.application.wallet.usecase.debitwallet.model.response.DebitWalletResponse;
 
 public interface WalletApi {
 
-    Id createWallet(Id accountId);
+    CreateWalletResponse createWallet(CreateWalletRequest request);
 
-    LedgerEntry credit(Id walletId, Money amount, String reference, String idempotencyKey);
+    CreditWalletResponse creditWallet(CreditWalletRequest request);
 
-    LedgerEntry debit(Id walletId, Money amount, String reference, String idempotencyKey);
+    DebitWalletResponse debitWallet(DebitWalletRequest request);
+
 }
-
