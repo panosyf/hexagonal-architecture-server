@@ -30,6 +30,14 @@ public class Wallet extends AggregateRoot {
         return new Wallet(Id.generate(), accountId, List.of());
     }
 
+    public Id getId() {
+        return id;
+    }
+
+    public Id getAccountId() {
+        return accountId;
+    }
+
     public Money balance() {
         return ledgerEntryList.stream()
                 .map(LedgerEntry::getAmount)

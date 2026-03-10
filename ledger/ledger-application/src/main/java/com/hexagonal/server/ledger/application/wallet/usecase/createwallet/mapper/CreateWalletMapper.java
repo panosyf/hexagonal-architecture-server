@@ -17,7 +17,7 @@ public class CreateWalletMapper {
     }
 
     public static CreateWalletResponse toCreateWalletResponse(Wallet wallet) {
-        return CreateWalletMapper.toCreateWalletResponse(wallet);
+        return new CreateWalletResponse(wallet.getId().getValue());
     }
 
 }

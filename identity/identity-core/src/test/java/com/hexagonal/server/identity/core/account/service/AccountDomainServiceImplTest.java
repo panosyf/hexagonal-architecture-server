@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class AccountDomainServiceTest {
+class AccountDomainServiceImplTest {
 
     private AccountDomainService accountDomainService;
     private final ArgumentCaptor<Account> accountCaptor = ArgumentCaptor.forClass(Account.class);

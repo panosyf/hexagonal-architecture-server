@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 
-public class GetAccountUsecaseTest {
+public class GetAccountUsecaseImplTest {
 
     private final AccountRepositoryPort accountRepositoryPort = mock(AccountRepositoryPort.class);
     private GetAccountUsecase getAccountUsecase;
