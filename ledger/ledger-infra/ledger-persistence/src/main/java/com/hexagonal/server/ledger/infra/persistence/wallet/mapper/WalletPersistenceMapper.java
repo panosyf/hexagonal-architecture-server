@@ -14,6 +14,13 @@ public class WalletPersistenceMapper {
     private WalletPersistenceMapper() {
     }
 
+    public static Wallet toDomainEntity(WalletPersistenceEntity walletEntity) {
+        return Wallet.create(
+                Id.valueOf(walletEntity.getId()),
+                Id.valueOf(walletEntity.getAccountId()),
+                List.of());
+    }
+
     public static Wallet toDomainEntity(WalletPersistenceEntity walletEntity, List<LedgerEntryPersistenceEntity> ledgerEntities) {
         List<LedgerEntry> entries = ledgerEntities.stream()
                 .map(WalletPersistenceMapper::toLedgerEntryDomain)

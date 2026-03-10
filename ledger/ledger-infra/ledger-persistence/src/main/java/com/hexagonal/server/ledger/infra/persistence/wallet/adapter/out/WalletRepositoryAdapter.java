@@ -22,21 +22,25 @@ public class WalletRepositoryAdapter implements WalletRepositoryPort {
     }
 
     @Override
+    public Wallet save(Wallet wallet) {
+        WalletPersistenceEntity walletEntity = WalletPersistenceMapper.toWalletEntity(wallet);
+        walletJpaRepository.save(walletEntity);
+        if (wallet.getLedgerEntryList().isEmpty()) {
+            return wallet;
+        }
+        List<LedgerEntryPersistenceEntity> entries = WalletPersistenceMapper.toLedgerEntities(wallet);
+        ledgerEntryJpaRepository.saveAll(entries);
+        return wallet;
+    }
+
+    @Override
     public Wallet findById(Id walletId) {
         WalletPersistenceEntity walletEntity = walletJpaRepository.findById(walletId.getValue())
                 .orElseThrow(() ->
                         new RuntimeException("Wallet not found"));
-        List<LedgerEntryPersistenceEntity> ledgerEntries = ledgerEntryJpaRepository.findByWalletId(walletId.getValue());
-        return WalletPersistenceMapper.toDomainEntity(walletEntity, ledgerEntries);
-    }
-
-    @Override
-    public Wallet save(Wallet wallet) {
-        WalletPersistenceEntity walletEntity = WalletPersistenceMapper.toWalletEntity(wallet);
-        walletJpaRepository.save(walletEntity);
-        List<LedgerEntryPersistenceEntity> entries = WalletPersistenceMapper.toLedgerEntities(wallet);
-        ledgerEntryJpaRepository.saveAll(entries);
-        return wallet;
+        // TODO REMOVING FOR PERFORMANCE, LEDGER ENTRIES SHOULD BE FETCHED BY SEPARATE QUERY
+//        List<LedgerEntryPersistenceEntity> ledgerEntries = ledgerEntryJpaRepository.findByWalletId(walletId.getValue());
+        return WalletPersistenceMapper.toDomainEntity(walletEntity);
     }
 
 }

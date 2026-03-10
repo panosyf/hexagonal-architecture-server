@@ -5,8 +5,8 @@ import com.hexagonal.server.shared.kernel.common.valueobjects.Id;
 
 public interface WalletRepositoryPort {
 
-    Wallet findById(Id walletId);
-
     Wallet save(Wallet wallet);
+
+    Wallet findById(Id walletId);
 
 }
