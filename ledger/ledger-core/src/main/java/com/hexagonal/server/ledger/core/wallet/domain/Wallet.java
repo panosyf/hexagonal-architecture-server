@@ -30,6 +30,10 @@ public class Wallet extends AggregateRoot {
         return new Wallet(Id.generate(), accountId, List.of());
     }
 
+    public static Wallet create(final Id id, final Id accountId, final List<LedgerEntry> ledgerEntryList) {
+        return new Wallet(Id.generate(), accountId, List.of());
+    }
+
     public Id getId() {
         return id;
     }

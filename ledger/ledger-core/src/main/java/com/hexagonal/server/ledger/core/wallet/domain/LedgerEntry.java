@@ -30,6 +30,10 @@ public class LedgerEntry extends DomainEntity {
         this.reference = reference;
     }
 
+    public static LedgerEntry create(final Id id, final Id walletId, Money amount, String reference) {
+        return new LedgerEntry(id, walletId, amount, reference);
+    }
+
     public Id getId() {
         return id;
     }
