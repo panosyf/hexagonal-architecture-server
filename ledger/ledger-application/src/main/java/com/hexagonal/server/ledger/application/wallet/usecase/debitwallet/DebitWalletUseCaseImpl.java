@@ -2,41 +2,42 @@ package com.hexagonal.server.ledger.application.wallet.usecase.debitwallet;
 
 import com.hexagonal.server.ledger.application.wallet.port.out.repository.IdempotencyRepositoryPort;
 import com.hexagonal.server.ledger.application.wallet.port.out.repository.WalletRepositoryPort;
+import com.hexagonal.server.ledger.application.wallet.usecase.debitwallet.mapper.DebitWalletMapper;
+import com.hexagonal.server.ledger.application.wallet.usecase.debitwallet.model.request.DebitWalletRequest;
+import com.hexagonal.server.ledger.application.wallet.usecase.debitwallet.model.response.DebitWalletResponse;
 import com.hexagonal.server.ledger.core.wallet.domain.LedgerEntry;
 import com.hexagonal.server.ledger.core.wallet.domain.Wallet;
 import com.hexagonal.server.ledger.core.wallet.model.DebitOperation;
 import com.hexagonal.server.ledger.core.wallet.service.WalletDomainService;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Id;
-import com.hexagonal.server.shared.kernel.common.valueobjects.Money;
+import org.springframework.beans.factory.annotation.Qualifier;
 
-public class DebitWalletUseCaseImpl {
+public class DebitWalletUseCaseImpl implements DebitWalletUseCase {
 
-    private final WalletRepositoryPort walletRepositoryPort;
     private final WalletDomainService walletDomainService;
+    private final WalletRepositoryPort walletRepositoryPort;
     private final IdempotencyRepositoryPort idempotencyRepositoryPort;
 
     public DebitWalletUseCaseImpl(
+            @Qualifier("walletDomainService") WalletDomainService walletDomainService,
             WalletRepositoryPort walletRepositoryPort,
-            WalletDomainService walletDomainService,
             IdempotencyRepositoryPort idempotencyRepositoryPort) {
-        this.walletRepositoryPort = walletRepositoryPort;
         this.walletDomainService = walletDomainService;
+        this.walletRepositoryPort = walletRepositoryPort;
         this.idempotencyRepositoryPort = idempotencyRepositoryPort;
     }
 
-    public LedgerEntry execute(
-            Id walletId,
-            Money amount,
-            String reference,
-            String idempotencyKey) {
-        if (idempotencyRepositoryPort.exists(idempotencyKey)) {
-            throw new IllegalStateException("Duplicate operation");
+    @Override
+    public DebitWalletResponse debitWallet(DebitWalletRequest debitWalletRequest) {
+        if (idempotencyRepositoryPort.exists(Id.valueOf(debitWalletRequest.idempotencyKey()))) {
+            throw new IllegalStateException("Duplicate debit debitWalletRequest");
         }
-        Wallet wallet = walletRepositoryPort.findById(walletId);
-        LedgerEntry entry = walletDomainService.debit(new DebitOperation(wallet, amount, reference));
+        Wallet wallet = walletRepositoryPort.findById(Id.valueOf(debitWalletRequest.walletId()));
+        DebitOperation debitOperation = DebitWalletMapper.toDebitOperation(debitWalletRequest, wallet);
+        LedgerEntry ledgerEntry = walletDomainService.debit(debitOperation);
         walletRepositoryPort.save(wallet);
-        idempotencyRepositoryPort.store(idempotencyKey);
-        return entry;
+        idempotencyRepositoryPort.store(Id.valueOf(debitWalletRequest.idempotencyKey()));
+        return DebitWalletMapper.toDebitWalletResponse(ledgerEntry);
     }
-}
 
+}

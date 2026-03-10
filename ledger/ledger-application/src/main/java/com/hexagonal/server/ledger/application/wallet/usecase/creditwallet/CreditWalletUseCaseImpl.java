@@ -14,8 +14,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 
 public class CreditWalletUseCaseImpl implements CreditWalletUseCase {
 
-    private final WalletRepositoryPort walletRepositoryPort;
     private final WalletDomainService walletDomainService;
+    private final WalletRepositoryPort walletRepositoryPort;
     private final IdempotencyRepositoryPort idempotencyRepositoryPort;
 
     public CreditWalletUseCaseImpl(
@@ -29,16 +29,17 @@ public class CreditWalletUseCaseImpl implements CreditWalletUseCase {
 
     @Override
     public CreditWalletResponse creditWallet(CreditWalletRequest creditWalletRequest) {
-        if (idempotencyRepositoryPort.exists(creditWalletRequest.idempotencyKey())) {
+        if (idempotencyRepositoryPort.exists(Id.valueOf(creditWalletRequest.idempotencyKey()))) {
             throw new IllegalStateException("Duplicate credit creditWalletRequest");
         }
         Wallet wallet = walletRepositoryPort.findById(Id.valueOf(creditWalletRequest.walletId()));
         CreditOperation operation = CreditWalletMapper.toCreditOperation(creditWalletRequest, wallet);
         LedgerEntry ledgerEntry = walletDomainService.credit(operation);
         walletRepositoryPort.save(wallet);
-        idempotencyRepositoryPort.store(creditWalletRequest.idempotencyKey());
+        idempotencyRepositoryPort.store(Id.valueOf(creditWalletRequest.idempotencyKey()));
         return CreditWalletMapper.toCreditWalletResponse(ledgerEntry);
     }
+
 }
 
 
