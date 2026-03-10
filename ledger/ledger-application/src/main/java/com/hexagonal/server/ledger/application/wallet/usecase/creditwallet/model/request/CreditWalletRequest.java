@@ -5,7 +5,6 @@ import java.math.BigDecimal;
 public record CreditWalletRequest(
         String walletId,
         BigDecimal amount,
-        String reference,
-        String idempotencyKey
+        String reference
 ) {}
 

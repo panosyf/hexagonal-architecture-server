@@ -1,6 +1,5 @@
 package com.hexagonal.server.ledger.application.wallet.usecase.creditwallet.config;
 
-import com.hexagonal.server.ledger.application.wallet.port.out.repository.IdempotencyRepositoryPort;
 import com.hexagonal.server.ledger.application.wallet.port.out.repository.WalletRepositoryPort;
 import com.hexagonal.server.ledger.application.wallet.usecase.creditwallet.CreditWalletUseCase;
 import com.hexagonal.server.ledger.application.wallet.usecase.creditwallet.CreditWalletUseCaseImpl;
@@ -13,20 +12,17 @@ public class CreditWalletUsecaseConfig {
 
     private final WalletDomainService walletDomainService;
     private final WalletRepositoryPort walletRepositoryPort;
-    private final IdempotencyRepositoryPort idempotencyRepositoryPort;
 
     public CreditWalletUsecaseConfig(
             WalletDomainService walletDomainService,
-            WalletRepositoryPort walletRepositoryPort,
-            IdempotencyRepositoryPort idempotencyRepositoryPort) {
+            WalletRepositoryPort walletRepositoryPort) {
         this.walletDomainService = walletDomainService;
         this.walletRepositoryPort = walletRepositoryPort;
-        this.idempotencyRepositoryPort = idempotencyRepositoryPort;
     }
 
     @Bean("creditWalletUseCase")
     public CreditWalletUseCase creditWalletUseCase() {
-        return new CreditWalletUseCaseImpl(walletDomainService, walletRepositoryPort, idempotencyRepositoryPort);
+        return new CreditWalletUseCaseImpl(walletDomainService, walletRepositoryPort);
     }
 
 }

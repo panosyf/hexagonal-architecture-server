@@ -1,6 +1,5 @@
 package com.hexagonal.server.ledger.application.wallet.usecase.debitwallet;
 
-import com.hexagonal.server.ledger.application.wallet.port.out.repository.IdempotencyRepositoryPort;
 import com.hexagonal.server.ledger.application.wallet.port.out.repository.WalletRepositoryPort;
 import com.hexagonal.server.ledger.application.wallet.usecase.debitwallet.mapper.DebitWalletMapper;
 import com.hexagonal.server.ledger.application.wallet.usecase.debitwallet.model.request.DebitWalletRequest;
@@ -16,27 +15,20 @@ public class DebitWalletUseCaseImpl implements DebitWalletUseCase {
 
     private final WalletDomainService walletDomainService;
     private final WalletRepositoryPort walletRepositoryPort;
-    private final IdempotencyRepositoryPort idempotencyRepositoryPort;
 
     public DebitWalletUseCaseImpl(
             @Qualifier("walletDomainService") WalletDomainService walletDomainService,
-            WalletRepositoryPort walletRepositoryPort,
-            IdempotencyRepositoryPort idempotencyRepositoryPort) {
+            WalletRepositoryPort walletRepositoryPort) {
         this.walletDomainService = walletDomainService;
         this.walletRepositoryPort = walletRepositoryPort;
-        this.idempotencyRepositoryPort = idempotencyRepositoryPort;
     }
 
     @Override
     public DebitWalletResponse debitWallet(DebitWalletRequest debitWalletRequest) {
-        if (idempotencyRepositoryPort.exists(Id.valueOf(debitWalletRequest.idempotencyKey()))) {
-            throw new IllegalStateException("Duplicate debit debitWalletRequest");
-        }
         Wallet wallet = walletRepositoryPort.findById(Id.valueOf(debitWalletRequest.walletId()));
         DebitOperation debitOperation = DebitWalletMapper.toDebitOperation(debitWalletRequest, wallet);
         LedgerEntry ledgerEntry = walletDomainService.debit(debitOperation);
         walletRepositoryPort.save(wallet);
-        idempotencyRepositoryPort.store(Id.valueOf(debitWalletRequest.idempotencyKey()));
         return DebitWalletMapper.toDebitWalletResponse(ledgerEntry);
     }
 
