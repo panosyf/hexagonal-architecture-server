@@ -1,4 +1,4 @@
-package com.hexagonal.server.identity.application.account.common.exception.constants;
+package com.hexagonal.server.identity.application.account.common.exception;
 
 
 public class AccountErrorMessageConstant {

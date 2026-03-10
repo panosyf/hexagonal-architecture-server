@@ -1,4 +1,4 @@
-package com.hexagonal.server.shared.kernel.common.exception.constants;
+package com.hexagonal.server.shared.kernel.common.exception;
 
 
 public class ErrorMessageConstants {

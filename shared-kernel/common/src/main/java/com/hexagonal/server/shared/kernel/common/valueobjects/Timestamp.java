@@ -1,6 +1,6 @@
 package com.hexagonal.server.shared.kernel.common.valueobjects;
 
-import com.hexagonal.server.shared.kernel.common.exception.constants.ErrorMessageConstants;
+import com.hexagonal.server.shared.kernel.common.exception.ErrorMessageConstants;
 
 import java.time.Instant;
 import java.time.ZoneId;

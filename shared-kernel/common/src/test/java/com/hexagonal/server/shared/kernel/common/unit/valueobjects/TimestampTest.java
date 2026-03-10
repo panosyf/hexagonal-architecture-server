@@ -1,6 +1,6 @@
 package com.hexagonal.server.shared.kernel.common.unit.valueobjects;
 
-import com.hexagonal.server.shared.kernel.common.exception.constants.ErrorMessageConstants;
+import com.hexagonal.server.shared.kernel.common.exception.ErrorMessageConstants;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Timestamp;
 import org.junit.jupiter.api.Test;
 
