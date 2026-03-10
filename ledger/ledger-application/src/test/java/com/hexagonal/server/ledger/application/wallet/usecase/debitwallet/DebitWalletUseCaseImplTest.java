@@ -41,7 +41,8 @@ class DebitWalletUseCaseImplTest {
                 walletId.getValue(),
                 BigDecimal.valueOf(50),
                 "payment");
-        LedgerEntry ledgerEntry = LedgerEntry.debit(walletId, Money.of(BigDecimal.valueOf(50)), "payment");
+        wallet.credit(Money.of(BigDecimal.valueOf(100)), "initial balance");
+        LedgerEntry ledgerEntry = wallet.debit(Money.of(BigDecimal.valueOf(50)), "payment");
         when(walletRepositoryPort.findById(any())).thenReturn(wallet);
         when(walletDomainService.debit(any())).thenReturn(ledgerEntry);
         // when

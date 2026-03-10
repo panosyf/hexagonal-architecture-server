@@ -46,7 +46,7 @@ public class LedgerEntry extends DomainEntity {
         return amount;
     }
 
-    protected Timestamp getCreatedAt() {
+    public Timestamp getCreatedAt() {
         return createdAt;
     }
 
@@ -54,7 +54,7 @@ public class LedgerEntry extends DomainEntity {
         return reference;
     }
 
-    public static LedgerEntry credit(Id walletId, Money amount, String reference) {
+    protected static LedgerEntry credit(Id walletId, Money amount, String reference) {
         if (amount.isNegative()) {
             throw new IllegalArgumentException("Credit cannot be negative");
         }
@@ -66,7 +66,7 @@ public class LedgerEntry extends DomainEntity {
         );
     }
 
-    public static LedgerEntry debit(Id walletId, Money amount, String reference) {
+    protected static LedgerEntry debit(Id walletId, Money amount, String reference) {
         if (amount.isNegative()) {
             throw new IllegalArgumentException("Debit amount cannot be negative");
         }

@@ -24,6 +24,7 @@ public final class CreditWalletMapper {
                 ledgerEntry.getId().getValue(),
                 ledgerEntry.getWalletId().getValue(),
                 ledgerEntry.getAmount().getValue(),
+                ledgerEntry.getCreatedAt().getTime(),
                 ledgerEntry.getReference());
     }
 }

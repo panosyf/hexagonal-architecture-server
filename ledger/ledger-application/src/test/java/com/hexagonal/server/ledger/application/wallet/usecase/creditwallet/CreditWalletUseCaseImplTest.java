@@ -40,7 +40,7 @@ class CreditWalletUseCaseImplTest {
                 walletId.getValue(),
                 BigDecimal.valueOf(100),
                 "deposit");
-        LedgerEntry ledgerEntry = LedgerEntry.credit(walletId, Money.of(BigDecimal.valueOf(100)), "deposit");
+        LedgerEntry ledgerEntry = wallet.credit(Money.of(BigDecimal.valueOf(100)), "deposit");
         when(walletRepositoryPort.findById(any())).thenReturn(wallet);
         when(walletDomainService.credit(any())).thenReturn(ledgerEntry);
         // when
