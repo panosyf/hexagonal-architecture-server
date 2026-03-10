@@ -1,6 +1,6 @@
 package com.hexagonal.server.ledger.application.wallet.usecase.debitwallet;
 
-import com.hexagonal.server.ledger.application.wallet.port.out.repository.IdempotencyRepository;
+import com.hexagonal.server.ledger.application.wallet.port.out.repository.IdempotencyRepositoryPort;
 import com.hexagonal.server.ledger.application.wallet.port.out.repository.WalletRepositoryPort;
 import com.hexagonal.server.ledger.core.wallet.domain.LedgerEntry;
 import com.hexagonal.server.ledger.core.wallet.domain.Wallet;
@@ -13,15 +13,15 @@ public class DebitWalletUseCaseImpl {
 
     private final WalletRepositoryPort walletRepositoryPort;
     private final WalletDomainService walletDomainService;
-    private final IdempotencyRepository idempotencyRepository;
+    private final IdempotencyRepositoryPort idempotencyRepositoryPort;
 
     public DebitWalletUseCaseImpl(
             WalletRepositoryPort walletRepositoryPort,
             WalletDomainService walletDomainService,
-            IdempotencyRepository idempotencyRepository) {
+            IdempotencyRepositoryPort idempotencyRepositoryPort) {
         this.walletRepositoryPort = walletRepositoryPort;
         this.walletDomainService = walletDomainService;
-        this.idempotencyRepository = idempotencyRepository;
+        this.idempotencyRepositoryPort = idempotencyRepositoryPort;
     }
 
     public LedgerEntry execute(
@@ -29,13 +29,13 @@ public class DebitWalletUseCaseImpl {
             Money amount,
             String reference,
             String idempotencyKey) {
-        if (idempotencyRepository.exists(idempotencyKey)) {
+        if (idempotencyRepositoryPort.exists(idempotencyKey)) {
             throw new IllegalStateException("Duplicate operation");
         }
         Wallet wallet = walletRepositoryPort.findById(walletId);
         LedgerEntry entry = walletDomainService.debit(new DebitOperation(wallet, amount, reference));
         walletRepositoryPort.save(wallet);
-        idempotencyRepository.store(idempotencyKey);
+        idempotencyRepositoryPort.store(idempotencyKey);
         return entry;
     }
 }

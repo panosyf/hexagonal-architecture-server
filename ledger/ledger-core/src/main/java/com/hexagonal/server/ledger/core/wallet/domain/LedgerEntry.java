@@ -30,15 +30,15 @@ public class LedgerEntry extends DomainEntity {
         this.reference = reference;
     }
 
-    protected Id getId() {
+    public Id getId() {
         return id;
     }
 
-    protected Id getWalletId() {
+    public Id getWalletId() {
         return walletId;
     }
 
-    protected Money getAmount() {
+    public Money getAmount() {
         return amount;
     }
 
@@ -46,7 +46,7 @@ public class LedgerEntry extends DomainEntity {
         return createdAt;
     }
 
-    protected String getReference() {
+    public String getReference() {
         return reference;
     }
 

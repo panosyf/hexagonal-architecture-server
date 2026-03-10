@@ -1,42 +1,44 @@
 package com.hexagonal.server.ledger.application.wallet.usecase.creditwallet;
 
-import com.hexagonal.server.ledger.application.wallet.port.out.repository.IdempotencyRepository;
+import com.hexagonal.server.ledger.application.wallet.port.out.repository.IdempotencyRepositoryPort;
 import com.hexagonal.server.ledger.application.wallet.port.out.repository.WalletRepositoryPort;
+import com.hexagonal.server.ledger.application.wallet.usecase.creditwallet.mapper.CreditWalletMapper;
+import com.hexagonal.server.ledger.application.wallet.usecase.creditwallet.model.request.CreditWalletRequest;
+import com.hexagonal.server.ledger.application.wallet.usecase.creditwallet.model.response.CreditWalletResponse;
 import com.hexagonal.server.ledger.core.wallet.domain.LedgerEntry;
 import com.hexagonal.server.ledger.core.wallet.domain.Wallet;
 import com.hexagonal.server.ledger.core.wallet.model.CreditOperation;
 import com.hexagonal.server.ledger.core.wallet.service.WalletDomainService;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Id;
-import com.hexagonal.server.shared.kernel.common.valueobjects.Money;
+import org.springframework.beans.factory.annotation.Qualifier;
 
-public class CreditWalletUseCaseImpl {
+public class CreditWalletUseCaseImpl implements CreditWalletUseCase {
 
     private final WalletRepositoryPort walletRepositoryPort;
     private final WalletDomainService walletDomainService;
-    private final IdempotencyRepository idempotencyRepository;
+    private final IdempotencyRepositoryPort idempotencyRepositoryPort;
 
     public CreditWalletUseCaseImpl(
+            @Qualifier("walletDomainService") WalletDomainService walletDomainService,
             WalletRepositoryPort walletRepositoryPort,
-            WalletDomainService walletDomainService,
-            IdempotencyRepository idempotencyRepository) {
-        this.walletRepositoryPort = walletRepositoryPort;
+            IdempotencyRepositoryPort idempotencyRepositoryPort) {
         this.walletDomainService = walletDomainService;
-        this.idempotencyRepository = idempotencyRepository;
+        this.walletRepositoryPort = walletRepositoryPort;
+        this.idempotencyRepositoryPort = idempotencyRepositoryPort;
     }
 
-    public LedgerEntry execute(
-            Id walletId,
-            Money amount,
-            String reference,
-            String idempotencyKey) {
-        if (idempotencyRepository.exists(idempotencyKey)) {
-            throw new IllegalStateException("Duplicate operation");
+    @Override
+    public CreditWalletResponse creditWallet(CreditWalletRequest creditWalletRequest) {
+        if (idempotencyRepositoryPort.exists(creditWalletRequest.idempotencyKey())) {
+            throw new IllegalStateException("Duplicate credit creditWalletRequest");
         }
-        Wallet wallet = walletRepositoryPort.findById(walletId);
-        LedgerEntry entry = walletDomainService.credit(new CreditOperation(wallet, amount, reference));
+        Wallet wallet = walletRepositoryPort.findById(Id.valueOf(creditWalletRequest.walletId()));
+        CreditOperation operation = CreditWalletMapper.toCreditOperation(creditWalletRequest, wallet);
+        LedgerEntry ledgerEntry = walletDomainService.credit(operation);
         walletRepositoryPort.save(wallet);
-        idempotencyRepository.store(idempotencyKey);
-        return entry;
+        idempotencyRepositoryPort.store(creditWalletRequest.idempotencyKey());
+        return CreditWalletMapper.toCreditWalletResponse(ledgerEntry);
     }
 }
+
 
