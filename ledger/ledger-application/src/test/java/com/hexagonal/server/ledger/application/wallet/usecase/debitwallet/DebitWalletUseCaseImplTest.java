@@ -14,7 +14,6 @@ import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -38,7 +37,6 @@ class DebitWalletUseCaseImplTest {
         Id walletId = Id.generate();
         Wallet wallet = Wallet.create(Id.generate());
         DebitWalletRequest request = new DebitWalletRequest(
-                walletId.getValue(),
                 BigDecimal.valueOf(50),
                 "payment");
         wallet.credit(Money.of(BigDecimal.valueOf(100)), "initial balance");
@@ -46,7 +44,7 @@ class DebitWalletUseCaseImplTest {
         when(walletRepositoryPort.findById(any())).thenReturn(wallet);
         when(walletDomainService.debit(any())).thenReturn(ledgerEntry);
         // when
-        DebitWalletResponse response = debitWalletUseCase.debitWallet(request);
+        DebitWalletResponse response = debitWalletUseCase.debitWallet(walletId.getValue(), request);
         // then
         verify(walletRepositoryPort).findById(any());
         verify(walletDomainService).debit(any());

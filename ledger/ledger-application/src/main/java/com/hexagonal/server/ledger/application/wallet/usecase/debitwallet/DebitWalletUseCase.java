@@ -5,6 +5,6 @@ import com.hexagonal.server.ledger.application.wallet.usecase.debitwallet.model.
 
 public interface DebitWalletUseCase {
 
-    DebitWalletResponse debitWallet(DebitWalletRequest debitWalletRequest);
+    DebitWalletResponse debitWallet(String id, DebitWalletRequest debitWalletRequest);
 
 }

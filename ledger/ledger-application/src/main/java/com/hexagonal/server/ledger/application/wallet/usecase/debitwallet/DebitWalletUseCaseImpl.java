@@ -24,8 +24,8 @@ public class DebitWalletUseCaseImpl implements DebitWalletUseCase {
     }
 
     @Override
-    public DebitWalletResponse debitWallet(DebitWalletRequest debitWalletRequest) {
-        Wallet wallet = walletRepositoryPort.findById(Id.valueOf(debitWalletRequest.walletId()));
+    public DebitWalletResponse debitWallet(String id, DebitWalletRequest debitWalletRequest) {
+        Wallet wallet = walletRepositoryPort.findById(Id.valueOf(id));
         DebitOperation debitOperation = DebitWalletMapper.toDebitOperation(debitWalletRequest, wallet);
         LedgerEntry ledgerEntry = walletDomainService.debit(debitOperation);
         walletRepositoryPort.save(wallet);

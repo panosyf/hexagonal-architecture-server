@@ -3,8 +3,8 @@ package com.hexagonal.server.ledger.application.wallet.usecase.creditwallet.mode
 import java.math.BigDecimal;
 
 public record CreditWalletRequest(
-        String walletId,
         BigDecimal amount,
         String reference
-) {}
+) {
+}
 

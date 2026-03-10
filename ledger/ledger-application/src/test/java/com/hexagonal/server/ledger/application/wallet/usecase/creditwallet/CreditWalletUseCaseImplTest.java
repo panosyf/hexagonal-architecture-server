@@ -37,14 +37,13 @@ class CreditWalletUseCaseImplTest {
         Id walletId = Id.generate();
         Wallet wallet = Wallet.create(Id.generate());
         CreditWalletRequest request = new CreditWalletRequest(
-                walletId.getValue(),
                 BigDecimal.valueOf(100),
                 "deposit");
         LedgerEntry ledgerEntry = wallet.credit(Money.of(BigDecimal.valueOf(100)), "deposit");
         when(walletRepositoryPort.findById(any())).thenReturn(wallet);
         when(walletDomainService.credit(any())).thenReturn(ledgerEntry);
         // when
-        CreditWalletResponse response = creditWalletUseCase.creditWallet(request);
+        CreditWalletResponse response = creditWalletUseCase.creditWallet(walletId.getValue(), request);
         // then
         verify(walletRepositoryPort).findById(any());
         verify(walletDomainService).credit(any());

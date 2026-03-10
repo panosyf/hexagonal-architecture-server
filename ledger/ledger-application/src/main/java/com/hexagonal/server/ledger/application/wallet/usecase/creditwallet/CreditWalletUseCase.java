@@ -5,6 +5,6 @@ import com.hexagonal.server.ledger.application.wallet.usecase.creditwallet.model
 
 public interface CreditWalletUseCase {
 
-    CreditWalletResponse creditWallet(CreditWalletRequest creditWalletRequest);
+    CreditWalletResponse creditWallet(String id, CreditWalletRequest creditWalletRequest);
 
 }

@@ -7,13 +7,14 @@ import com.hexagonal.server.ledger.application.wallet.usecase.creditwallet.model
 import com.hexagonal.server.ledger.application.wallet.usecase.creditwallet.model.response.CreditWalletResponse;
 import com.hexagonal.server.ledger.application.wallet.usecase.debitwallet.model.request.DebitWalletRequest;
 import com.hexagonal.server.ledger.application.wallet.usecase.debitwallet.model.response.DebitWalletResponse;
+import org.springframework.http.ResponseEntity;
 
 public interface WalletApi {
 
-    CreateWalletResponse createWallet(CreateWalletRequest request);
+    ResponseEntity<CreateWalletResponse> createWallet(CreateWalletRequest createWalletRequest);
 
-    CreditWalletResponse creditWallet(CreditWalletRequest request);
+    ResponseEntity<CreditWalletResponse> creditWallet(String id, CreditWalletRequest creditWalletRequest);
 
-    DebitWalletResponse debitWallet(DebitWalletRequest request);
+    ResponseEntity<DebitWalletResponse> debitWallet(String id, DebitWalletRequest debitWalletRequest);
 
 }

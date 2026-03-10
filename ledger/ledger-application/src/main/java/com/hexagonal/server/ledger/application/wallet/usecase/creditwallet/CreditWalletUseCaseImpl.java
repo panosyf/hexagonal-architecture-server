@@ -24,8 +24,8 @@ public class CreditWalletUseCaseImpl implements CreditWalletUseCase {
     }
 
     @Override
-    public CreditWalletResponse creditWallet(CreditWalletRequest creditWalletRequest) {
-        Wallet wallet = walletRepositoryPort.findById(Id.valueOf(creditWalletRequest.walletId()));
+    public CreditWalletResponse creditWallet(String id, CreditWalletRequest creditWalletRequest) {
+        Wallet wallet = walletRepositoryPort.findById(Id.valueOf(id));
         CreditOperation operation = CreditWalletMapper.toCreditOperation(creditWalletRequest, wallet);
         LedgerEntry ledgerEntry = walletDomainService.credit(operation);
         walletRepositoryPort.save(wallet);

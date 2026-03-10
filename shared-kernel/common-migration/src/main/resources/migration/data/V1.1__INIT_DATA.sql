@@ -1,5 +1,0 @@
---INSERT INTO "account" (id, name, created_at, updated_at) VALUES ('1', 'Entei', 10000, '2024-09-04 22:00:00', null);
---INSERT INTO "account" (id, name, created_at, updated_at) VALUES ('2', 'Suicune', 2000, '2024-09-04 22:00:00', null);
---INSERT INTO "account" (id, name, created_at, updated_at) VALUES ('3', 'Raiku', 1000, '2024-09-04 22:00:00', null);
---INSERT INTO "transaction" (id, type, amount, description, debtor_account_id, beneficiary_account_id, status, created_at, updated_at) VALUES ('1', 'TRANSFER', 100, 'Italy', '1', '2', 'PENDING', '2024-09-04 22:00:00', null);
---INSERT INTO "transaction" (id, type, amount, description, debtor_account_id, beneficiary_account_id, status, created_at, updated_at) VALUES ('2', 'TRANSFER', 100, 'Spain', '1', '3', 'PENDING', '2024-09-04 22:00:00', null);

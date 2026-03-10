@@ -3,7 +3,6 @@ package com.hexagonal.server.ledger.application.wallet.usecase.debitwallet.model
 import java.math.BigDecimal;
 
 public record DebitWalletRequest(
-        String walletId,
         BigDecimal amount,
         String reference
 ) {
