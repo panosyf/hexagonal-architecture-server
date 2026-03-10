@@ -31,6 +31,13 @@
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
+        <!-- ledger-boot module-->
+        <dependency>
+            <groupId>com.hexagonal.server.ledger</groupId>
+            <artifactId>ledger-boot</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
     <profiles>
