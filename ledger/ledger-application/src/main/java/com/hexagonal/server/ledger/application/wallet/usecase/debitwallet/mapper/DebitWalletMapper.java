@@ -5,6 +5,7 @@ import com.hexagonal.server.ledger.application.wallet.usecase.debitwallet.model.
 import com.hexagonal.server.ledger.core.wallet.domain.LedgerEntry;
 import com.hexagonal.server.ledger.core.wallet.domain.Wallet;
 import com.hexagonal.server.ledger.core.wallet.model.DebitOperation;
+import com.hexagonal.server.shared.kernel.common.valueobjects.Description;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Money;
 
 public final class DebitWalletMapper {
@@ -16,7 +17,7 @@ public final class DebitWalletMapper {
         return new DebitOperation(
                 wallet,
                 Money.of(debitWalletRequest.amount()),
-                debitWalletRequest.reference());
+                Description.valueOf(debitWalletRequest.reference()));
     }
 
     public static DebitWalletResponse toDebitWalletResponse(LedgerEntry ledgerEntry) {
@@ -25,7 +26,8 @@ public final class DebitWalletMapper {
                 ledgerEntry.getWalletId().getValue(),
                 ledgerEntry.getAmount().getValue(),
                 ledgerEntry.getCreatedAt().getTime(),
-                ledgerEntry.getReference());
+                ledgerEntry.getReference().getValue());
     }
+
 }
 

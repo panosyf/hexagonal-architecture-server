@@ -1,6 +1,7 @@
 package com.hexagonal.server.ledger.core.wallet.domain;
 
 import com.hexagonal.server.shared.kernel.common.entity.DomainEntity;
+import com.hexagonal.server.shared.kernel.common.valueobjects.Description;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Id;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Money;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Timestamp;
@@ -13,7 +14,7 @@ public class LedgerEntry extends DomainEntity {
     private Id walletId;
     private Money amount;
     private Timestamp createdAt;
-    private String reference;
+    private Description reference;
 
     private LedgerEntry() {
     }
@@ -22,7 +23,7 @@ public class LedgerEntry extends DomainEntity {
             final Id id,
             final Id walletId,
             final Money amount,
-            final String reference) {
+            final Description reference) {
         this.id = id;
         this.walletId = walletId;
         this.amount = amount;
@@ -30,7 +31,7 @@ public class LedgerEntry extends DomainEntity {
         this.reference = reference;
     }
 
-    public static LedgerEntry create(final Id id, final Id walletId, Money amount, String reference) {
+    public static LedgerEntry create(final Id id, final Id walletId, Money amount, Description reference) {
         return new LedgerEntry(id, walletId, amount, reference);
     }
 
@@ -50,11 +51,11 @@ public class LedgerEntry extends DomainEntity {
         return createdAt;
     }
 
-    public String getReference() {
+    public Description getReference() {
         return reference;
     }
 
-    protected static LedgerEntry credit(Id walletId, Money amount, String reference) {
+    protected static LedgerEntry credit(Id walletId, Money amount, Description reference) {
         if (amount.isNegative()) {
             throw new IllegalArgumentException("Credit cannot be negative");
         }
@@ -66,7 +67,7 @@ public class LedgerEntry extends DomainEntity {
         );
     }
 
-    protected static LedgerEntry debit(Id walletId, Money amount, String reference) {
+    protected static LedgerEntry debit(Id walletId, Money amount, Description reference) {
         if (amount.isNegative()) {
             throw new IllegalArgumentException("Debit amount cannot be negative");
         }

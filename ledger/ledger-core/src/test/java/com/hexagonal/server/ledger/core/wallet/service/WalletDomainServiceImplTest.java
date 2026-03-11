@@ -5,6 +5,7 @@ import com.hexagonal.server.ledger.core.wallet.domain.Wallet;
 import com.hexagonal.server.ledger.core.wallet.model.CreateWalletOperation;
 import com.hexagonal.server.ledger.core.wallet.model.CreditOperation;
 import com.hexagonal.server.ledger.core.wallet.model.DebitOperation;
+import com.hexagonal.server.shared.kernel.common.valueobjects.Description;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Id;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Money;
 import org.junit.jupiter.api.BeforeEach;
@@ -39,7 +40,7 @@ class WalletDomainServiceImplTest {
     void should_credit_wallet() {
         // given
         Wallet wallet = Wallet.create(Id.generate());
-        CreditOperation creditOperation = new CreditOperation(wallet, Money.of(BigDecimal.valueOf(100)), "deposit");
+        CreditOperation creditOperation = new CreditOperation(wallet, Money.of(BigDecimal.valueOf(100)), Description.valueOf("deposit"));
         // when
         LedgerEntry entry = walletDomainService.credit(creditOperation);
         // then
@@ -52,8 +53,8 @@ class WalletDomainServiceImplTest {
     void should_debit_wallet() {
         // given
         Wallet wallet = Wallet.create(Id.generate());
-        wallet.credit(Money.of(BigDecimal.valueOf(100)), "deposit");
-        DebitOperation debitOperation = new DebitOperation(wallet, Money.of(BigDecimal.valueOf(40)), "payment");
+        wallet.credit(Money.of(BigDecimal.valueOf(100)), Description.valueOf("deposit"));
+        DebitOperation debitOperation = new DebitOperation(wallet, Money.of(BigDecimal.valueOf(40)), Description.valueOf("payment"));
         // when
         LedgerEntry entry = walletDomainService.debit(debitOperation);
         // then

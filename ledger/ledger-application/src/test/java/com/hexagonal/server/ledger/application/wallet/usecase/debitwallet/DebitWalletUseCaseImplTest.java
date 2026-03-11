@@ -7,6 +7,7 @@ import com.hexagonal.server.ledger.core.wallet.domain.LedgerEntry;
 import com.hexagonal.server.ledger.core.wallet.domain.Wallet;
 import com.hexagonal.server.ledger.core.wallet.model.DebitOperation;
 import com.hexagonal.server.ledger.core.wallet.service.WalletDomainService;
+import com.hexagonal.server.shared.kernel.common.valueobjects.Description;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Id;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Money;
 import org.junit.jupiter.api.BeforeEach;
@@ -39,9 +40,9 @@ class DebitWalletUseCaseImplTest {
         // given
         Id walletId = Id.generate();
         Wallet wallet = Wallet.create(Id.generate());
-        wallet.credit(Money.of(BigDecimal.valueOf(100)), "initial");
+        wallet.credit(Money.of(BigDecimal.valueOf(100)), Description.valueOf("initial"));
         DebitWalletRequest debitWalletRequest = new DebitWalletRequest(BigDecimal.valueOf(50), "payment");
-        LedgerEntry ledgerEntry = wallet.debit(Money.of(BigDecimal.valueOf(50)), "payment");
+        LedgerEntry ledgerEntry = wallet.debit(Money.of(BigDecimal.valueOf(50)), Description.valueOf("payment"));
         when(walletRepositoryPort.findById(walletId)).thenReturn(wallet);
         when(walletDomainService.debit(any())).thenReturn(ledgerEntry);
         // when
@@ -54,7 +55,7 @@ class DebitWalletUseCaseImplTest {
         assertAll(
                 () -> assertEquals(wallet, debitOperation.wallet()),
                 () -> assertEquals(debitWalletRequest.amount().setScale(2, RoundingMode.HALF_EVEN), debitOperation.amount().getValue()),
-                () -> assertEquals(debitWalletRequest.reference(), debitOperation.reference()),
+                () -> assertEquals(debitWalletRequest.reference(), debitOperation.reference().getValue()),
                 () -> assertEquals(ledgerEntry.getId().getValue(), response.ledgerEntryId())
         );
     }

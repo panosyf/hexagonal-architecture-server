@@ -5,6 +5,7 @@ import com.hexagonal.server.ledger.application.wallet.usecase.creditwallet.model
 import com.hexagonal.server.ledger.core.wallet.domain.LedgerEntry;
 import com.hexagonal.server.ledger.core.wallet.domain.Wallet;
 import com.hexagonal.server.ledger.core.wallet.model.CreditOperation;
+import com.hexagonal.server.shared.kernel.common.valueobjects.Description;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Money;
 
 public final class CreditWalletMapper {
@@ -16,7 +17,7 @@ public final class CreditWalletMapper {
         return new CreditOperation(
                 wallet,
                 Money.of(creditWalletRequest.amount()),
-                creditWalletRequest.reference());
+                Description.valueOf(creditWalletRequest.reference()));
     }
 
     public static CreditWalletResponse toCreditWalletResponse(LedgerEntry ledgerEntry) {
@@ -25,7 +26,7 @@ public final class CreditWalletMapper {
                 ledgerEntry.getWalletId().getValue(),
                 ledgerEntry.getAmount().getValue(),
                 ledgerEntry.getCreatedAt().getTime(),
-                ledgerEntry.getReference());
+                ledgerEntry.getReference().getValue());
     }
 }
 

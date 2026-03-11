@@ -1,10 +1,13 @@
 package com.hexagonal.server.ledger.infra.persistence.wallet.entity;
 
+import com.hexagonal.server.shared.kernel.common.infra.valueobjects.converters.DescriptionAttributeConverter;
+import com.hexagonal.server.shared.kernel.common.infra.valueobjects.converters.IdAttributeConverter;
+import com.hexagonal.server.shared.kernel.common.infra.valueobjects.converters.MoneyAttributeConverter;
 import com.hexagonal.server.shared.kernel.common.infra.valueobjects.converters.TimestampAttributeConverter;
+import com.hexagonal.server.shared.kernel.common.valueobjects.Description;
+import com.hexagonal.server.shared.kernel.common.valueobjects.Money;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Timestamp;
 import jakarta.persistence.*;
-
-import java.math.BigDecimal;
 
 @Entity(name = "ledger_entry")
 @Table(name = "ledger_entry")
@@ -15,13 +18,16 @@ public class LedgerEntryPersistenceEntity {
     private String id;
 
     @Column(name = "wallet_id")
-    private String walletId;
+    @Convert(converter = IdAttributeConverter.class)
+    private com.hexagonal.server.shared.kernel.common.valueobjects.Id walletId;
 
     @Column(name = "amount")
-    private BigDecimal amount;
+    @Convert(converter = MoneyAttributeConverter.class)
+    private Money amount;
 
     @Column(name = "reference")
-    private String reference;
+    @Convert(converter = DescriptionAttributeConverter.class)
+    private Description reference;
 
     @Column(name = "created_at")
     @Convert(converter = TimestampAttributeConverter.class)
@@ -38,15 +44,15 @@ public class LedgerEntryPersistenceEntity {
         return id;
     }
 
-    public String getWalletId() {
+    public com.hexagonal.server.shared.kernel.common.valueobjects.Id getWalletId() {
         return walletId;
     }
 
-    public BigDecimal getAmount() {
+    public Money getAmount() {
         return amount;
     }
 
-    public String getReference() {
+    public Description getReference() {
         return reference;
     }
 
@@ -60,9 +66,9 @@ public class LedgerEntryPersistenceEntity {
 
     private LedgerEntryPersistenceEntity(
             String id,
-            String walletId,
-            BigDecimal amount,
-            String reference) {
+            com.hexagonal.server.shared.kernel.common.valueobjects.Id walletId,
+            Money amount,
+            Description reference) {
 
         this.id = id;
         this.walletId = walletId;
@@ -72,9 +78,9 @@ public class LedgerEntryPersistenceEntity {
 
     public static LedgerEntryPersistenceEntity create(
             String id,
-            String walletId,
-            BigDecimal amount,
-            String reference) {
+            com.hexagonal.server.shared.kernel.common.valueobjects.Id walletId,
+            Money amount,
+            Description reference) {
 
         return new LedgerEntryPersistenceEntity(
                 id,

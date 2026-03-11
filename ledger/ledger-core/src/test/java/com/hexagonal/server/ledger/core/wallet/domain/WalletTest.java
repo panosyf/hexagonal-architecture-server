@@ -1,6 +1,6 @@
 package com.hexagonal.server.ledger.core.wallet.domain;
 
-import com.hexagonal.server.ledger.core.wallet.domain.Wallet;
+import com.hexagonal.server.shared.kernel.common.valueobjects.Description;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Id;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Money;
 import org.junit.jupiter.api.Test;
@@ -30,7 +30,7 @@ class WalletTest {
         // given
         Wallet wallet = Wallet.create(Id.generate());
         // when
-        wallet.credit(Money.of(BigDecimal.valueOf(100)), "deposit");
+        wallet.credit(Money.of(BigDecimal.valueOf(100)), Description.valueOf("deposit"));
         // then
         assertThat(wallet.getLedgerEntryList()).hasSize(1);
         assertThat(wallet.balance()).isEqualTo(Money.of(BigDecimal.valueOf(100)));
@@ -41,8 +41,8 @@ class WalletTest {
         // given
         Wallet wallet = Wallet.create(Id.generate());
         // when
-        wallet.credit(Money.of(BigDecimal.valueOf(100)), "deposit");
-        wallet.debit(Money.of(BigDecimal.valueOf(40)), "payment");
+        wallet.credit(Money.of(BigDecimal.valueOf(100)), Description.valueOf("deposit"));
+        wallet.debit(Money.of(BigDecimal.valueOf(40)), Description.valueOf("payment"));
         // then
         assertThat(wallet.balance())
                 .isEqualTo(Money.of(BigDecimal.valueOf(60)));
@@ -54,10 +54,10 @@ class WalletTest {
         // given
         Wallet wallet = Wallet.create(Id.generate());
         // when
-        wallet.credit(Money.of(BigDecimal.valueOf(50)), "deposit");
+        wallet.credit(Money.of(BigDecimal.valueOf(50)), Description.valueOf("deposit"));
         // then
         assertThatThrownBy(() ->
-                wallet.debit(Money.of(BigDecimal.valueOf(100)), "payment")
+                wallet.debit(Money.of(BigDecimal.valueOf(100)), Description.valueOf("payment"))
         )
                 .isInstanceOf(IllegalStateException.class)
                 .hasMessage(INSUFFICIENT_FUNDS);
@@ -68,8 +68,8 @@ class WalletTest {
         // given
         Wallet wallet = Wallet.create(Id.generate());
         // when
-        wallet.credit(Money.of(BigDecimal.valueOf(100)), "deposit");
-        wallet.debit(Money.of(BigDecimal.valueOf(30)), "payment");
+        wallet.credit(Money.of(BigDecimal.valueOf(100)), Description.valueOf("deposit"));
+        wallet.debit(Money.of(BigDecimal.valueOf(30)), Description.valueOf("payment"));
         // then
         assertThat(wallet.balance())
                 .isEqualTo(Money.of(BigDecimal.valueOf(70)));

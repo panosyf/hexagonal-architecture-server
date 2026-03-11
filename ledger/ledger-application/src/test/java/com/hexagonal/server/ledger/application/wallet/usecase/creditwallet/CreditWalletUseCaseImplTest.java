@@ -7,6 +7,7 @@ import com.hexagonal.server.ledger.core.wallet.domain.LedgerEntry;
 import com.hexagonal.server.ledger.core.wallet.domain.Wallet;
 import com.hexagonal.server.ledger.core.wallet.model.CreditOperation;
 import com.hexagonal.server.ledger.core.wallet.service.WalletDomainService;
+import com.hexagonal.server.shared.kernel.common.valueobjects.Description;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Id;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Money;
 import org.junit.jupiter.api.BeforeEach;
@@ -40,7 +41,7 @@ class CreditWalletUseCaseImplTest {
         Id walletId = Id.generate();
         Wallet wallet = Wallet.create(Id.generate());
         CreditWalletRequest request = new CreditWalletRequest(BigDecimal.valueOf(50), "credit-ref");
-        LedgerEntry ledgerEntry = wallet.credit(Money.of(BigDecimal.valueOf(50)), "credit-ref");
+        LedgerEntry ledgerEntry = wallet.credit(Money.of(BigDecimal.valueOf(50)), Description.valueOf("credit-ref"));
         when(walletRepositoryPort.findById(walletId)).thenReturn(wallet);
         when(walletDomainService.credit(any())).thenReturn(ledgerEntry);
         // when
@@ -53,7 +54,7 @@ class CreditWalletUseCaseImplTest {
         assertAll(
                 () -> assertEquals(wallet, creditOperation.wallet()),
                 () -> assertEquals(request.amount().setScale(2, RoundingMode.HALF_EVEN), creditOperation.amount().getValue()),
-                () -> assertEquals(request.reference(), creditOperation.reference()),
+                () -> assertEquals(request.reference(), creditOperation.reference().getValue()),
                 () -> assertEquals(ledgerEntry.getId().getValue(), response.ledgerEntryId())
         );
     }

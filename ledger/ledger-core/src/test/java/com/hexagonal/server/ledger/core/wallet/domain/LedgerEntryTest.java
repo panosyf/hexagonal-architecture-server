@@ -1,13 +1,14 @@
 package com.hexagonal.server.ledger.core.wallet.domain;
 
-import com.hexagonal.server.ledger.core.wallet.domain.LedgerEntry;
+import com.hexagonal.server.shared.kernel.common.valueobjects.Description;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Id;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Money;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LedgerEntryTest {
 
@@ -17,11 +18,11 @@ class LedgerEntryTest {
         Id walletId = Id.generate();
         Money amount = Money.of(BigDecimal.valueOf(100));
         // when
-        LedgerEntry entry = LedgerEntry.credit(walletId, amount, "deposit");
+        LedgerEntry entry = LedgerEntry.credit(walletId, amount, Description.valueOf("deposit"));
         // then
         assertThat(entry.getWalletId()).isEqualTo(walletId);
         assertThat(entry.getAmount()).isEqualTo(amount);
-        assertThat(entry.getReference()).isEqualTo("deposit");
+        assertThat(entry.getReference().getValue()).isEqualTo("deposit");
         assertThat(entry.getCreatedAt()).isNotNull();
         assertThat(entry.getId()).isNotNull();
     }
@@ -32,10 +33,10 @@ class LedgerEntryTest {
         Id walletId = Id.generate();
         Money amount = Money.of(BigDecimal.valueOf(50));
         // when
-        LedgerEntry entry = LedgerEntry.debit(walletId, amount, "payment");
+        LedgerEntry entry = LedgerEntry.debit(walletId, amount, Description.valueOf("payment"));
         // then
         assertThat(entry.getAmount().getValue()).isEqualByComparingTo("-50");
-        assertThat(entry.getReference()).isEqualTo("payment");
+        assertThat(entry.getReference().getValue()).isEqualTo("payment");
     }
 
     @Test
@@ -45,7 +46,7 @@ class LedgerEntryTest {
         Money amount = Money.of(BigDecimal.valueOf(-10));
         // then
         assertThatThrownBy(() ->
-                LedgerEntry.credit(walletId, amount, "invalid")
+                LedgerEntry.credit(walletId, amount, Description.valueOf("invalid"))
         )
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("Credit cannot be negative");
@@ -58,7 +59,7 @@ class LedgerEntryTest {
         Money amount = Money.of(BigDecimal.valueOf(-10));
         // then
         assertThatThrownBy(() ->
-                LedgerEntry.debit(walletId, amount, "invalid")
+                LedgerEntry.debit(walletId, amount, Description.valueOf("invalid"))
         )
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("Debit amount cannot be negative");

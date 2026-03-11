@@ -1,6 +1,7 @@
 package com.hexagonal.server.ledger.core.wallet.domain;
 
 import com.hexagonal.server.shared.kernel.common.entity.AggregateRoot;
+import com.hexagonal.server.shared.kernel.common.valueobjects.Description;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Id;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Money;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Timestamp;
@@ -74,13 +75,13 @@ public class Wallet extends AggregateRoot {
                 .reduce(Money.zero(), Money::add);
     }
 
-    public LedgerEntry credit(Money amount, String reference) {
+    public LedgerEntry credit(Money amount, Description reference) {
         LedgerEntry ledgerEntry = LedgerEntry.credit(this.id, amount, reference);
         ledgerEntryList.add(ledgerEntry);
         return ledgerEntry;
     }
 
-    public LedgerEntry debit(Money amount, String reference) {
+    public LedgerEntry debit(Money amount, Description reference) {
         Money newBalance = balance().subtract(amount);
         if (newBalance.isNegative()) {
             throw new IllegalStateException(INSUFFICIENT_FUNDS);
