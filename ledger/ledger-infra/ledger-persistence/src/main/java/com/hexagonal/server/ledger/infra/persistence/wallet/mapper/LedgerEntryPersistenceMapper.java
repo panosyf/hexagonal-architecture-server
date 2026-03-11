@@ -17,7 +17,7 @@ public class LedgerEntryPersistenceMapper {
                 .map(ledgerEntry ->
                         LedgerEntryPersistenceEntity.create(
                                 ledgerEntry.getId().getValue(),
-                                ledgerEntry.getWalletId(),
+                                ledgerEntry.getWalletId().getValue(),
                                 ledgerEntry.getAmount(),
                                 ledgerEntry.getReference()
                         ))
@@ -27,7 +27,7 @@ public class LedgerEntryPersistenceMapper {
     public static LedgerEntry toDomainEntity(LedgerEntryPersistenceEntity ledgerEntryPersistenceEntity) {
         return LedgerEntry.create(
                 Id.valueOf(ledgerEntryPersistenceEntity.getId()),
-                ledgerEntryPersistenceEntity.getWalletId(),
+                Id.valueOf(ledgerEntryPersistenceEntity.getWalletId()),
                 ledgerEntryPersistenceEntity.getAmount(),
                 ledgerEntryPersistenceEntity.getReference()
         );

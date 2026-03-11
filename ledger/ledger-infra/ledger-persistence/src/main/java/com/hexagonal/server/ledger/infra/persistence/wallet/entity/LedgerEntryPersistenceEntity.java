@@ -1,7 +1,6 @@
 package com.hexagonal.server.ledger.infra.persistence.wallet.entity;
 
 import com.hexagonal.server.shared.kernel.common.infra.valueobjects.converters.DescriptionAttributeConverter;
-import com.hexagonal.server.shared.kernel.common.infra.valueobjects.converters.IdAttributeConverter;
 import com.hexagonal.server.shared.kernel.common.infra.valueobjects.converters.MoneyAttributeConverter;
 import com.hexagonal.server.shared.kernel.common.infra.valueobjects.converters.TimestampAttributeConverter;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Description;
@@ -18,8 +17,7 @@ public class LedgerEntryPersistenceEntity {
     private String id;
 
     @Column(name = "wallet_id")
-    @Convert(converter = IdAttributeConverter.class)
-    private com.hexagonal.server.shared.kernel.common.valueobjects.Id walletId;
+    private String walletId;
 
     @Column(name = "amount")
     @Convert(converter = MoneyAttributeConverter.class)
@@ -44,7 +42,7 @@ public class LedgerEntryPersistenceEntity {
         return id;
     }
 
-    public com.hexagonal.server.shared.kernel.common.valueobjects.Id getWalletId() {
+    public String getWalletId() {
         return walletId;
     }
 
@@ -66,7 +64,7 @@ public class LedgerEntryPersistenceEntity {
 
     private LedgerEntryPersistenceEntity(
             String id,
-            com.hexagonal.server.shared.kernel.common.valueobjects.Id walletId,
+            String walletId,
             Money amount,
             Description reference) {
 
@@ -78,7 +76,7 @@ public class LedgerEntryPersistenceEntity {
 
     public static LedgerEntryPersistenceEntity create(
             String id,
-            com.hexagonal.server.shared.kernel.common.valueobjects.Id walletId,
+            String walletId,
             Money amount,
             Description reference) {
 
