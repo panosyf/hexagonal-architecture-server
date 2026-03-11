@@ -1,0 +1,1 @@
+package com.hexagonal.server.identity.application.account.usecase.createaccount.model.request;

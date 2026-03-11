@@ -1,0 +1,1 @@
+package com.hexagonal.server.shared.kernel.testing.config;

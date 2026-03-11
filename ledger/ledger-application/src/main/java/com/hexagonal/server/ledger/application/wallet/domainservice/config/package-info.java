@@ -1,0 +1,1 @@
+package com.hexagonal.server.ledger.application.wallet.domainservice.config;

@@ -1,4 +1,4 @@
-package com.hexagonal.server.shared.kernel.common.infra.valueobjects.converters.config.beans;
+package com.hexagonal.server.shared.kernel.common.infra.valueobjects.converters.config;
 
 import com.hexagonal.server.shared.kernel.common.infra.valueobjects.converters.*;
 import org.springframework.context.annotation.Bean;

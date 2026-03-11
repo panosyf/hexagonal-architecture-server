@@ -33,5 +33,3 @@ public class CreditWalletUseCaseImpl implements CreditWalletUseCase {
     }
 
 }
-
-

@@ -1,0 +1,1 @@
+package com.hexagonal.server.identity.application.account.common.logging;

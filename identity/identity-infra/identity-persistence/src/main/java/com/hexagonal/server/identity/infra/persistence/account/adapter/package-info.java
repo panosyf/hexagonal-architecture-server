@@ -1,0 +1,1 @@
+package com.hexagonal.server.identity.infra.persistence.account.adapter;

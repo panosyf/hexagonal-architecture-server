@@ -1,0 +1,1 @@
+package com.hexagonal.server.identity.common.constant;
