@@ -95,7 +95,6 @@ hexagonal-server/
 ├── shared-kernel/
 │ ├── common
 │ ├── common-infra
-│ ├── common-migration
 │ ├── common-test
 │ └── shared-kernel-bom
 ├── account/

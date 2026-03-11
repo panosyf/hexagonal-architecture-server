@@ -35,10 +35,6 @@
         </dependency>
         <dependency>
             <groupId>com.hexagonal.server.shared.kernel</groupId>
-            <artifactId>common-migration</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.hexagonal.server.shared.kernel</groupId>
             <artifactId>common-test</artifactId>
             <scope>test</scope>
         </dependency>

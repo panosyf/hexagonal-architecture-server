@@ -21,10 +21,6 @@
             <groupId>com.hexagonal.server.shared.kernel</groupId>
             <artifactId>common-infra</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.hexagonal.server.shared.kernel</groupId>
-            <artifactId>common-migration</artifactId>
-        </dependency>
         <!-- application dependencies-->
         <dependency>
             <groupId>com.hexagonal.server.identity.application</groupId>

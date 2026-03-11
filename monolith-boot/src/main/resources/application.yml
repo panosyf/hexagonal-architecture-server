@@ -13,7 +13,9 @@ spring:
       mode: never
   flyway:
     enabled: true
-    locations: classpath:migration/schema, classpath:migration/data
+    locations:
+      - classpath:migration/schema
+      - classpath:migration/data
     fail-on-missing-locations: true
     validate-on-migrate: true
   jpa:

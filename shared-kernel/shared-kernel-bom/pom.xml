@@ -52,11 +52,6 @@
             </dependency>
             <dependency>
                 <groupId>com.hexagonal.server.shared.kernel</groupId>
-                <artifactId>common-migration</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>com.hexagonal.server.shared.kernel</groupId>
                 <artifactId>common-test</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
