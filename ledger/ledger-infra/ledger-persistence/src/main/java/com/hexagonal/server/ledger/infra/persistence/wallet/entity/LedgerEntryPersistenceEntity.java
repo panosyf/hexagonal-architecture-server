@@ -1,9 +1,8 @@
 package com.hexagonal.server.ledger.infra.persistence.wallet.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.hexagonal.server.shared.kernel.common.infra.valueobjects.converters.TimestampAttributeConverter;
+import com.hexagonal.server.shared.kernel.common.valueobjects.Timestamp;
+import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 
@@ -24,6 +23,14 @@ public class LedgerEntryPersistenceEntity {
     @Column(name = "reference")
     private String reference;
 
+    @Column(name = "created_at")
+    @Convert(converter = TimestampAttributeConverter.class)
+    private Timestamp createdAt;
+
+    @Column(name = "updated_at")
+    @Convert(converter = TimestampAttributeConverter.class)
+    private Timestamp updatedAt;
+
     protected LedgerEntryPersistenceEntity() {
     }
 
@@ -41,6 +48,14 @@ public class LedgerEntryPersistenceEntity {
 
     public String getReference() {
         return reference;
+    }
+
+    public Timestamp getCreatedAt() {
+        return createdAt;
+    }
+
+    public Timestamp getUpdatedAt() {
+        return updatedAt;
     }
 
     private LedgerEntryPersistenceEntity(

@@ -1,10 +1,9 @@
 package com.hexagonal.server.ledger.infra.persistence.wallet.entity;
 
 import com.hexagonal.server.shared.kernel.common.entity.PersistenceEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.hexagonal.server.shared.kernel.common.infra.valueobjects.converters.TimestampAttributeConverter;
+import com.hexagonal.server.shared.kernel.common.valueobjects.Timestamp;
+import jakarta.persistence.*;
 
 @Entity(name = "wallet")
 @Table(name = "wallet")
@@ -17,16 +16,26 @@ public class WalletPersistenceEntity extends PersistenceEntity {
     @Column(name = "account_id")
     private String accountId;
 
+    @Column(name = "created_at")
+    @Convert(converter = TimestampAttributeConverter.class)
+    private Timestamp createdAt;
+
+    @Column(name = "updated_at")
+    @Convert(converter = TimestampAttributeConverter.class)
+    private Timestamp updatedAt;
+
     protected WalletPersistenceEntity() {
     }
 
-    private WalletPersistenceEntity(String id, String accountId) {
+    private WalletPersistenceEntity(String id, String accountId, Timestamp createdAt, Timestamp updatedAt) {
         this.id = id;
         this.accountId = accountId;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
-    public static WalletPersistenceEntity create(String id, String accountId) {
-        return new WalletPersistenceEntity(id, accountId);
+    public static WalletPersistenceEntity create(String id, String accountId, Timestamp createdAt, Timestamp updatedAt) {
+        return new WalletPersistenceEntity(id, accountId, createdAt, updatedAt);
     }
 
     public String getId() {
@@ -36,4 +45,13 @@ public class WalletPersistenceEntity extends PersistenceEntity {
     public String getAccountId() {
         return accountId;
     }
+
+    public Timestamp getCreatedAt() {
+        return createdAt;
+    }
+
+    public Timestamp getUpdatedAt() {
+        return updatedAt;
+    }
+
 }

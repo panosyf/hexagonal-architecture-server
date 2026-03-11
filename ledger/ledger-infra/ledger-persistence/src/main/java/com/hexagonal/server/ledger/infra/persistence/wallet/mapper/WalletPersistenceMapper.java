@@ -18,23 +18,28 @@ public class WalletPersistenceMapper {
         return Wallet.create(
                 Id.valueOf(walletEntity.getId()),
                 Id.valueOf(walletEntity.getAccountId()),
-                List.of());
+                walletEntity.getCreatedAt(),
+                walletEntity.getUpdatedAt());
     }
 
     public static Wallet toDomainEntity(WalletPersistenceEntity walletEntity, List<LedgerEntryPersistenceEntity> ledgerEntities) {
-        List<LedgerEntry> entries = ledgerEntities.stream()
+        List<LedgerEntry> ledgerEntryList = ledgerEntities.stream()
                 .map(WalletPersistenceMapper::toLedgerEntryDomain)
                 .toList();
         return Wallet.create(
                 Id.valueOf(walletEntity.getId()),
                 Id.valueOf(walletEntity.getAccountId()),
-                entries);
+                ledgerEntryList,
+                walletEntity.getCreatedAt(),
+                walletEntity.getUpdatedAt());
     }
 
     public static WalletPersistenceEntity toWalletEntity(Wallet wallet) {
         return WalletPersistenceEntity.create(
                 wallet.getId().getValue(),
-                wallet.getAccountId().getValue());
+                wallet.getAccountId().getValue(),
+                wallet.getCreatedAt(),
+                wallet.getUpdatedAt());
     }
 
     public static List<LedgerEntryPersistenceEntity> toLedgerEntities(Wallet wallet) {
