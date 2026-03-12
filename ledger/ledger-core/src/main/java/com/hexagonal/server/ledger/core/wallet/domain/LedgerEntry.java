@@ -1,5 +1,6 @@
 package com.hexagonal.server.ledger.core.wallet.domain;
 
+import com.hexagonal.server.ledger.core.wallet.model.LedgerEntryType;
 import com.hexagonal.server.shared.kernel.common.entity.DomainEntity;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Description;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Id;
@@ -13,6 +14,7 @@ public class LedgerEntry extends DomainEntity {
     private Id id;
     private Id walletId;
     private Money amount;
+    private LedgerEntryType type;
     private Description reference;
     private Timestamp createdAt;
     private Timestamp updatedAt;
@@ -24,10 +26,12 @@ public class LedgerEntry extends DomainEntity {
             final Id id,
             final Id walletId,
             final Money amount,
+            final LedgerEntryType type,
             final Description reference) {
         this.id = id;
         this.walletId = walletId;
         this.amount = amount;
+        this.type = type;
         this.reference = reference;
         Timestamp now = Timestamp.now();
         this.createdAt = now;
@@ -38,6 +42,7 @@ public class LedgerEntry extends DomainEntity {
             final Id id,
             final Id walletId,
             final Money amount,
+            final LedgerEntryType type,
             final Description reference,
             final Timestamp createdAt,
             final  Timestamp updatedAt) {
@@ -45,16 +50,17 @@ public class LedgerEntry extends DomainEntity {
         this.walletId = walletId;
         this.amount = amount;
         this.reference = reference;
+        this.type = type;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
 
-    public static LedgerEntry create(final Id id, final Id walletId, Money amount, Description reference) {
-        return new LedgerEntry(id, walletId, amount, reference);
+    public static LedgerEntry create(final Id id, final Id walletId, final Money amount, final LedgerEntryType type, final Description reference) {
+        return new LedgerEntry(id, walletId, amount, type, reference);
     }
 
-    public static LedgerEntry create(final Id id, final Id walletId, Money amount, Description reference, Timestamp createdAt, Timestamp updatedAt) {
-        return new LedgerEntry(id, walletId, amount, reference, createdAt, updatedAt);
+    public static LedgerEntry create(final Id id, final Id walletId, final Money amount, final LedgerEntryType type, Description reference, Timestamp createdAt, Timestamp updatedAt) {
+        return new LedgerEntry(id, walletId, amount, type, reference, createdAt, updatedAt);
     }
 
     public Id getId() {
@@ -69,6 +75,10 @@ public class LedgerEntry extends DomainEntity {
         return amount;
     }
 
+    public LedgerEntryType getType() {
+        return type;
+    }
+
     public Description getReference() {
         return reference;
     }
@@ -81,10 +91,6 @@ public class LedgerEntry extends DomainEntity {
         return updatedAt;
     }
 
-    public void setUpdatedAt(Timestamp updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
     protected static LedgerEntry credit(Id walletId, Money amount, Description reference) {
         if (amount.isNegative()) {
             throw new IllegalArgumentException("Credit cannot be negative");
@@ -93,6 +99,7 @@ public class LedgerEntry extends DomainEntity {
                 Id.generate(),
                 walletId,
                 amount,
+                LedgerEntryType.CREDIT,
                 reference
         );
     }
@@ -105,6 +112,7 @@ public class LedgerEntry extends DomainEntity {
                 Id.generate(),
                 walletId,
                 Money.of(amount.getValue().negate(), amount.getCurrency()),
+                LedgerEntryType.DEBIT,
                 reference
         );
     }

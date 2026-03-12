@@ -33,7 +33,7 @@ class WalletDomainServiceImplTest {
         Wallet wallet = walletDomainService.createWallet(createWalletOperation);
         // then
         assertThat(wallet).isNotNull();
-        assertThat(wallet.balance()).isEqualTo(Money.zero());
+        assertThat(wallet.getBalance()).isEqualTo(Money.zero());
     }
 
     @Test
@@ -45,8 +45,7 @@ class WalletDomainServiceImplTest {
         LedgerEntry entry = walletDomainService.credit(creditOperation);
         // then
         assertThat(entry).isNotNull();
-        assertThat(wallet.balance())
-                .isEqualTo(Money.of(BigDecimal.valueOf(100)));
+        assertThat(wallet.getBalance()).isEqualTo(Money.of(BigDecimal.valueOf(100)));
     }
 
     @Test
@@ -59,8 +58,7 @@ class WalletDomainServiceImplTest {
         LedgerEntry entry = walletDomainService.debit(debitOperation);
         // then
         assertThat(entry).isNotNull();
-        assertThat(wallet.balance())
-                .isEqualTo(Money.of(BigDecimal.valueOf(60)));
+        assertThat(wallet.getBalance()).isEqualTo(Money.of(BigDecimal.valueOf(60)));
     }
 
 }

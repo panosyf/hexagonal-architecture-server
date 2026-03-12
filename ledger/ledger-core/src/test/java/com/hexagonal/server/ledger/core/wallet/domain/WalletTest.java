@@ -21,8 +21,7 @@ class WalletTest {
         Wallet wallet = Wallet.create(accountId);
         // then
         assertThat(wallet).isNotNull();
-        assertThat(wallet.getLedgerEntryList()).isEmpty();
-        assertThat(wallet.balance()).isEqualTo(Money.zero());
+        assertThat(wallet.getBalance()).isEqualTo(Money.zero());
     }
 
     @Test
@@ -32,8 +31,7 @@ class WalletTest {
         // when
         wallet.credit(Money.of(BigDecimal.valueOf(100)), Description.valueOf("deposit"));
         // then
-        assertThat(wallet.getLedgerEntryList()).hasSize(1);
-        assertThat(wallet.balance()).isEqualTo(Money.of(BigDecimal.valueOf(100)));
+        assertThat(wallet.getBalance()).isEqualTo(Money.of(BigDecimal.valueOf(100)));
     }
 
     @Test
@@ -44,9 +42,7 @@ class WalletTest {
         wallet.credit(Money.of(BigDecimal.valueOf(100)), Description.valueOf("deposit"));
         wallet.debit(Money.of(BigDecimal.valueOf(40)), Description.valueOf("payment"));
         // then
-        assertThat(wallet.balance())
-                .isEqualTo(Money.of(BigDecimal.valueOf(60)));
-        assertThat(wallet.getLedgerEntryList()).hasSize(2);
+        assertThat(wallet.getBalance()).isEqualTo(Money.of(BigDecimal.valueOf(60)));
     }
 
     @Test
@@ -57,8 +53,7 @@ class WalletTest {
         wallet.credit(Money.of(BigDecimal.valueOf(50)), Description.valueOf("deposit"));
         // then
         assertThatThrownBy(() ->
-                wallet.debit(Money.of(BigDecimal.valueOf(100)), Description.valueOf("payment"))
-        )
+                wallet.debit(Money.of(BigDecimal.valueOf(100)), Description.valueOf("payment")))
                 .isInstanceOf(IllegalStateException.class)
                 .hasMessage(INSUFFICIENT_FUNDS);
     }
@@ -71,8 +66,7 @@ class WalletTest {
         wallet.credit(Money.of(BigDecimal.valueOf(100)), Description.valueOf("deposit"));
         wallet.debit(Money.of(BigDecimal.valueOf(30)), Description.valueOf("payment"));
         // then
-        assertThat(wallet.balance())
-                .isEqualTo(Money.of(BigDecimal.valueOf(70)));
+        assertThat(wallet.getBalance()).isEqualTo(Money.of(BigDecimal.valueOf(70)));
     }
 
 
