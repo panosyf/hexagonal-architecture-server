@@ -45,7 +45,7 @@ public class LedgerEntry extends DomainEntity {
             final LedgerEntryType type,
             final Description reference,
             final Timestamp createdAt,
-            final  Timestamp updatedAt) {
+            final Timestamp updatedAt) {
         this.id = id;
         this.walletId = walletId;
         this.amount = amount;

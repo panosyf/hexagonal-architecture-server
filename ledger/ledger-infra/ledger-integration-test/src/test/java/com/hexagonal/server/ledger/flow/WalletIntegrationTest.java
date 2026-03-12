@@ -8,7 +8,9 @@ import com.hexagonal.server.ledger.application.wallet.usecase.debitwallet.model.
 import com.hexagonal.server.ledger.application.wallet.usecase.debitwallet.model.response.DebitWalletResponse;
 import com.hexagonal.server.ledger.common.constant.Endpoint;
 import com.hexagonal.server.ledger.config.BaseLedgerIntegrationTest;
+import com.hexagonal.server.ledger.core.wallet.domain.Wallet;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Id;
+import com.hexagonal.server.shared.kernel.common.valueobjects.Money;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -33,14 +35,14 @@ class WalletIntegrationTest extends BaseLedgerIntegrationTest {
         // wallet created
         assertThat(walletRepositoryPort.findTotalEntries()).isEqualTo(1);
         assertThat(createWalletResponse).isNotNull();
-        String walletId = createWalletResponse.walletId();
-        assertThat(walletId).isNotNull();
+        String walletIdString = createWalletResponse.walletId();
+        assertThat(walletIdString).isNotNull();
         // init credit wallet request
         BigDecimal creditAmount = BigDecimal.valueOf(80);
         CreditWalletRequest creditWalletRequest = new CreditWalletRequest(creditAmount, "credit");
         // debit wallet
         CreditWalletResponse creditWalletResponse = requestTestClient.post(
-                        Endpoint.CREDIT_WALLET.replace("{id}", walletId), creditWalletRequest)
+                        Endpoint.CREDIT_WALLET.replace("{id}", walletIdString), creditWalletRequest)
                 .expectStatus().isOk()
                 .expectBody(CreditWalletResponse.class)
                 .returnResult()
@@ -48,23 +50,27 @@ class WalletIntegrationTest extends BaseLedgerIntegrationTest {
         // wallet credited
         assertThat(creditWalletResponse).isNotNull();
         assertThat(creditWalletResponse.ledgerEntryId()).isNotNull();
-        assertThat(creditWalletResponse.walletId()).isEqualTo(walletId);
+        assertThat(creditWalletResponse.walletId()).isEqualTo(walletIdString);
         assertThat(creditWalletResponse.amount()).isEqualTo(creditAmount.setScale(2, RoundingMode.HALF_EVEN));
+        Id walletId = Id.valueOf(createWalletResponse.walletId());
+        Wallet walletAfterCredit = walletRepositoryPort.findById(walletId);
+        assertThat(walletAfterCredit.getBalance()).isEqualTo(Money.of(BigDecimal.valueOf(80)));
         // init debit wallet request
         DebitWalletRequest debitWalletRequest = new DebitWalletRequest(BigDecimal.valueOf(50), "payment");
         // debit wallet
         DebitWalletResponse debitResponse = requestTestClient.post(
-                        Endpoint.DEBIT_WALLET.replace("{id}", walletId), debitWalletRequest)
+                        Endpoint.DEBIT_WALLET.replace("{id}", walletIdString), debitWalletRequest)
                 .expectStatus().isOk()
                 .expectBody(DebitWalletResponse.class)
                 .returnResult()
                 .getResponseBody();
-
         // wallet debited
         assertThat(debitResponse).isNotNull();
         assertThat(debitResponse.ledgerEntryId()).isNotNull();
-        assertThat(debitResponse.walletId()).isEqualTo(walletId);
-        assertThat(debitResponse.amount()).isEqualTo(BigDecimal.valueOf(30).setScale(2, RoundingMode.HALF_EVEN));
+        assertThat(debitResponse.walletId()).isEqualTo(walletIdString);
+        assertThat(debitResponse.amount()).isEqualTo(BigDecimal.valueOf(-50).setScale(2, RoundingMode.HALF_EVEN));
+        Wallet walletAfterDebit = walletRepositoryPort.findById(walletId);
+        assertThat(walletAfterDebit.getBalance()).isEqualTo(Money.of(BigDecimal.valueOf(30)));
     }
 
 }
