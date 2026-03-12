@@ -19,7 +19,9 @@ public class LedgerEntryPersistenceMapper {
                                 ledgerEntry.getId().getValue(),
                                 ledgerEntry.getWalletId().getValue(),
                                 ledgerEntry.getAmount(),
-                                ledgerEntry.getReference()
+                                ledgerEntry.getReference(),
+                                ledgerEntry.getCreatedAt(),
+                                ledgerEntry.getUpdatedAt()
                         ))
                 .toList();
     }
@@ -29,7 +31,9 @@ public class LedgerEntryPersistenceMapper {
                 Id.valueOf(ledgerEntryPersistenceEntity.getId()),
                 Id.valueOf(ledgerEntryPersistenceEntity.getWalletId()),
                 ledgerEntryPersistenceEntity.getAmount(),
-                ledgerEntryPersistenceEntity.getReference()
+                ledgerEntryPersistenceEntity.getReference(),
+                ledgerEntryPersistenceEntity.getCreatedAt(),
+                ledgerEntryPersistenceEntity.getUpdatedAt()
         );
     }
 

@@ -66,7 +66,9 @@ public class LedgerEntryPersistenceEntity {
             String id,
             String walletId,
             Money amount,
-            Description reference) {
+            Description reference,
+            Timestamp createdAt,
+            Timestamp updatedAt) {
 
         this.id = id;
         this.walletId = walletId;
@@ -78,14 +80,16 @@ public class LedgerEntryPersistenceEntity {
             String id,
             String walletId,
             Money amount,
-            Description reference) {
-
+            Description reference,
+            Timestamp createdAt,
+            Timestamp updatedAt) {
         return new LedgerEntryPersistenceEntity(
                 id,
                 walletId,
                 amount,
-                reference
-        );
+                reference,
+                createdAt,
+                updatedAt);
     }
 
 }
