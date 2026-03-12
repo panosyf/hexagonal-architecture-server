@@ -8,6 +8,7 @@ import com.hexagonal.server.ledger.infra.persistence.wallet.entity.WalletPersist
 import com.hexagonal.server.ledger.infra.persistence.wallet.mapper.LedgerEntryPersistenceMapper;
 import com.hexagonal.server.ledger.infra.persistence.wallet.mapper.WalletPersistenceMapper;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Id;
+import jakarta.transaction.Transactional;
 
 import java.util.List;
 
@@ -24,6 +25,7 @@ public class WalletRepositoryAdapter implements WalletRepositoryPort {
     }
 
     @Override
+    @Transactional
     public Wallet save(Wallet wallet) {
         WalletPersistenceEntity walletEntity = WalletPersistenceMapper.toPersistenceEntity(wallet);
         walletJpaRepository.save(walletEntity);
