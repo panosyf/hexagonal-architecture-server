@@ -1,5 +1,6 @@
 package com.hexagonal.server.ledger.application.wallet.usecase.debitwallet;
 
+import com.hexagonal.server.ledger.application.wallet.port.out.repository.LedgerEntryRepositoryPort;
 import com.hexagonal.server.ledger.application.wallet.port.out.repository.WalletRepositoryPort;
 import com.hexagonal.server.ledger.application.wallet.usecase.debitwallet.model.request.DebitWalletRequest;
 import com.hexagonal.server.ledger.application.wallet.usecase.debitwallet.model.response.DebitWalletResponse;
@@ -26,13 +27,14 @@ class DebitWalletUseCaseImplTest {
 
     private final WalletDomainService walletDomainService = mock(WalletDomainService.class);
     private final WalletRepositoryPort walletRepositoryPort = mock(WalletRepositoryPort.class);
+    private final LedgerEntryRepositoryPort ledgerEntryRepositoryPort = mock(LedgerEntryRepositoryPort.class);
 
     private DebitWalletUseCaseImpl debitWalletUseCase;
     private final ArgumentCaptor<DebitOperation> debitOperationCaptor = ArgumentCaptor.forClass(DebitOperation.class);
 
     @BeforeEach
     void setUp() {
-        debitWalletUseCase = new DebitWalletUseCaseImpl(walletDomainService, walletRepositoryPort);
+        debitWalletUseCase = new DebitWalletUseCaseImpl(walletDomainService, walletRepositoryPort, ledgerEntryRepositoryPort);
     }
 
     @Test
@@ -51,6 +53,7 @@ class DebitWalletUseCaseImplTest {
         verify(walletRepositoryPort).findById(walletId);
         verify(walletDomainService).debit(debitOperationCaptor.capture());
         verify(walletRepositoryPort).save(wallet);
+        verify(ledgerEntryRepositoryPort).save(ledgerEntry);
         DebitOperation debitOperation = debitOperationCaptor.getValue();
         assertAll(
                 () -> assertEquals(wallet, debitOperation.wallet()),

@@ -1,5 +1,6 @@
 package com.hexagonal.server.ledger.application.wallet.usecase.creditwallet;
 
+import com.hexagonal.server.ledger.application.wallet.port.out.repository.LedgerEntryRepositoryPort;
 import com.hexagonal.server.ledger.application.wallet.port.out.repository.WalletRepositoryPort;
 import com.hexagonal.server.ledger.application.wallet.usecase.creditwallet.model.request.CreditWalletRequest;
 import com.hexagonal.server.ledger.application.wallet.usecase.creditwallet.model.response.CreditWalletResponse;
@@ -26,13 +27,14 @@ class CreditWalletUseCaseImplTest {
 
     private final WalletDomainService walletDomainService = mock(WalletDomainService.class);
     private final WalletRepositoryPort walletRepositoryPort = mock(WalletRepositoryPort.class);
+    private final LedgerEntryRepositoryPort ledgerEntryRepositoryPort = mock(LedgerEntryRepositoryPort.class);
 
     private CreditWalletUseCaseImpl creditWalletUseCase;
     private final ArgumentCaptor<CreditOperation> creditOperationCaptor = ArgumentCaptor.forClass(CreditOperation.class);
 
     @BeforeEach
     void setUp() {
-        creditWalletUseCase = new CreditWalletUseCaseImpl(walletDomainService, walletRepositoryPort);
+        creditWalletUseCase = new CreditWalletUseCaseImpl(walletDomainService, walletRepositoryPort, ledgerEntryRepositoryPort);
     }
 
     @Test
@@ -50,6 +52,7 @@ class CreditWalletUseCaseImplTest {
         verify(walletRepositoryPort).findById(walletId);
         verify(walletDomainService).credit(creditOperationCaptor.capture());
         verify(walletRepositoryPort).save(wallet);
+        verify(ledgerEntryRepositoryPort).save(ledgerEntry);
         CreditOperation creditOperation = creditOperationCaptor.getValue();
         assertAll(
                 () -> assertEquals(wallet, creditOperation.wallet()),
