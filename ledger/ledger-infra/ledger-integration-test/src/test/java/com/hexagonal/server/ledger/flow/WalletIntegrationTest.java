@@ -12,6 +12,7 @@ import com.hexagonal.server.shared.kernel.common.valueobjects.Id;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -48,7 +49,7 @@ class WalletIntegrationTest extends BaseLedgerIntegrationTest {
         assertThat(creditWalletResponse).isNotNull();
         assertThat(creditWalletResponse.ledgerEntryId()).isNotNull();
         assertThat(creditWalletResponse.walletId()).isEqualTo(walletId);
-        assertThat(creditWalletResponse.amount()).isEqualTo(creditAmount);
+        assertThat(creditWalletResponse.amount()).isEqualTo(creditAmount.setScale(2, RoundingMode.HALF_EVEN));
         // init debit wallet request
         DebitWalletRequest debitWalletRequest = new DebitWalletRequest(BigDecimal.valueOf(50), "payment");
         // debit wallet
@@ -63,7 +64,7 @@ class WalletIntegrationTest extends BaseLedgerIntegrationTest {
         assertThat(debitResponse).isNotNull();
         assertThat(debitResponse.ledgerEntryId()).isNotNull();
         assertThat(debitResponse.walletId()).isEqualTo(walletId);
-        assertThat(debitResponse.amount()).isEqualTo(BigDecimal.valueOf(30));
+        assertThat(debitResponse.amount()).isEqualTo(BigDecimal.valueOf(30).setScale(2, RoundingMode.HALF_EVEN));
     }
 
 }

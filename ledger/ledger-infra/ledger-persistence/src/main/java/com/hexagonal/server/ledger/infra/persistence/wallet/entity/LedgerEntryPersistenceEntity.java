@@ -74,6 +74,8 @@ public class LedgerEntryPersistenceEntity {
         this.walletId = walletId;
         this.amount = amount;
         this.reference = reference;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     public static LedgerEntryPersistenceEntity create(
