@@ -1,5 +1,6 @@
 package com.hexagonal.server.ledger.infra.persistence.wallet.entity;
 
+import com.hexagonal.server.ledger.core.wallet.model.LedgerEntryType;
 import com.hexagonal.server.shared.kernel.common.infra.valueobjects.converters.DescriptionAttributeConverter;
 import com.hexagonal.server.shared.kernel.common.infra.valueobjects.converters.MoneyAttributeConverter;
 import com.hexagonal.server.shared.kernel.common.infra.valueobjects.converters.TimestampAttributeConverter;
@@ -22,6 +23,10 @@ public class LedgerEntryPersistenceEntity {
     @Column(name = "amount")
     @Convert(converter = MoneyAttributeConverter.class)
     private Money amount;
+
+    @Column(name = "type")
+    @Enumerated(EnumType.STRING)
+    private LedgerEntryType type;
 
     @Column(name = "reference")
     @Convert(converter = DescriptionAttributeConverter.class)
@@ -50,6 +55,10 @@ public class LedgerEntryPersistenceEntity {
         return amount;
     }
 
+    public LedgerEntryType getType() {
+        return type;
+    }
+
     public Description getReference() {
         return reference;
     }
@@ -66,6 +75,7 @@ public class LedgerEntryPersistenceEntity {
             String id,
             String walletId,
             Money amount,
+            LedgerEntryType type,
             Description reference,
             Timestamp createdAt,
             Timestamp updatedAt) {
@@ -82,6 +92,7 @@ public class LedgerEntryPersistenceEntity {
             String id,
             String walletId,
             Money amount,
+            LedgerEntryType type,
             Description reference,
             Timestamp createdAt,
             Timestamp updatedAt) {
@@ -89,6 +100,7 @@ public class LedgerEntryPersistenceEntity {
                 id,
                 walletId,
                 amount,
+                type,
                 reference,
                 createdAt,
                 updatedAt);

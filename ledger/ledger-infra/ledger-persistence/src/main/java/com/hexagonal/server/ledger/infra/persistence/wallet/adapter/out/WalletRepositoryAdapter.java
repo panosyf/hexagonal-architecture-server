@@ -15,13 +15,10 @@ import java.util.List;
 public class WalletRepositoryAdapter implements WalletRepositoryPort {
 
     private final WalletJpaRepository walletJpaRepository;
-    private final LedgerEntryJpaRepository ledgerEntryJpaRepository;
 
     public WalletRepositoryAdapter(
-            WalletJpaRepository walletJpaRepository,
-            LedgerEntryJpaRepository ledgerEntryJpaRepository) {
+            WalletJpaRepository walletJpaRepository) {
         this.walletJpaRepository = walletJpaRepository;
-        this.ledgerEntryJpaRepository = ledgerEntryJpaRepository;
     }
 
     @Override
@@ -29,12 +26,6 @@ public class WalletRepositoryAdapter implements WalletRepositoryPort {
     public Wallet save(Wallet wallet) {
         WalletPersistenceEntity walletEntity = WalletPersistenceMapper.toPersistenceEntity(wallet);
         walletJpaRepository.save(walletEntity);
-        List<LedgerEntry> ledgerEntryList = wallet.getLedgerEntryList();
-        if (ledgerEntryList.isEmpty()) {
-            return wallet;
-        }
-        List<LedgerEntryPersistenceEntity> entries = LedgerEntryPersistenceMapper.toPersistenceEntityList(ledgerEntryList);
-        ledgerEntryJpaRepository.saveAll(entries);
         return wallet;
     }
 
@@ -43,8 +34,6 @@ public class WalletRepositoryAdapter implements WalletRepositoryPort {
         WalletPersistenceEntity walletEntity = walletJpaRepository.findById(walletId.getValue())
                 .orElseThrow(() ->
                         new RuntimeException("Wallet not found"));
-        // TODO REMOVING FOR PERFORMANCE, LEDGER ENTRIES SHOULD BE FETCHED BY SEPARATE QUERY
-//        List<LedgerEntryPersistenceEntity> ledgerEntries = ledgerEntryJpaRepository.findByWalletId(walletId.getValue());
         return WalletPersistenceMapper.toDomainEntity(walletEntity);
     }
 
@@ -55,7 +44,6 @@ public class WalletRepositoryAdapter implements WalletRepositoryPort {
 
     @Override
     public void deleteAll() {
-        ledgerEntryJpaRepository.deleteAll();
         walletJpaRepository.deleteAll();
     }
 

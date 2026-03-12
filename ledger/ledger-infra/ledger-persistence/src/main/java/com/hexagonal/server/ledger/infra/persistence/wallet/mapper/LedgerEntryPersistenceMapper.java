@@ -4,26 +4,20 @@ import com.hexagonal.server.ledger.core.wallet.domain.LedgerEntry;
 import com.hexagonal.server.ledger.infra.persistence.wallet.entity.LedgerEntryPersistenceEntity;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Id;
 
-import java.util.List;
-
 public class LedgerEntryPersistenceMapper {
 
     private LedgerEntryPersistenceMapper() {
     }
 
-    public static List<LedgerEntryPersistenceEntity> toPersistenceEntityList(List<LedgerEntry> ledgerEntryList) {
-        return ledgerEntryList
-                .stream()
-                .map(ledgerEntry ->
-                        LedgerEntryPersistenceEntity.create(
-                                ledgerEntry.getId().getValue(),
-                                ledgerEntry.getWalletId().getValue(),
-                                ledgerEntry.getAmount(),
-                                ledgerEntry.getReference(),
-                                ledgerEntry.getCreatedAt(),
-                                ledgerEntry.getUpdatedAt()
-                        ))
-                .toList();
+    public static LedgerEntryPersistenceEntity toPersistenceEntity(LedgerEntry ledgerEntry) {
+        return LedgerEntryPersistenceEntity.create(
+                ledgerEntry.getId().getValue(),
+                ledgerEntry.getWalletId().getValue(),
+                ledgerEntry.getAmount(),
+                ledgerEntry.getType(),
+                ledgerEntry.getReference(),
+                ledgerEntry.getCreatedAt(),
+                ledgerEntry.getUpdatedAt());
     }
 
     public static LedgerEntry toDomainEntity(LedgerEntryPersistenceEntity ledgerEntryPersistenceEntity) {
@@ -31,10 +25,10 @@ public class LedgerEntryPersistenceMapper {
                 Id.valueOf(ledgerEntryPersistenceEntity.getId()),
                 Id.valueOf(ledgerEntryPersistenceEntity.getWalletId()),
                 ledgerEntryPersistenceEntity.getAmount(),
+                ledgerEntryPersistenceEntity.getType(),
                 ledgerEntryPersistenceEntity.getReference(),
                 ledgerEntryPersistenceEntity.getCreatedAt(),
-                ledgerEntryPersistenceEntity.getUpdatedAt()
-        );
+                ledgerEntryPersistenceEntity.getUpdatedAt());
     }
 
 }

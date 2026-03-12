@@ -1,6 +1,5 @@
 package com.hexagonal.server.ledger.infra.persistence.wallet.mapper;
 
-import com.hexagonal.server.ledger.core.wallet.domain.LedgerEntry;
 import com.hexagonal.server.ledger.core.wallet.domain.Wallet;
 import com.hexagonal.server.ledger.infra.persistence.wallet.entity.LedgerEntryPersistenceEntity;
 import com.hexagonal.server.ledger.infra.persistence.wallet.entity.WalletPersistenceEntity;
@@ -16,19 +15,17 @@ public class WalletPersistenceMapper {
     public static Wallet toDomainEntity(WalletPersistenceEntity walletEntity) {
         return Wallet.create(
                 Id.valueOf(walletEntity.getId()),
-                walletEntity.getAccountId(),
+                Id.valueOf(walletEntity.getAccountId()),
+                walletEntity.getBalance(),
                 walletEntity.getCreatedAt(),
                 walletEntity.getUpdatedAt());
     }
 
     public static Wallet toDomainEntity(WalletPersistenceEntity walletEntity, List<LedgerEntryPersistenceEntity> ledgerEntities) {
-        List<LedgerEntry> ledgerEntryList = ledgerEntities.stream()
-                .map(LedgerEntryPersistenceMapper::toDomainEntity)
-                .toList();
         return Wallet.create(
                 Id.valueOf(walletEntity.getId()),
-                walletEntity.getAccountId(),
-                ledgerEntryList,
+                Id.valueOf(walletEntity.getAccountId()),
+                walletEntity.getBalance(),
                 walletEntity.getCreatedAt(),
                 walletEntity.getUpdatedAt());
     }
@@ -36,7 +33,8 @@ public class WalletPersistenceMapper {
     public static WalletPersistenceEntity toPersistenceEntity(Wallet wallet) {
         return WalletPersistenceEntity.create(
                 wallet.getId().getValue(),
-                wallet.getAccountId(),
+                wallet.getAccountId().getValue(),
+                wallet.getBalance(),
                 wallet.getCreatedAt(),
                 wallet.getUpdatedAt());
     }
