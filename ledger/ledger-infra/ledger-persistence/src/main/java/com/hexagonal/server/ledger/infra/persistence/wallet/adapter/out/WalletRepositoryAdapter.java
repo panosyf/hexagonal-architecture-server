@@ -46,4 +46,15 @@ public class WalletRepositoryAdapter implements WalletRepositoryPort {
         return WalletPersistenceMapper.toDomainEntity(walletEntity);
     }
 
+    @Override
+    public int findTotalEntries() {
+        return walletJpaRepository.findTotalEntries();
+    }
+
+    @Override
+    public void deleteAll() {
+        ledgerEntryJpaRepository.deleteAll();
+        walletJpaRepository.deleteAll();
+    }
+
 }

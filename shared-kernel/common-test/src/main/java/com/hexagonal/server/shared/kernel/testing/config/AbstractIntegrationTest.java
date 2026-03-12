@@ -23,6 +23,6 @@ public abstract class AbstractIntegrationTest {
     protected RequestTestClient requestTestClient;
 
     @AfterEach
-    protected abstract void cleanupRepositories();
+    protected abstract void cleanupAfterEach();
 
 }

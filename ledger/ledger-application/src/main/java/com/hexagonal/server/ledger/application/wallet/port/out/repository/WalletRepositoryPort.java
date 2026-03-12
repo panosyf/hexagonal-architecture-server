@@ -9,4 +9,8 @@ public interface WalletRepositoryPort {
 
     Wallet findById(Id walletId);
 
+    int findTotalEntries();
+
+    void deleteAll();
+
 }

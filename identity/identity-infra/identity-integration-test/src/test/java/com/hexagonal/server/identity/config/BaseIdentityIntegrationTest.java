@@ -11,7 +11,7 @@ public class BaseIdentityIntegrationTest extends AbstractIntegrationTest {
     protected AccountRepositoryPort accountRepositoryPort;
 
     @AfterEach
-    protected void cleanupRepositories() {
+    protected void cleanupAfterEach() {
         accountRepositoryPort.deleteAll();
     }
 
