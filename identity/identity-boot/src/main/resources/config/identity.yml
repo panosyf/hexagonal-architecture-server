@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: hexagonal-server-identity
+  profiles:
+    active: '@spring.profiles.active@'
+  datasource:
+    url: ${IDENTITY_DATABASE_URL}
+    username: ${IDENTITY_DATABASE_USER}
+    password: ${IDENTITY_DATABASE_PASSWORD}
+    driverClassName: org.postgresql.Driver
+  sql:
+    init:
+      mode: never
+  flyway:
+    enabled: true
+    locations:
+      - classpath:migration/identity/schema
+      - classpath:migration/identity/data
+    fail-on-missing-locations: true
+    validate-on-migrate: true
+  jpa:
+    defer-datasource-initialization: false
+    hibernate:
+      ddl-auto: none
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui/index.html
+
+server:
+  port: 8080

@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: hexagonal-server-ledger
+  profiles:
+    active: '@spring.profiles.active@'
+  datasource:
+    url: ${LEDGER_DATABASE_URL}
+    username: ${LEDGER_DATABASE_USER}
+    password: ${LEDGER_DATABASE_PASSWORD}
+    driverClassName: org.postgresql.Driver
+  sql:
+    init:
+      mode: never
+  flyway:
+    enabled: true
+    locations:
+      - classpath:migration/ledger/schema
+      - classpath:migration/ledger/data
+    fail-on-missing-locations: true
+    validate-on-migrate: true
+  jpa:
+    defer-datasource-initialization: false
+    hibernate:
+      ddl-auto: none
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui/index.html
+
+server:
+  port: 8080
+
+logging:
+  level:
+    org.springframework.data.repository: DEBUG

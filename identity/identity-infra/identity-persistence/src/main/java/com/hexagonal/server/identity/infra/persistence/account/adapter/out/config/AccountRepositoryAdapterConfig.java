@@ -16,7 +16,7 @@ public class AccountRepositoryAdapterConfig {
         this.accountJpaRepository = accountJpaRepository;
     }
 
-    @Bean
+    @Bean("accountRepositoryPort")
     public AccountRepositoryPort accountRepositoryPort() {
         return new AccountRepositoryAdapter(accountJpaRepository);
     }

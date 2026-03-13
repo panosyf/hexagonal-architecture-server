@@ -1,32 +1,8 @@
 spring:
   application:
     name: hexagonal-server
-  profiles:
-    active: '@spring.profiles.active@'
-  datasource:
-    url: jdbc:postgresql://localhost:5432/hexagonal_server
-    username: postgres
-    password: postgres
-    driverClassName: org.postgresql.Driver
-  sql:
-    init:
-      mode: never
-  flyway:
-    enabled: true
-    locations:
-      - classpath:migration/schema
-      - classpath:migration/data
-    fail-on-missing-locations: true
-    validate-on-migrate: true
-  jpa:
-    defer-datasource-initialization: false
-    hibernate:
-      ddl-auto: none
-springdoc:
-  api-docs:
-    path: /api-docs
-  swagger-ui:
-    path: /swagger-ui/index.html
 
-server:
-  port: 8080
+  config:
+    import:
+      - classpath:config/identity.yml
+      - classpath:config/ledger.yml

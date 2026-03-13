@@ -1,4 +1,4 @@
-package com.hexagonal.server;
+package com.hexagonal.server.identity;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -7,12 +7,14 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@ComponentScan("com.hexagonal.server")
-public class HexagonalServerApplication {
+@ComponentScan("com.hexagonal.server.ledger")
+@EntityScan("com.hexagonal.server.ledger")
+@EnableJpaRepositories("com.hexagonal.server.ledger")
+public class HexagonalServerLedgerApplication {
 
     public static void main(String[] args) {
-        System.out.println("monolith-boot running");
-        SpringApplication.run(HexagonalServerApplication.class, args);
+        System.out.println("ledger-boot running");
+        SpringApplication.run(HexagonalServerLedgerApplication.class, args);
     }
 
 }

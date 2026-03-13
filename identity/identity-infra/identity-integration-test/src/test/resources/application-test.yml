@@ -6,6 +6,8 @@ spring:
     driverClassName: org.h2.Driver
   flyway:
     enabled: true
-    locations: classpath:migration/schema, classpath:migration/data
+    locations:
+      - classpath:migration/identity/schema
+      - classpath:migration/identity/data
     fail-on-missing-locations: true
     validate-on-migrate: true
