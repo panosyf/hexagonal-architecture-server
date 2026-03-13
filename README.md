@@ -97,13 +97,13 @@ hexagonal-server/
 │ ├── common-infra
 │ ├── common-test
 │ └── shared-kernel-bom
-├── account/
-│ ├── account-core
-│ ├── account-application
-│ └── account-infra/
-│   ├── account-persistence
-│   ├── account-api
-│   └── account-boot
+├── identity/
+│ ├── identity-core
+│ ├── identity-application
+│ └── identity-infra/
+│   ├── identity-persistence
+│   ├── identity-api
+│   └── identity-boot
 └── ledger/
   ├── ledger-core
   ├── ledger-application
@@ -130,13 +130,13 @@ All commands are executed from the **repository root** and use the Maven Wrapper
 -am → also build required dependencies
 
 ```bash
-### Build Entire Account Context
-mvn clean verify -pl account/account-boot -am
+### Build Entire Identity Context
+mvn clean verify -pl identity/identity-boot -am
 ```
 
 ```bash
-### Build Only account-core
-mvn clean verify -pl account/account-core -am
+### Build Only identity-core
+mvn clean verify -pl identity/identity-core -am
 ```
 
 ```bash
@@ -150,8 +150,8 @@ mvn clean verify -pl shared-kernel/common -am
 ```
 
 ```bash
-### Install Account to Local Maven Repository
-mvn clean install -pl account/account-boot -am
+### Install Identity to Local Maven Repository
+mvn clean install -pl identity/identity-boot -am
 ```
 
 ```bash
@@ -161,11 +161,12 @@ mvn clean install -pl shared-kernel -am
 
 ```bash
 ### Resume Failed Build
-mvn -rf :account-core
+mvn -rf :identity-core
 ```
 
 ```bash
 ### Upgrade shared-kernel Version
+# TODO REVISIT THIS
 mvn versions:set -DnewVersion=1.3.0
 mvn clean install
 ```
@@ -173,14 +174,15 @@ mvn clean install
 ## Handle versioning upgrades
 
 ```bash
-### Upgrade shared-kernel Dependency in account
+# TODO REVISIT THIS
+### Upgrade shared-kernel Dependency in identity
 mvn versions:use-dep-version \
   -Dincludes=com.hexagonal.server.shared.kernel:* \
   -DdepVersion=1.3.0 \
   -DforceVersion=true \
-  -pl account
+  -pl identity
 ### Then verify:
-mvn clean verify -pl account/account-boot -am
+mvn clean verify -pl identity/identity-boot -am
 ```
 
 ## Running the Application
@@ -202,7 +204,7 @@ chmod +x monolith-run.sh
 ```
 
 The script will:
-1. Build all modules (including account-boot)
+1. Build all modules
 2. Install dependencies to local Maven repository
 3. Start the application on port 8080 with 'local' profile
 
