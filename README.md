@@ -102,14 +102,14 @@ hexagonal-server/
 │ ├── account-application
 │ └── account-infra/
 │   ├── account-persistence
-│   ├── account-rest
+│   ├── account-api
 │   └── account-boot
 └── ledger/
   ├── ledger-core
   ├── ledger-application
   └── ledger-infra/
     ├── ledger-persistence
-    ├── ledger-rest
+    ├── ledger-api
     └── ledger-boot
 ```
 

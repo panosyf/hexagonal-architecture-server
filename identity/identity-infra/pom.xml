@@ -18,7 +18,7 @@
 
     <modules>
         <module>identity-persistence</module>
-        <module>identity-rest</module>
+        <module>identity-api</module>
         <module>identity-integration-test</module>
     </modules>
 

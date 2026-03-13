@@ -26,7 +26,7 @@
         <!-- rest module-->
         <dependency>
             <groupId>com.hexagonal.server.ledger.infra</groupId>
-            <artifactId>ledger-rest</artifactId>
+            <artifactId>ledger-api</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>

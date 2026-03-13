@@ -1,1 +1,0 @@
-package com.hexagonal.server.ledger.infra.rest.otheraggregateroot;

@@ -26,7 +26,7 @@
         <!-- rest module-->
         <dependency>
             <groupId>com.hexagonal.server.identity.infra</groupId>
-            <artifactId>identity-rest</artifactId>
+            <artifactId>identity-api</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>

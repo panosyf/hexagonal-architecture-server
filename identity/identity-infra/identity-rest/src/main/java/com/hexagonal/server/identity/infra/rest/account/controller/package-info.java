@@ -1,1 +1,0 @@
-package com.hexagonal.server.identity.infra.rest.account.controller;
