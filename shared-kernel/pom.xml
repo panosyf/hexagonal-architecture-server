@@ -24,7 +24,8 @@
 
     <modules>
         <module>common</module>
-        <module>common-infra</module>
+        <module>common-persistence</module>
+        <module>common-api</module>
         <module>common-test</module>
         <module>shared-kernel-bom</module>
     </modules>

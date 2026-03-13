@@ -10,6 +10,7 @@ import com.hexagonal.server.ledger.application.wallet.usecase.creditwallet.model
 import com.hexagonal.server.ledger.application.wallet.usecase.debitwallet.DebitWalletUseCase;
 import com.hexagonal.server.ledger.application.wallet.usecase.debitwallet.model.request.DebitWalletRequest;
 import com.hexagonal.server.ledger.application.wallet.usecase.debitwallet.model.response.DebitWalletResponse;
+import com.hexagonal.server.shared.kernel.common.model.ApiResponse;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,20 +37,20 @@ public class WalletController implements WalletApi {
 
     @Override
     @PostMapping(path = "/api/v1/wallets")
-    public ResponseEntity<CreateWalletResponse> createWallet(@RequestBody CreateWalletRequest createWalletRequest) {
-        return new ResponseEntity<>(createWalletUseCase.createWallet(createWalletRequest), HttpStatus.CREATED);
+    public ResponseEntity<ApiResponse<CreateWalletResponse>> createWallet(@RequestBody CreateWalletRequest createWalletRequest) {
+        return new ResponseEntity<>(new ApiResponse<>(createWalletUseCase.createWallet(createWalletRequest)), HttpStatus.CREATED);
     }
 
     @Override
     @PostMapping(path = "/api/v1/wallets/{id}/actions/credit")
-    public ResponseEntity<CreditWalletResponse> creditWallet(@PathVariable(name = "id") String id, @RequestBody CreditWalletRequest creditWalletRequest) {
-        return new ResponseEntity<>(creditWalletUseCase.creditWallet(id, creditWalletRequest), HttpStatus.OK);
+    public ResponseEntity<ApiResponse<CreditWalletResponse>> creditWallet(@PathVariable(name = "id") String id, @RequestBody CreditWalletRequest creditWalletRequest) {
+        return new ResponseEntity<>(new ApiResponse<>(creditWalletUseCase.creditWallet(id, creditWalletRequest)), HttpStatus.OK);
     }
 
     @Override
     @PostMapping(path = "/api/v1/wallets/{id}/actions/debit")
-    public ResponseEntity<DebitWalletResponse> debitWallet(@PathVariable(name = "id") String id, @RequestBody DebitWalletRequest debitWalletRequest) {
-        return new ResponseEntity<>(debitWalletUseCase.debitWallet(id, debitWalletRequest), HttpStatus.OK);
+    public ResponseEntity<ApiResponse<DebitWalletResponse>> debitWallet(@PathVariable(name = "id") String id, @RequestBody DebitWalletRequest debitWalletRequest) {
+        return new ResponseEntity<>(new ApiResponse<>(debitWalletUseCase.debitWallet(id, debitWalletRequest)), HttpStatus.OK);
     }
 
 }

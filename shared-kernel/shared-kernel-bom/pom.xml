@@ -42,12 +42,12 @@
             </dependency>
             <dependency>
                 <groupId>com.hexagonal.server.shared.kernel</groupId>
-                <artifactId>common-contract</artifactId>
+                <artifactId>common-api</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.hexagonal.server.shared.kernel</groupId>
-                <artifactId>common-infra</artifactId>
+                <artifactId>common-persistence</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
             <dependency>

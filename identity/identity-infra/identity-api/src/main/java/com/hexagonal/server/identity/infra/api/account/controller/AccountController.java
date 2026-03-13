@@ -6,6 +6,7 @@ import com.hexagonal.server.identity.application.account.usecase.createaccount.m
 import com.hexagonal.server.identity.application.account.port.in.api.AccountApi;
 import com.hexagonal.server.identity.application.account.usecase.createaccount.CreateAccountUsecase;
 import com.hexagonal.server.identity.application.account.usecase.getaccount.GetAccountUsecase;
+import com.hexagonal.server.shared.kernel.common.model.ApiResponse;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,14 +27,14 @@ public class AccountController implements AccountApi {
 
     @Override
     @PostMapping(path = "/api/v1/accounts")
-    public ResponseEntity<CreateAccountResponse> createAccount(@RequestBody CreateAccountRequest createAccountRequest) {
-        return new ResponseEntity<>(createAccountUsecase.createAccount(createAccountRequest), HttpStatus.CREATED);
+    public ResponseEntity<ApiResponse<CreateAccountResponse>> createAccount(@RequestBody CreateAccountRequest createAccountRequest) {
+        return new ResponseEntity<>(new ApiResponse<>(createAccountUsecase.createAccount(createAccountRequest)), HttpStatus.CREATED);
     }
 
     @Override
     @GetMapping(path = "/api/v1/accounts/{id}")
-    public ResponseEntity<AccountDto> getAccount(@PathVariable(name = "id") String id) {
-        return new ResponseEntity<>(getAccountUsecase.getAccount(id), HttpStatus.OK);
+    public ResponseEntity<ApiResponse<AccountDto>> getAccount(@PathVariable(name = "id") String id) {
+        return new ResponseEntity<>(new ApiResponse<>(getAccountUsecase.getAccount(id)), HttpStatus.OK);
     }
 
 }

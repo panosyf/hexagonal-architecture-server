@@ -1,20 +1,21 @@
 package com.hexagonal.server.identity.infra.persistence.account.entity;
 
-import com.hexagonal.server.shared.kernel.common.entity.PersistenceEntity;
-import com.hexagonal.server.shared.kernel.common.infra.valueobjects.converters.*;
+import com.hexagonal.server.shared.kernel.common.persistence.entity.PersistenceEntity;
+import com.hexagonal.server.shared.kernel.common.persistence.valueobjects.converters.EmailAttributeConverter;
+import com.hexagonal.server.shared.kernel.common.persistence.valueobjects.converters.NameAttributeConverter;
+import com.hexagonal.server.shared.kernel.common.persistence.valueobjects.converters.PasswordAttributeConverter;
+import com.hexagonal.server.shared.kernel.common.persistence.valueobjects.converters.UsernameAttributeConverter;
 import com.hexagonal.server.shared.kernel.common.valueobjects.*;
-import jakarta.persistence.*;
-import jakarta.persistence.Id;
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
 import java.util.Objects;
 
 @Entity(name = "account")
 @Table(name = "account")
 public class AccountPersistenceEntity extends PersistenceEntity {
-
-    @Id
-    @Column(name = "id")
-    private String id;
 
     @Column(name = "email")
     @Convert(converter = EmailAttributeConverter.class)
@@ -32,44 +33,34 @@ public class AccountPersistenceEntity extends PersistenceEntity {
     @Convert(converter = NameAttributeConverter.class)
     private Name name;
 
-    @Column(name = "created_at")
-    @Convert(converter = TimestampAttributeConverter.class)
-    private Timestamp createdAt;
-
-    @Column(name = "updated_at")
-    @Convert(converter = TimestampAttributeConverter.class)
-    private Timestamp updatedAt;
-
     protected AccountPersistenceEntity() {
+        super();
     }
 
     private AccountPersistenceEntity(
-            final String id,
-            final Email email,
-            final Username username,
-            final Password password,
-            final Name name,
-            final Timestamp createdAt,
-            final Timestamp updatedAt) {
-        this.id = id;
+            String id,
+            Email email,
+            Username username,
+            Password password,
+            Name name,
+            Timestamp createdAt,
+            Timestamp updatedAt) {
+        super(id, createdAt, updatedAt);
         this.email = email;
         this.username = username;
         this.password = password;
         this.name = name;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
     }
 
-    public static AccountPersistenceEntity create(String id, Email email, Username username, Password password, Name name, Timestamp createdAt, Timestamp updatedAt) {
+    public static AccountPersistenceEntity create(
+            String id,
+            Email email,
+            Username username,
+            Password password,
+            Name name,
+            Timestamp createdAt,
+            Timestamp updatedAt) {
         return new AccountPersistenceEntity(id, email, username, password, name, createdAt, updatedAt);
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public Email getEmail() {
@@ -104,45 +95,35 @@ public class AccountPersistenceEntity extends PersistenceEntity {
         this.name = name;
     }
 
-    public Timestamp getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Timestamp createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Timestamp getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Timestamp updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        AccountPersistenceEntity that = (AccountPersistenceEntity) o;
-        return Objects.equals(id, that.id) && Objects.equals(email, that.email) && Objects.equals(username, that.username) && Objects.equals(password, that.password) && Objects.equals(name, that.name) && Objects.equals(createdAt, that.createdAt) && Objects.equals(updatedAt, that.updatedAt);
+        if (!(o instanceof AccountPersistenceEntity that)) return false;
+        return Objects.equals(getId(), that.getId()) &&
+                Objects.equals(email, that.email) &&
+                Objects.equals(username, that.username) &&
+                Objects.equals(password, that.password) &&
+                Objects.equals(name, that.name) &&
+                Objects.equals(getCreatedAt(), that.getCreatedAt()) &&
+                Objects.equals(getUpdatedAt(), that.getUpdatedAt());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, email, username, password, name, createdAt, updatedAt);
+        return Objects.hash(getId(), email, username, password, name, getCreatedAt(), getUpdatedAt());
     }
 
     @Override
     public String toString() {
         return "AccountPersistenceEntity{" +
-                "id=" + id +
+                "id=" + getId() +
                 ", email=" + email +
                 ", username=" + username +
-                ", password=" + "[REDACTED]" +
+                ", password=[REDACTED]" +
                 ", name=" + name +
-                ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
+                ", createdAt=" + getCreatedAt() +
+                ", updatedAt=" + getUpdatedAt() +
                 '}';
     }
 }
+

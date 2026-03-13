@@ -6,5 +6,6 @@ public class Endpoint {
     }
 
     public static final String CREATE_ACCOUNT = "/api/v1/accounts";
+    public static final String GET_ACCOUNT = "/api/v1/accounts/{id}";
 
 }

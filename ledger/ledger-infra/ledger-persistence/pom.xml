@@ -19,7 +19,7 @@
         <!-- shared-kernel dependencies-->
         <dependency>
             <groupId>com.hexagonal.server.shared.kernel</groupId>
-            <artifactId>common-infra</artifactId>
+            <artifactId>common-persistence</artifactId>
         </dependency>
         <!-- application dependencies-->
         <dependency>

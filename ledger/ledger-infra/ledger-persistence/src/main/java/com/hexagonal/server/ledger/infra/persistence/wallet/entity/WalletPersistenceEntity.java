@@ -1,19 +1,17 @@
 package com.hexagonal.server.ledger.infra.persistence.wallet.entity;
 
-import com.hexagonal.server.shared.kernel.common.entity.PersistenceEntity;
-import com.hexagonal.server.shared.kernel.common.infra.valueobjects.converters.MoneyAttributeConverter;
-import com.hexagonal.server.shared.kernel.common.infra.valueobjects.converters.TimestampAttributeConverter;
+import com.hexagonal.server.shared.kernel.common.persistence.entity.PersistenceEntity;
+import com.hexagonal.server.shared.kernel.common.persistence.valueobjects.converters.MoneyAttributeConverter;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Money;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Timestamp;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
 @Entity(name = "wallet")
 @Table(name = "wallet")
 public class WalletPersistenceEntity extends PersistenceEntity {
-
-    @Id
-    @Column(name = "id")
-    private String id;
 
     @Column(name = "account_id")
     private String accountId;
@@ -22,31 +20,32 @@ public class WalletPersistenceEntity extends PersistenceEntity {
     @Convert(converter = MoneyAttributeConverter.class)
     private Money balance;
 
-    @Column(name = "created_at")
-    @Convert(converter = TimestampAttributeConverter.class)
-    private Timestamp createdAt;
-
-    @Column(name = "updated_at")
-    @Convert(converter = TimestampAttributeConverter.class)
-    private Timestamp updatedAt;
-
     protected WalletPersistenceEntity() {
     }
 
-    private WalletPersistenceEntity(String id, String accountId, Money balance, Timestamp createdAt, Timestamp updatedAt) {
-        this.id = id;
+    private WalletPersistenceEntity(
+            String id,
+            String accountId,
+            Money balance,
+            Timestamp createdAt,
+            Timestamp updatedAt) {
+        super(id, createdAt, updatedAt);
         this.accountId = accountId;
         this.balance = balance;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
     }
 
-    public static WalletPersistenceEntity create(String id, String accountId, Money balance, Timestamp createdAt, Timestamp updatedAt) {
-        return new WalletPersistenceEntity(id, accountId, balance, createdAt, updatedAt);
-    }
-
-    public String getId() {
-        return id;
+    public static WalletPersistenceEntity create(
+            String id,
+            String accountId,
+            Money balance,
+            Timestamp createdAt,
+            Timestamp updatedAt) {
+        return new WalletPersistenceEntity(
+                id,
+                accountId,
+                balance,
+                createdAt,
+                updatedAt);
     }
 
     public String getAccountId() {
@@ -57,12 +56,5 @@ public class WalletPersistenceEntity extends PersistenceEntity {
         return balance;
     }
 
-    public Timestamp getCreatedAt() {
-        return createdAt;
-    }
-
-    public Timestamp getUpdatedAt() {
-        return updatedAt;
-    }
-
 }
+

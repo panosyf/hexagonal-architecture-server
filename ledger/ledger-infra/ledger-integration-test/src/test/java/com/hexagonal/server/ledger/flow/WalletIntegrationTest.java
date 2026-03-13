@@ -9,9 +9,11 @@ import com.hexagonal.server.ledger.application.wallet.usecase.debitwallet.model.
 import com.hexagonal.server.ledger.common.constant.Endpoint;
 import com.hexagonal.server.ledger.config.BaseLedgerIntegrationTest;
 import com.hexagonal.server.ledger.core.wallet.domain.Wallet;
+import com.hexagonal.server.shared.kernel.common.model.ApiResponse;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Id;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Money;
 import org.junit.jupiter.api.Test;
+import org.springframework.core.ParameterizedTypeReference;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -29,9 +31,11 @@ class WalletIntegrationTest extends BaseLedgerIntegrationTest {
         CreateWalletResponse createWalletResponse = requestTestClient
                 .post(Endpoint.CREATE_WALLET, createWalletRequest)
                 .expectStatus().isCreated()
-                .expectBody(CreateWalletResponse.class)
+                .expectBody(new ParameterizedTypeReference<ApiResponse<CreateWalletResponse>>() {
+                })
                 .returnResult()
-                .getResponseBody();
+                .getResponseBody()
+                .getData();
         // wallet created
         assertThat(walletRepositoryPort.findTotalEntries()).isEqualTo(1);
         assertThat(createWalletResponse).isNotNull();
@@ -44,9 +48,11 @@ class WalletIntegrationTest extends BaseLedgerIntegrationTest {
         CreditWalletResponse creditWalletResponse = requestTestClient.post(
                         Endpoint.CREDIT_WALLET.replace("{id}", walletIdString), creditWalletRequest)
                 .expectStatus().isOk()
-                .expectBody(CreditWalletResponse.class)
+                .expectBody(new ParameterizedTypeReference<ApiResponse<CreditWalletResponse>>() {
+                })
                 .returnResult()
-                .getResponseBody();
+                .getResponseBody()
+                .getData();
         // wallet credited
         assertThat(creditWalletResponse).isNotNull();
         assertThat(creditWalletResponse.ledgerEntryId()).isNotNull();
@@ -61,9 +67,11 @@ class WalletIntegrationTest extends BaseLedgerIntegrationTest {
         DebitWalletResponse debitResponse = requestTestClient.post(
                         Endpoint.DEBIT_WALLET.replace("{id}", walletIdString), debitWalletRequest)
                 .expectStatus().isOk()
-                .expectBody(DebitWalletResponse.class)
+                .expectBody(new ParameterizedTypeReference<ApiResponse<DebitWalletResponse>>() {
+                })
                 .returnResult()
-                .getResponseBody();
+                .getResponseBody()
+                .getData();
         // wallet debited
         assertThat(debitResponse).isNotNull();
         assertThat(debitResponse.ledgerEntryId()).isNotNull();

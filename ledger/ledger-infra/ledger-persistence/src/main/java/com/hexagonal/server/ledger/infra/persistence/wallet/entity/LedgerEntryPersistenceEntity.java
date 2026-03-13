@@ -1,9 +1,9 @@
 package com.hexagonal.server.ledger.infra.persistence.wallet.entity;
 
 import com.hexagonal.server.ledger.core.wallet.model.LedgerEntryType;
-import com.hexagonal.server.shared.kernel.common.infra.valueobjects.converters.DescriptionAttributeConverter;
-import com.hexagonal.server.shared.kernel.common.infra.valueobjects.converters.MoneyAttributeConverter;
-import com.hexagonal.server.shared.kernel.common.infra.valueobjects.converters.TimestampAttributeConverter;
+import com.hexagonal.server.shared.kernel.common.persistence.entity.PersistenceEntity;
+import com.hexagonal.server.shared.kernel.common.persistence.valueobjects.converters.DescriptionAttributeConverter;
+import com.hexagonal.server.shared.kernel.common.persistence.valueobjects.converters.MoneyAttributeConverter;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Description;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Money;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Timestamp;
@@ -11,11 +11,7 @@ import jakarta.persistence.*;
 
 @Entity(name = "ledger_entry")
 @Table(name = "ledger_entry")
-public class LedgerEntryPersistenceEntity {
-
-    @Id
-    @Column(name = "id")
-    private String id;
+public class LedgerEntryPersistenceEntity extends PersistenceEntity {
 
     @Column(name = "wallet_id")
     private String walletId;
@@ -32,19 +28,7 @@ public class LedgerEntryPersistenceEntity {
     @Convert(converter = DescriptionAttributeConverter.class)
     private Description reference;
 
-    @Column(name = "created_at")
-    @Convert(converter = TimestampAttributeConverter.class)
-    private Timestamp createdAt;
-
-    @Column(name = "updated_at")
-    @Convert(converter = TimestampAttributeConverter.class)
-    private Timestamp updatedAt;
-
     protected LedgerEntryPersistenceEntity() {
-    }
-
-    public String getId() {
-        return id;
     }
 
     public String getWalletId() {
@@ -63,14 +47,6 @@ public class LedgerEntryPersistenceEntity {
         return reference;
     }
 
-    public Timestamp getCreatedAt() {
-        return createdAt;
-    }
-
-    public Timestamp getUpdatedAt() {
-        return updatedAt;
-    }
-
     private LedgerEntryPersistenceEntity(
             String id,
             String walletId,
@@ -79,13 +55,11 @@ public class LedgerEntryPersistenceEntity {
             Description reference,
             Timestamp createdAt,
             Timestamp updatedAt) {
-
-        this.id = id;
+        super(id, createdAt, updatedAt);
         this.walletId = walletId;
         this.amount = amount;
+        this.type = type;
         this.reference = reference;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
     }
 
     public static LedgerEntryPersistenceEntity create(

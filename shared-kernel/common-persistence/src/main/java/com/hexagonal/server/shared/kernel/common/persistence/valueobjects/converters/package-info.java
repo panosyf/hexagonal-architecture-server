@@ -1,0 +1,1 @@
+package com.hexagonal.server.shared.kernel.common.persistence.valueobjects.converters;

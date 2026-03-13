@@ -31,10 +31,6 @@
         <!-- shared-kernel dependencies-->
         <dependency>
             <groupId>com.hexagonal.server.shared.kernel</groupId>
-            <artifactId>common-infra</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.hexagonal.server.shared.kernel</groupId>
             <artifactId>common-test</artifactId>
             <scope>test</scope>
         </dependency>
