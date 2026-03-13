@@ -3,8 +3,8 @@ package com.hexagonal.server.identity.application.account.usecase.createaccount;
 import com.hexagonal.server.identity.application.account.common.logging.AccountLogInfoMessage;
 import com.hexagonal.server.identity.application.account.usecase.createaccount.mapper.CreateAccountMapper;
 import com.hexagonal.server.identity.application.account.port.out.repository.AccountRepositoryPort;
-import com.hexagonal.server.identity.application.account.usecase.createaccount.model.request.AccountCreateRequest;
-import com.hexagonal.server.identity.application.account.usecase.createaccount.model.response.AccountCreationResponse;
+import com.hexagonal.server.identity.application.account.usecase.createaccount.model.request.CreateAccountRequest;
+import com.hexagonal.server.identity.application.account.usecase.createaccount.model.response.CreateAccountResponse;
 import com.hexagonal.server.identity.core.account.domain.Account;
 import com.hexagonal.server.identity.core.account.model.CreateAccountOperation;
 import com.hexagonal.server.identity.core.account.service.AccountDomainService;
@@ -27,12 +27,12 @@ public class CreateAccountUsecaseImpl implements CreateAccountUsecase {
     }
 
     @Override
-    public AccountCreationResponse createAccount(AccountCreateRequest accountCreateRequest) {
-        CreateAccountOperation createAccountOperation = CreateAccountMapper.toCreateAccountOperation(accountCreateRequest);
+    public CreateAccountResponse createAccount(CreateAccountRequest createAccountRequest) {
+        CreateAccountOperation createAccountOperation = CreateAccountMapper.toCreateAccountOperation(createAccountRequest);
         Account account = accountDomainService.createAccount(createAccountOperation);
         accountRepositoryPort.save(account);
         log.info(AccountLogInfoMessage.LOG_ACCOUNT_CREATED_INFO, account.getEmail(), account.getUsername());
-        return new AccountCreationResponse(account.getId().getValue());
+        return new CreateAccountResponse(account.getId().getValue());
     }
 
 }

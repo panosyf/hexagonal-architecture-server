@@ -1,6 +1,6 @@
 package com.hexagonal.server.identity.application.account.usecase.createaccount.mapper;
 
-import com.hexagonal.server.identity.application.account.usecase.createaccount.model.request.AccountCreateRequest;
+import com.hexagonal.server.identity.application.account.usecase.createaccount.model.request.CreateAccountRequest;
 import com.hexagonal.server.identity.core.account.model.CreateAccountOperation;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Email;
 import com.hexagonal.server.shared.kernel.common.valueobjects.Name;
@@ -12,13 +12,13 @@ public class CreateAccountMapper {
     private CreateAccountMapper() {
     }
 
-    public static CreateAccountOperation toCreateAccountOperation(AccountCreateRequest accountCreateRequest) {
-        Email email = Email.valueOf(accountCreateRequest.email());
-        Username username = Username.valueOf(accountCreateRequest.username());
+    public static CreateAccountOperation toCreateAccountOperation(CreateAccountRequest createAccountRequest) {
+        Email email = Email.valueOf(createAccountRequest.email());
+        Username username = Username.valueOf(createAccountRequest.username());
         // TODO UTILIZE HASHING AND SALT
         // TODO HIDE PASSWORD FROM LOGS
-        Password password = Password.valueOf(accountCreateRequest.password());
-        Name name = Name.valueOf(accountCreateRequest.firstname(), accountCreateRequest.lastname());
+        Password password = Password.valueOf(createAccountRequest.password());
+        Name name = Name.valueOf(createAccountRequest.firstname(), createAccountRequest.lastname());
         return new CreateAccountOperation(email, username, password, name);
     }
 

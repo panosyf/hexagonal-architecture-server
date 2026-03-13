@@ -1,6 +1,6 @@
 package com.hexagonal.server.identity.common.mock;
 
-import com.hexagonal.server.identity.application.account.usecase.createaccount.model.request.AccountCreateRequest;
+import com.hexagonal.server.identity.application.account.usecase.createaccount.model.request.CreateAccountRequest;
 import com.hexagonal.server.identity.common.constant.Email;
 import com.hexagonal.server.identity.common.constant.Name;
 import com.hexagonal.server.identity.common.constant.Password;
@@ -11,8 +11,8 @@ public class AccountCreateRequestMock {
     private AccountCreateRequestMock() {
     }
 
-    public static AccountCreateRequest generateAccountCreateRequest() {
-        return new AccountCreateRequest(
+    public static CreateAccountRequest generateAccountCreateRequest() {
+        return new CreateAccountRequest(
                 Email.EMAIL_1.getValue(),
                 Username.USERNAME_1.getValue(),
                 Password.PASSWORD_1.getValue(),

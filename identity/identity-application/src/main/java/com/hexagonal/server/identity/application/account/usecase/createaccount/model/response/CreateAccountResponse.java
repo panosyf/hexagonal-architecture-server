@@ -4,5 +4,5 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public record AccountCreationResponse(String id) {
+public record CreateAccountResponse(String id) {
 }

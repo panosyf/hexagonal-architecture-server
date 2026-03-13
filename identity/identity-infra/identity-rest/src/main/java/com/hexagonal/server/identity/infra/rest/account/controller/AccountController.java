@@ -1,8 +1,8 @@
 package com.hexagonal.server.identity.infra.rest.account.controller;
 
 import com.hexagonal.server.identity.application.account.common.dto.AccountDto;
-import com.hexagonal.server.identity.application.account.usecase.createaccount.model.request.AccountCreateRequest;
-import com.hexagonal.server.identity.application.account.usecase.createaccount.model.response.AccountCreationResponse;
+import com.hexagonal.server.identity.application.account.usecase.createaccount.model.request.CreateAccountRequest;
+import com.hexagonal.server.identity.application.account.usecase.createaccount.model.response.CreateAccountResponse;
 import com.hexagonal.server.identity.application.account.port.in.api.AccountApi;
 import com.hexagonal.server.identity.application.account.usecase.createaccount.CreateAccountUsecase;
 import com.hexagonal.server.identity.application.account.usecase.getaccount.GetAccountUsecase;
@@ -26,8 +26,8 @@ public class AccountController implements AccountApi {
 
     @Override
     @PostMapping(path = "/api/v1/accounts")
-    public ResponseEntity<AccountCreationResponse> createAccount(@RequestBody AccountCreateRequest accountCreateRequest) {
-        return new ResponseEntity<>(createAccountUsecase.createAccount(accountCreateRequest), HttpStatus.CREATED);
+    public ResponseEntity<CreateAccountResponse> createAccount(@RequestBody CreateAccountRequest createAccountRequest) {
+        return new ResponseEntity<>(createAccountUsecase.createAccount(createAccountRequest), HttpStatus.CREATED);
     }
 
     @Override

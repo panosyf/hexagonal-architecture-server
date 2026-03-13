@@ -5,8 +5,8 @@ import com.hexagonal.server.identity.application.account.common.constant.Name;
 import com.hexagonal.server.identity.application.account.common.constant.Password;
 import com.hexagonal.server.identity.application.account.common.constant.Username;
 import com.hexagonal.server.identity.application.account.port.out.repository.AccountRepositoryPort;
-import com.hexagonal.server.identity.application.account.usecase.createaccount.model.request.AccountCreateRequest;
-import com.hexagonal.server.identity.application.account.usecase.createaccount.model.response.AccountCreationResponse;
+import com.hexagonal.server.identity.application.account.usecase.createaccount.model.request.CreateAccountRequest;
+import com.hexagonal.server.identity.application.account.usecase.createaccount.model.response.CreateAccountResponse;
 import com.hexagonal.server.identity.core.account.domain.Account;
 import com.hexagonal.server.identity.core.account.model.CreateAccountOperation;
 import com.hexagonal.server.identity.core.account.service.AccountDomainService;
@@ -36,12 +36,12 @@ public class CreateAccountUsecaseImplTest {
     @Test
     void createAccountTest() {
         // given
-        AccountCreateRequest accountCreateRequest = generateAccountCreateRequest();
+        CreateAccountRequest createAccountRequest = generateAccountCreateRequest();
         Account account = generateAccount();
         given(accountDomainService.createAccount(any(CreateAccountOperation.class)))
                 .willReturn(account);
         // when
-        AccountCreationResponse accountCreationResponse = createAccountUsecase.createAccount(accountCreateRequest);
+        CreateAccountResponse createAccountResponse = createAccountUsecase.createAccount(createAccountRequest);
         // then
         verify(accountDomainService, times(1))
                 .createAccount(createAccountOperationCaptor.capture());
@@ -51,7 +51,7 @@ public class CreateAccountUsecaseImplTest {
                 () -> assertEquals(Username.USERNAME_1, createAccountOperation.username()),
                 () -> assertEquals(Password.PASSWORD_1, createAccountOperation.password()),
                 () -> assertEquals(Name.ACCOUNT_NAME_1, createAccountOperation.name()),
-                () -> assertEquals(account.getId().getValue(), accountCreationResponse.id())
+                () -> assertEquals(account.getId().getValue(), createAccountResponse.id())
         );
     }
 

@@ -1,7 +1,7 @@
 package com.hexagonal.server.identity.flow;
 
-import com.hexagonal.server.identity.application.account.usecase.createaccount.model.request.AccountCreateRequest;
-import com.hexagonal.server.identity.application.account.usecase.createaccount.model.response.AccountCreationResponse;
+import com.hexagonal.server.identity.application.account.usecase.createaccount.model.request.CreateAccountRequest;
+import com.hexagonal.server.identity.application.account.usecase.createaccount.model.response.CreateAccountResponse;
 import com.hexagonal.server.identity.common.constant.Endpoint;
 import com.hexagonal.server.identity.config.BaseIdentityIntegrationTest;
 import org.junit.jupiter.api.Test;
@@ -14,17 +14,17 @@ class AccountIntegrationTest extends BaseIdentityIntegrationTest {
     @Test
     void userCreatesAccount() {
         //given
-        AccountCreateRequest accountCreateRequest = generateAccountCreateRequest();
+        CreateAccountRequest createAccountRequest = generateAccountCreateRequest();
         //when
-        AccountCreationResponse accountCreationResponse = requestTestClient.post(Endpoint.CREATE_ACCOUNT, accountCreateRequest)
+        CreateAccountResponse createAccountResponse = requestTestClient.post(Endpoint.CREATE_ACCOUNT, createAccountRequest)
                 .expectStatus().isCreated()
-                .expectBody(AccountCreationResponse.class)
+                .expectBody(CreateAccountResponse.class)
                 .returnResult()
                 .getResponseBody();
         //then
         assertThat(accountRepositoryPort.findTotalEntries()).isEqualTo(1);
-        assertThat(accountCreationResponse).isNotNull();
-        assertThat(accountCreationResponse.id()).isNotNull();
+        assertThat(createAccountResponse).isNotNull();
+        assertThat(createAccountResponse.id()).isNotNull();
     }
 
 }
