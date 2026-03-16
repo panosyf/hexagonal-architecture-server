@@ -1,4 +1,4 @@
-package com.hexagonal.server.identity;
+package com.hexagonal.server.ledger;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
