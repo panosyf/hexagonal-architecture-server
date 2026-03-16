@@ -2,12 +2,15 @@ package com.hexagonal.server;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-@SpringBootApplication
-@ComponentScan("com.hexagonal.server")
+@SpringBootApplication(
+        scanBasePackages = "com.hexagonal.server",
+        excludeName = {
+                "com.hexagonal.server.ledger.LedgerApplication",
+                "com.hexagonal.server.identity.IdentityApplication"
+        }
+)
 public class HexagonalServerApplication {
 
     public static void main(String[] args) {
