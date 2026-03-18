@@ -8,4 +8,6 @@ server:
   config:
     import:
       - classpath:config/identity.yml
+      - optional:classpath:config/identity-${spring.profiles.active}.yml
       - classpath:config/ledger.yml
+      - optional:classpath:config/ledger-${spring.profiles.active}.yml

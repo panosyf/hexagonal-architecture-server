@@ -1,8 +1,6 @@
 spring:
   application:
     name: hexagonal-server
-  profiles:
-    active: '@spring.profiles.active@'
   datasource:
     url: jdbc:postgresql://localhost:5432/hexagonal_server
     username: postgres

@@ -2,3 +2,4 @@ spring:
   config:
     import:
       - classpath:config/ledger.yml
+      - optional:classpath:config/ledger-${spring.profiles.active}.yml

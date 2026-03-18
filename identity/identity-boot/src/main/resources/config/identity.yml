@@ -1,8 +1,6 @@
 spring:
   application:
     name: hexagonal-server-identity
-  profiles:
-    active: '@spring.profiles.active@'
   datasource:
     url: ${IDENTITY_DATABASE_URL}
     username: ${IDENTITY_DATABASE_USER}
@@ -12,6 +10,8 @@ spring:
     init:
       mode: never
   flyway:
+    default-schema: identity
+    schemas: identity
     enabled: true
     locations:
       - classpath:migration/identity/schema
@@ -21,6 +21,7 @@ spring:
   jpa:
     defer-datasource-initialization: false
     hibernate:
+      default_schema: identity
       ddl-auto: none
 springdoc:
   api-docs:

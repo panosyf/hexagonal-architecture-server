@@ -1,8 +1,6 @@
 spring:
   application:
     name: hexagonal-server-ledger
-  profiles:
-    active: '@spring.profiles.active@'
   datasource:
     url: ${LEDGER_DATABASE_URL}
     username: ${LEDGER_DATABASE_USER}
@@ -12,6 +10,8 @@ spring:
     init:
       mode: never
   flyway:
+    default-schema: ledger
+    schemas: ledger
     enabled: true
     locations:
       - classpath:migration/ledger/schema
@@ -21,6 +21,7 @@ spring:
   jpa:
     defer-datasource-initialization: false
     hibernate:
+      default_schema: ledger
       ddl-auto: none
 springdoc:
   api-docs:

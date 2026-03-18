@@ -2,3 +2,4 @@ spring:
   config:
     import:
       - classpath:config/identity.yml
+      - optional:classpath:config/identity-${spring.profiles.active}.yml
